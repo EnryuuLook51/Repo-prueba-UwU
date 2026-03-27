@@ -55,12 +55,20 @@ const t = useTranslations(lang);
       <div class="hero-visual" id="heroVisual" data-fade-in="left">
         <div class="visual-container">
           <div class="main-image-wrapper glass">
-            <img
-              src="/images/agricultores_trabajando_202603251507.jpeg"
-              alt="Sustainability"
-              class="main-image"
-              id="heroMainImg"
-            />
+            {
+              [
+                "/images/agricultores_trabajando_202603251507.jpeg",
+                "/images/carrusel/imagen1.jpeg",
+                "/images/carrusel/imagen 2.png",
+              ].map((img, index) => (
+                <img
+                  src={img}
+                  alt={`Sustainability ${index + 1}`}
+                  class={`main-image hero-carousel-img ${index === 0 ? "active" : ""}`}
+                  id={`heroImg-${index}`}
+                />
+              ))
+            }
             <div class="image-overlay"></div>
           </div>
 
@@ -216,6 +224,14 @@ const t = useTranslations(lang);
     height: 100%;
     object-fit: cover;
     transform: scale(1.2);
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+  }
+
+  .main-image.active {
+    opacity: 1;
   }
 
   .impact-badge {
@@ -395,7 +411,7 @@ const t = useTranslations(lang);
         "-=0.3",
       )
       .to(
-        "#heroMainImg",
+        ".hero-carousel-img",
         {
           scale: 1,
           duration: 2,
@@ -442,5 +458,30 @@ const t = useTranslations(lang);
         gsap.to(indicator, { opacity: 1, duration: 0.3 });
       }
     });
+
+    // Hero Image Carousel Logic
+    const carouselImages = document.querySelectorAll(".hero-carousel-img");
+    let currentIdx = 0;
+
+    function nextHeroImage() {
+      const nextIdx = (currentIdx + 1) % carouselImages.length;
+
+      gsap.to(carouselImages[currentIdx], {
+        opacity: 0,
+        duration: 2,
+        ease: "power2.inOut",
+      });
+      gsap.to(carouselImages[nextIdx], {
+        opacity: 1,
+        duration: 2,
+        ease: "power2.inOut",
+      });
+
+      currentIdx = nextIdx;
+    }
+
+    if (carouselImages.length > 1) {
+      setInterval(nextHeroImage, 6000); // Change image every 6 seconds
+    }
   });
 </script>

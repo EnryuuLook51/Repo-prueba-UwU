@@ -1,6 +1,7 @@
 ---
 import Header from "../components/home/Header.astro";
 import Loader from "../components/home/Loader.astro";
+import ScrollToTop from "../components/common/ScrollToTop";
 
 interface Props {
   title: string;
@@ -21,9 +22,10 @@ const { title } = Astro.props;
     />
     <title>{title}</title>
   </head>
-  <body style="overflow: hidden;">
+  <body>
     <Loader />
     <Header />
+    <ScrollToTop client:only="react" />
 
     <main data-scroll-container>
       <slot />
