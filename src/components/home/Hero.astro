@@ -333,15 +333,15 @@ const t = useTranslations(lang);
 <script>
   import { gsap } from "gsap";
 
-  function splitIntoWordsAndChars(node) {
-    const text = node.textContent;
-    const words = text.split(" ").filter((w) => w !== "");
+  function splitIntoWordsAndChars(node: Node) {
+    const text = node.textContent || "";
+    const words = text.split(" ").filter((w: string) => w !== "");
     const fragment = document.createDocumentFragment();
 
-    words.forEach((word) => {
+    words.forEach((word: string) => {
       const wordSpan = document.createElement("span");
       wordSpan.className = "word-wrapper";
-      word.split("").forEach((char) => {
+      word.split("").forEach((char: string) => {
         const charSpan = document.createElement("span");
         charSpan.className = "split-char";
         charSpan.innerText = char;
@@ -349,14 +349,17 @@ const t = useTranslations(lang);
       });
       fragment.appendChild(wordSpan);
     });
-    node.replaceWith(fragment);
+    (node as Element).replaceWith(fragment);
   }
 
-  function splitTextPro(el) {
+  function splitTextPro(el: HTMLElement) {
     const childNodes = Array.from(el.childNodes);
-    childNodes.forEach((node) => {
+    childNodes.forEach((node: Node) => {
       if (node.nodeType === 3) splitIntoWordsAndChars(node);
-      else if (node.classList && node.classList.contains("split-target"))
+      else if (
+        (node as Element).classList &&
+        (node as Element).classList.contains("split-target")
+      )
         splitIntoWordsAndChars(node);
     });
     return el.querySelectorAll(".split-char");
