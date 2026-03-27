@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+/* RESET MINIMO */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* FUENTE REAL */
+@font-face {
+  font-family: "Jokker";
+  src: url("https://zeroco2.eco/wp-content/themes/zeroco2/assets/static/fonts/JokkerVF.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+html {
+  font-family: "Jokker", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+/* ONLY LIGHT MODE COLORS */
+:root {
+  --green-base: #ffffff;
+  --brand-green: #6cbe4f;
+  /* Green from user example */
+  --brand-blue: #2374b9;
+  /* Blue from user example */
+  --white: #1f4d37;
+  --black: #ffffff;
+
+  --bg-main: #f8fafc;
+  /* Professional Light Mode BG */
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-color: rgba(0, 0, 0, 0.08);
+
+  --shadow-glow: 0 10px 30px rgba(35, 116, 185, 0.08);
+  --transition-premium: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+body {
+  font-size: 14px;
+  letter-spacing: 0.015em;
+  line-height: 1.6;
+  overflow-x: hidden;
+  font-weight: 400;
+  background: var(--bg-main);
+  color: var(--text-primary);
+}
+
+/* PREMIUM UTILITIES - NO GRADIENTS */
+.glass {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+}
+
+.text-brand-green {
+  color: var(--brand-green);
+}
+
+.text-brand-blue {
+  color: var(--brand-blue);
+}
+
+.btn-premium {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  background: var(--brand-green);
+  color: white;
+  border-radius: 100px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: all 0.4s var(--transition-premium);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.btn-premium:hover {
+  background: var(--brand-blue);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(35, 116, 185, 0.2);
+}
+
+/* CUSTOM CONTAINER */
+.custom-container {
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-blue);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-green);
+}

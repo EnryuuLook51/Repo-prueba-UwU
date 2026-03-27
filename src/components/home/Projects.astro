@@ -1,0 +1,94 @@
+---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="proyectos" class="projects-section py-32 relative overflow-hidden">
+  <div class="custom-container">
+    <!-- RIGHT ALIGNMENT -->
+    <div class="section-header mb-24 text-right" id="projectsHeader">
+      <div class="section-badge mb-6">
+        <span
+          class="text-brand-blue font-bold tracking-widest text-xs uppercase italic"
+          >04 / {t("nav.projects")}</span
+        >
+      </div>
+      <h2 class="text-5xl lg:text-7xl font-black text-primary mb-6">
+        Casos de <span class="text-brand-green">Éxito</span> & <span
+          class="text-brand-blue">Concursos</span
+        >
+      </h2>
+    </div>
+
+    <div class="space-y-40">
+      {/* Project 1 - Right Info */}
+      <div class="project-row grid lg:grid-cols-2 gap-16 items-center">
+        <div class="project-visual relative">
+          <div
+            class="aspect-video glass rounded-[3rem] overflow-hidden flex items-center justify-center"
+          >
+            <span class="text-9xl opacity-10">🏛️</span>
+          </div>
+        </div>
+        <div class="project-info px-4 text-right">
+          <h3 class="text-4xl font-bold text-primary mb-6">
+            Licitaciones Públicas
+          </h3>
+          <div class="space-y-4 mb-8">
+            <p
+              class="text-secondary flex lg:flex-row-reverse gap-3 italic text-lg"
+            >
+              <span class="text-brand-green">▸</span>
+              Gestión estratégica en concursos del estado.
+            </p>
+            <p class="text-secondary/80 flex lg:flex-row-reverse gap-3 text-lg">
+              <span class="text-brand-green">▸</span>
+              Adjudicación exitosa de proyectos de infraestructura verde.
+            </p>
+          </div>
+          <div
+            class="result-badge inline-flex items-center gap-3 px-8 py-4 bg-brand-green/10 rounded-full border border-brand-green/20"
+          >
+            <span class="text-3xl font-black text-brand-green"
+              >Adjudicado 2025</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    background: var(--bg-main);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from("#projectsHeader", {
+    scrollTrigger: {
+      trigger: "#proyectos",
+      start: "top 85%",
+    },
+    x: 100,
+    duration: 1.5,
+    ease: "power4.out",
+  });
+
+  gsap.from(".project-row", {
+    scrollTrigger: {
+      trigger: ".project-row",
+      start: "bottom bottom",
+    },
+    y: 50,
+    duration: 1.2,
+    ease: "power2.out",
+  });
+</script>

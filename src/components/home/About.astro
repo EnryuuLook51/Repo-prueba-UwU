@@ -1,0 +1,122 @@
+---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="about" class="about-section py-32 relative overflow-hidden">
+  <div class="custom-container">
+    <!-- LEFT ALIGNMENT -->
+    <div class="section-header mb-16 text-left" id="aboutHeader">
+      <div class="section-badge mb-6" data-fade-in="down">
+        <span
+          class="text-brand-green font-bold tracking-widest text-xs uppercase italic"
+        >
+          01 / {t("nav.about")}
+        </span>
+      </div>
+      <h2
+        class="text-5xl lg:text-7xl font-black text-primary leading-tight m-0"
+        id="aboutTitle"
+      >
+        Nuestra <span class="text-brand-green">Empresa</span>
+      </h2>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-20 items-start">
+      <div class="about-content text-left" id="aboutContent">
+        <p class="text-2xl text-secondary mb-12 leading-relaxed font-light">
+          {t("about.description")}
+        </p>
+        <div class="about-cta">
+          <a href="#lineas-negocio" class="btn-premium">
+            Ver nuestra trayectoria
+          </a>
+        </div>
+      </div>
+
+      <div class="about-cards grid gap-6" id="aboutCards">
+        {
+          [
+            {
+              icon: "🎯",
+              title: t("about.mission"),
+              desc: t("about.mission.text"),
+            },
+            {
+              icon: "👁️",
+              title: t("about.vision"),
+              desc: t("about.vision.text"),
+            },
+            {
+              icon: "💎",
+              title: t("about.values"),
+              desc: t("about.values.text"),
+            },
+          ].map((card) => (
+            <div class="glass p-8 rounded-3xl hover:border-brand-green/30 transition-all duration-500 hover:-translate-y-1">
+              <div class="flex items-start gap-5">
+                <div class="w-14 h-14 bg-brand-green/10 rounded-2xl flex items-center justify-center text-brand-green text-3xl">
+                  {card.icon}
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-primary mb-3">
+                    {card.title}
+                  </h3>
+                  <p class="text-secondary leading-relaxed opacity-80">
+                    {card.desc}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-section {
+    background: var(--bg-main);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from("#aboutHeader", {
+    scrollTrigger: {
+      trigger: "#about",
+      start: "top 85%",
+    },
+    x: -100,
+    duration: 1.5,
+    ease: "power4.out",
+  });
+
+  gsap.from("#aboutContent", {
+    scrollTrigger: {
+      trigger: "#about",
+      start: "top 80%",
+    },
+    y: 50,
+    duration: 1.2,
+    ease: "power3.out",
+  });
+
+  gsap.from("#aboutCards > div", {
+    scrollTrigger: {
+      trigger: "#aboutCards",
+      start: "top 80%",
+    },
+    y: 40,
+    stagger: 0.2,
+    duration: 1.2,
+    ease: "power3.out",
+  });
+</script>

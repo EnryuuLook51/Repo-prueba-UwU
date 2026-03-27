@@ -1,0 +1,165 @@
+---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section
+  id="lineas-negocio"
+  class="services-section py-32 relative overflow-hidden"
+>
+  <div class="custom-container">
+    <!-- RIGHT ALIGNMENT HEADER -->
+    <div class="section-header mb-16 text-right" id="servicesHeader">
+      <div class="section-badge mb-6" data-fade-in="down">
+        <span
+          class="text-brand-blue font-bold tracking-widest text-xs uppercase"
+          >02 / {t("nav.services")}</span
+        >
+      </div>
+      <h2 class="text-5xl lg:text-7xl font-black text-primary leading-none m-0">
+        Nuestras <span class="text-brand-green">Líneas</span> de <span
+          class="text-brand-blue">Negocio</span
+        >
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8" id="servicesGrid">
+      {/* Ceprobio */}
+      <div
+        class="service-card group glass-premium p-10 rounded-[3rem] hover:scale-[1.03] transition-all duration-500 flex flex-col items-end text-right border-l-4 border-brand-green"
+      >
+        <div
+          class="service-icon mb-8 w-20 h-20 bg-brand-green/10 rounded-3xl flex items-center justify-center text-4xl shadow-sm group-hover:bg-brand-green group-hover:text-white transition-all duration-500"
+        >
+          🔬
+        </div>
+        <h3
+          class="text-3xl font-black text-primary mb-4 leading-tight tracking-tight"
+        >
+          {t("services.ceprobio.title")}
+        </h3>
+        <p
+          class="text-secondary leading-relaxed text-base opacity-90 font-medium"
+        >
+          {t("services.ceprobio.description")}
+        </p>
+      </div>
+
+      {/* Balik */}
+      <div
+        class="service-card group glass-premium p-10 rounded-[3rem] hover:scale-[1.03] transition-all duration-500 flex flex-col items-end text-right border-l-4 border-brand-blue"
+      >
+        <div
+          class="service-icon mb-8 w-20 h-20 bg-brand-blue/10 rounded-3xl flex items-center justify-center text-4xl shadow-sm group-hover:bg-brand-blue group-hover:text-white transition-all duration-500"
+        >
+          🛡️
+        </div>
+        <h3
+          class="text-3xl font-black text-primary mb-4 leading-tight tracking-tight"
+        >
+          {t("services.balik.title")}
+        </h3>
+        <p
+          class="text-secondary leading-relaxed text-base opacity-90 font-medium"
+        >
+          {t("services.balik.description")}
+        </p>
+      </div>
+
+      {/* Proveeduria */}
+      <div
+        class="service-card group glass-premium p-10 rounded-[3rem] hover:scale-[1.03] transition-all duration-500 flex flex-col items-end text-right border-l-4 border-brand-green"
+      >
+        <div
+          class="service-icon mb-8 w-20 h-20 bg-brand-green/10 rounded-3xl flex items-center justify-center text-4xl shadow-sm group-hover:bg-brand-green group-hover:text-white transition-all duration-500"
+        >
+          📦
+        </div>
+        <h3
+          class="text-3xl font-black text-primary mb-4 leading-tight tracking-tight"
+        >
+          {t("services.proveeduria.title")}
+        </h3>
+        <p
+          class="text-secondary leading-relaxed text-base opacity-90 font-medium"
+        >
+          {t("services.proveeduria.description")}
+        </p>
+      </div>
+
+      {/* Proyectos */}
+      <div
+        class="service-card group glass-premium p-10 rounded-[3rem] hover:scale-[1.03] transition-all duration-500 flex flex-col items-end text-right border-l-4 border-brand-blue"
+      >
+        <div
+          class="service-icon mb-8 w-20 h-20 bg-brand-blue/10 rounded-3xl flex items-center justify-center text-4xl shadow-sm group-hover:bg-brand-blue group-hover:text-white transition-all duration-500"
+        >
+          🏛️
+        </div>
+        <h3
+          class="text-3xl font-black text-primary mb-4 leading-tight tracking-tight"
+        >
+          {t("services.proyectos.title")}
+        </h3>
+        <p
+          class="text-secondary leading-relaxed text-base opacity-90 font-medium"
+        >
+          {t("services.proyectos.description")}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-section {
+    background: var(--bg-main);
+  }
+
+  .glass-premium {
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
+  }
+
+  .service-card:hover {
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.12);
+  }
+
+  .text-primary {
+    color: var(--text-primary);
+  }
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from("#servicesHeader", {
+    scrollTrigger: {
+      trigger: "#lineas-negocio",
+      start: "top 85%",
+    },
+    x: 80,
+    duration: 1.2,
+    ease: "power4.out",
+  });
+
+  gsap.from(".service-card", {
+    scrollTrigger: {
+      trigger: "#servicesGrid",
+      start: "top 85%",
+    },
+    y: 50,
+    stagger: 0.1,
+    duration: 1.2,
+    ease: "power3.out",
+  });
+</script>

@@ -1,0 +1,146 @@
+---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<div class="preloader-overlay" id="loader">
+    <!-- Progress BG -->
+    <div class="preloader-bg" id="preloaderBg"></div>
+
+    <!-- Logo Display -->
+    <div class="preloader-logo">
+        <p class="logo-text" data-text-anim="logoAnimation">
+            GREEN<span class="text-brand-green">PROD</span>
+        </p>
+    </div>
+</div>
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&display=swap");
+
+    .preloader-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        background-color: #f8fafc; /* Light Mode BG */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .preloader-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: var(--brand-blue);
+        transform: scaleX(0);
+        transform-origin: left;
+        opacity: 0.1;
+    }
+
+    .preloader-logo {
+        position: relative;
+        z-index: 10;
+
+        p {
+            font-family: "Host Grotesk", sans-serif;
+            font-size: 5rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            display: flex;
+            overflow: hidden;
+        }
+    }
+
+    :global(.char-wrapper) {
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+    }
+
+    :global(.char-dup) {
+        position: absolute;
+        inset: 0;
+        transform: translateY(100%);
+        color: var(--brand-green);
+    }
+
+    .text-brand-green {
+        color: var(--brand-green);
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { CustomEase } from "gsap/CustomEase";
+
+    gsap.registerPlugin(CustomEase);
+
+    CustomEase.create(
+        "stutterEase",
+        "M0,0 C0,0 0.052,0.1 0.152,0.1 0.242,0.1 0.299,0.349 0.399,0.349 0.586,0.349 0.569,0.596 0.67,0.624 0.842,0.671 0.95,0.95 1,1",
+    );
+
+    function splitTextManual(el) {
+        const text = el.innerText;
+        el.innerHTML = "";
+        text.split("").forEach((char) => {
+            const wrapper = document.createElement("span");
+            wrapper.className = "char-wrapper";
+
+            const og = document.createElement("span");
+            og.className = "char-og";
+            og.innerText = char === " " ? "\u00A0" : char;
+
+            const dup = document.createElement("span");
+            dup.className = "char-dup";
+            dup.innerText = char === " " ? "\u00A0" : char;
+
+            wrapper.appendChild(og);
+            wrapper.appendChild(dup);
+            el.appendChild(wrapper);
+        });
+        return el.querySelectorAll(".char-wrapper");
+    }
+
+    window.addEventListener("load", () => {
+        const loader = document.getElementById("loader");
+        const logoText = document.querySelector(".logo-text");
+        const preloaderBg = document.getElementById("preloaderBg");
+
+        // Preparation
+        const chars = splitTextManual(logoText);
+
+        const tl = gsap.timeline();
+
+        tl.to(chars, {
+            yPercent: -100,
+            duration: 0.6,
+            stagger: { each: 0.03, from: "random" },
+            ease: "power2.inOut",
+            repeat: 1,
+            yoyo: true,
+        })
+            .to(
+                preloaderBg,
+                {
+                    scaleX: 1,
+                    duration: 2.5,
+                    ease: "stutterEase",
+                },
+                0,
+            )
+            .to(loader, {
+                clipPath: "inset(0% 0% 100% 0%)",
+                duration: 1.2,
+                ease: "expo.inOut",
+            })
+            .set(loader, { display: "none" });
+    });
+</script>
