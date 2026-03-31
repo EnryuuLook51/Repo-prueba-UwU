@@ -28,51 +28,48 @@ export default function Navbar({ lang: currentLang, t }: NavbarProps) {
         view_about_page: t['navbar.view_about_page'],
         balik: t['navbar.balik'],
         balik_desc: t['navbar.balik_desc'],
-        Ceprobio: t['navbar.Ceprobio'],
-        Ceprobio_desc: t['navbar.Ceprobio_desc'],
+        ceprobio: t['navbar.ceprobio'],
+        ceprobio_desc: t['navbar.ceprobio_desc'],
         planta: t['navbar.planta'],
         planta_desc: t['navbar.planta_desc'],
-        carniprod: t['navbar.carniprod'],
-        carniprod_desc: t['navbar.carniprod_desc'],
         proveeduria: t['navbar.proveeduria'],
         proveeduria_desc: t['navbar.proveeduria_desc'],
         proyectos: t['navbar.proyectos'],
         proyectos_desc: t['navbar.proyectos_desc'],
     };
 
+    const prefixPath = (path: string) => {
+        if (currentLang === 'es') return path;
+        return `/${currentLang}${path}`;
+    };
+
     const navLinks = [
-        { name: d.about, href: currentLang === 'es' ? '#about' : '/en#about' },
-        { name: d.catalog, href: currentLang === 'es' ? '/catalogo' : '/en/catalogo' },
-        { name: d.sustainability, href: currentLang === 'es' ? '/sostenibilidad' : '/en/sostenibilidad' },
+        { name: d.about, href: prefixPath('/#identidad') },
+        { name: d.catalog, href: prefixPath('/nuestros-proyectos') },
+        { name: d.sustainability, href: prefixPath('/impacto-circular') },
     ];
 
     const productsMenu = [
         {
-            category: d.products,
+            category: t['navbar.products_services_title'],
             items: [
-                { name: d.balik, desc: d.balik_desc, href: '#lineas-negocio' }, // Mapping to section since pages might not exist yet
-                { name: d.Ceprobio, desc: d.Ceprobio_desc, href: '#lineas-negocio' },
-                { name: d.planta, desc: d.planta_desc, href: '#lineas-negocio' },
-                { name: d.carniprod, desc: d.carniprod_desc, href: '#lineas-negocio' },
-            ]
-        },
-        {
-            category: d.services,
-            items: [
-                { name: d.proveeduria, desc: d.proveeduria_desc, href: '#lineas-negocio' },
-                { name: d.proyectos, desc: d.proyectos_desc, href: '#lineas-negocio' },
+                { name: t['navbar.ceprobio'], desc: t['navbar.ceprobio_desc'], href: prefixPath('/lineas-de-negocio/ceprobio') },
+                { name: t['navbar.proveeduria'], desc: t['navbar.proveeduria_desc'], href: prefixPath('/lineas-de-negocio/proveeduria') },
+                { name: t['navbar.balik'], desc: t['navbar.balik_desc'], href: prefixPath('/lineas-de-negocio/balik') },
+                { name: t['navbar.proyectos'], desc: t['navbar.proyectos_desc'], href: prefixPath('/nuestros-proyectos') },
+                { name: t['navbar.planta'], desc: t['navbar.planta_desc'], href: prefixPath('/lineas-de-negocio/planta-de-tratamiento') },
             ]
         }
     ];
 
     const aboutMenu = {
         main: [
-            { name: d.who_we_are, desc: d.who_we_are_desc, href: '#about' },
-            { name: d.our_history, desc: d.our_history_desc, href: '#about' }
+            { name: d.who_we_are, desc: d.who_we_are_desc, href: prefixPath('/nosotros') },
+            { name: d.our_history, desc: d.our_history_desc, href: prefixPath('/impacto-circular') }
         ],
         sidebar: [
-            { name: d.work_with_us, href: '#contacto', icon: Phone },
-            { name: d.contact, href: '#contacto', icon: Mail }
+            { name: d.work_with_us, href: prefixPath('/contacto'), icon: Phone },
+            { name: d.contact, href: prefixPath('/contacto'), icon: Mail }
         ]
     };
 
@@ -94,10 +91,11 @@ export default function Navbar({ lang: currentLang, t }: NavbarProps) {
     const rawPath = currentPath.replace(`/${currentLang}`, '') || '/';
     const isTransparentPage = rawPath === '/';
     const isSolid = isScrolled || !isTransparentPage || isOpen;
-    const transparentMode = isTransparentPage && !isSolid;
 
-    const textColorClass = 'text-slate-900';
-    const hoverColorClass = 'hover:text-brand-green';
+    // Dynamic styles based on scroll state
+    const textColorClass = isSolid ? 'text-slate-900' : 'text-white';
+    const hoverColorClass = isSolid ? 'hover:text-brand-blue' : 'hover:text-brand-green';
+    const iconColorClass = isSolid ? 'text-slate-600' : 'text-white';
 
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -136,9 +134,9 @@ export default function Navbar({ lang: currentLang, t }: NavbarProps) {
                 onMouseLeave={handleMouseLeave}
             >
                 {/* Top Bar - High Visibility Options */}
-                <div className={`hidden md:flex justify-end items-center px-8 py-2 text-xs transition-colors duration-700 border-b border-slate-200/50 ${isSolid ? 'text-slate-500' : 'text-slate-600 font-bold'}`}>
+                <div className={`hidden md:flex justify-end items-center px-8 py-2 text-xs transition-colors duration-700 ${isSolid ? 'text-slate-500' : 'text-slate-200 font-bold'}`}>
                     <div className="flex items-center gap-6">
-                        <a href="#contacto" className="flex items-center gap-2 hover:text-brand-green transition-colors">
+                        <a href={prefixPath('/contacto')} className="flex items-center gap-2 hover:text-brand-green transition-colors">
                             <Mail className="h-3 w-3" /> {d.contact}
                         </a>
                         <a href={currentLang === 'es' ? '/en' : '/'} className="flex items-center gap-2 hover:text-brand-green transition-colors cursor-pointer">
@@ -152,21 +150,20 @@ export default function Navbar({ lang: currentLang, t }: NavbarProps) {
                     <a href={currentLang === 'es' ? '/' : '/en'} className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
                         <div className="relative transition-all duration-700 h-14 w-36 md:h-16 md:w-48">
                             <img
-                                src="/images/greenprod.png"
+                                src={!isSolid ? "/images/greenprod-blanco.png" : "/images/greenprod.png"}
                                 alt="Green Prod & Sustainable Logo"
-                                className="h-full w-auto object-contain transition-all"
+                                className="h-full w-auto object-contain transition-all duration-700"
                             />
                         </div>
                     </a>
 
-                    {/* Desktop Nav */}
                     <nav className="hidden md:flex items-center h-full gap-1 lg:gap-2 relative">
                         <div
                             className="h-full flex items-center"
                             onMouseEnter={() => handleMouseEnter('nosotros')}
                         >
                             <button
-                                className={`px-4 lg:px-6 h-full flex items-center gap-1 text-sm font-semibold tracking-wide uppercase transition-colors duration-300 ${activeDropdown === 'nosotros' ? (transparentMode ? 'text-brand-green' : 'text-brand-blue') : textColorClass} ${hoverColorClass}`}
+                                className={`px-4 lg:px-6 h-full flex items-center gap-1 text-sm font-semibold tracking-wide uppercase transition-colors duration-300 ${activeDropdown === 'nosotros' ? (!isSolid ? 'text-brand-green' : 'text-brand-blue') : textColorClass} ${hoverColorClass}`}
                             >
                                 {d.about} <ChevronDown className={`h-4 w-4 transition-transform duration-700 ${activeDropdown === 'nosotros' ? 'rotate-180' : ''}`} />
                             </button>
@@ -177,28 +174,28 @@ export default function Navbar({ lang: currentLang, t }: NavbarProps) {
                             onMouseEnter={() => handleMouseEnter('productos')}
                         >
                             <button
-                                className={`px-4 lg:px-6 h-full flex items-center gap-1 text-sm font-semibold tracking-wide uppercase transition-colors duration-300 ${activeDropdown === 'productos' ? (transparentMode ? 'text-brand-green' : 'text-brand-blue') : textColorClass} ${hoverColorClass}`}
+                                className={`px-4 lg:px-6 h-full flex items-center gap-1 text-sm font-semibold tracking-wide uppercase transition-colors duration-300 ${activeDropdown === 'productos' ? (!isSolid ? 'text-brand-green' : 'text-brand-blue') : textColorClass} ${hoverColorClass}`}
                             >
                                 {d.products_services_title} <ChevronDown className={`h-4 w-4 transition-transform duration-700 ${activeDropdown === 'productos' ? 'rotate-180' : ''}`} />
                             </button>
                         </div>
 
                         <a
-                            href="#actividades"
+                            href={prefixPath('/impacto-circular')}
                             className={`px-4 lg:px-6 h-full flex items-center text-sm font-semibold tracking-wide uppercase transition-colors duration-300 ${textColorClass} ${hoverColorClass}`}
                         >
                             {t['nav.activities']}
                         </a>
 
                         <a
-                            href="#proyectos"
+                            href={prefixPath('/nuestros-proyectos')}
                             className={`px-4 lg:px-6 h-full flex items-center text-sm font-semibold tracking-wide uppercase transition-colors duration-300 ${textColorClass} ${hoverColorClass}`}
                         >
                             {d.catalog}
                         </a>
 
                         <div className="ml-4 flex items-center gap-4 border-l border-slate-300/30 pl-6">
-                            <button className={`p-2 transition-colors duration-300 ${transparentMode ? 'text-white hover:text-brand-green' : 'text-slate-600 hover:text-brand-blue'}`}>
+                            <button className={`p-2 transition-colors duration-300 ${!isSolid ? 'text-white hover:text-brand-green' : 'text-slate-600 hover:text-brand-blue'}`}>
                                 <Search className="h-5 w-5" />
                             </button>
                         </div>
@@ -206,11 +203,11 @@ export default function Navbar({ lang: currentLang, t }: NavbarProps) {
 
                     {/* Mobile Menu Toggle */}
                     <div className="flex md:hidden items-center gap-4">
-                        <button className={`p-2 transition-colors duration-700 ${transparentMode ? 'text-white hover:text-brand-green' : 'text-slate-600 hover:text-brand-blue'}`}>
+                        <button className={`p-2 transition-colors duration-700 ${!isSolid ? 'text-white hover:text-brand-green' : 'text-slate-600 hover:text-brand-blue'}`}>
                             <Search className="h-5 w-5" />
                         </button>
                         <button
-                            className={`p-2 transition-colors duration-700 ${transparentMode ? 'text-white hover:text-brand-green' : 'text-slate-600 hover:text-brand-blue'}`}
+                            className={`p-2 transition-colors duration-700 ${!isSolid ? 'text-white hover:text-brand-green' : 'text-slate-600 hover:text-brand-blue'}`}
                             onClick={() => setIsOpen(!isOpen)}
                             aria-label="Toggle menu"
                         >
@@ -232,23 +229,39 @@ export default function Navbar({ lang: currentLang, t }: NavbarProps) {
                             onMouseLeave={handleMouseLeave}
                         >
                             <div className="mx-auto max-w-7xl px-8 py-10">
-                                <div className="grid grid-cols-2 gap-12">
-                                    {productsMenu.map((column, idx) => (
-                                        <div key={idx}>
-                                            <h3 className="text-xl font-bold text-brand-blue mb-6 pb-2 border-b border-slate-100">{column.category}</h3>
-                                            <div className="grid grid-cols-2 gap-x-8 gap-y-6">
-                                                {column.items.map((item, idxi) => (
-                                                    <a
-                                                        key={idxi}
-                                                        href={item.href}
-                                                        className="group block"
-                                                        onClick={() => setActiveDropdown(null)}
-                                                    >
-                                                        <h4 className="text-base font-bold text-slate-800 group-hover:text-brand-green transition-colors mb-1">{item.name}</h4>
-                                                        <p className="text-sm text-slate-500 leading-snug">{item.desc}</p>
-                                                    </a>
+                                <div className="grid  gap-12">
+                                    {productsMenu.map((column) => (
+                                        <div key={column.category} className="flex flex-col">
+                                            {/* Encabezado de categoría mejorado visualmente */}
+                                            <h3 className="text-sm font-black text-brand-blue mb-4 pb-2 border-b border-slate-100 uppercase tracking-widest">
+                                                {column.category}
+                                            </h3>
+
+                                            {/* Cambiamos a <ul> para mejor semántica SEO/Accesibilidad */}
+                                            <ul className="grid grid-cols-3 line-clamp-2 gap-x-6 gap-y-2">
+                                                {column.items.map((item) => (
+                                                    <li key={item.name}>
+                                                        <a
+                                                            href={item.href}
+                                                            onClick={() => setActiveDropdown(null)}
+                                                            // Ampliamos el área de clic (hitbox) y agregamos fondo al hacer hover
+                                                            className="group flex flex-col p-3 -mx-3 rounded-xl hover:bg-slate-50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-green/20"
+                                                        >
+                                                            <h4 className="text-base font-bold text-slate-800 group-hover:text-brand-green transition-colors mb-1 flex items-center justify-between">
+                                                                {item.name}
+                                                                {/* Flecha indicadora que aparece sutilmente al hacer hover */}
+                                                                <span className="text-brand-green opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                                                                    <i className="fas fa-arrow-right text-sm"></i>
+                                                                </span>
+                                                            </h4>
+                                                            {/* line-clamp-2 evita que el diseño se rompa si la descripción es muy larga */}
+                                                            <p className="text-sm text-slate-500 leading-relaxed line-clamp-2">
+                                                                {item.desc}
+                                                            </p>
+                                                        </a>
+                                                    </li>
                                                 ))}
-                                            </div>
+                                            </ul>
                                         </div>
                                     ))}
                                 </div>
@@ -312,7 +325,7 @@ export default function Navbar({ lang: currentLang, t }: NavbarProps) {
                             <div className="bg-slate-50 border-t border-slate-100 px-8 py-4">
                                 <div className="mx-auto max-w-7xl flex justify-between items-center text-sm">
                                     <span className="text-slate-600 font-medium">{d.learn_more_vision}</span>
-                                    <a href="#about" className="text-brand-blue font-bold hover:text-brand-green flex items-center gap-1 transition-colors" onClick={() => setActiveDropdown(null)}>
+                                    <a href={prefixPath('/nosotros')} className="text-brand-blue font-bold hover:text-brand-green flex items-center gap-1 transition-colors" onClick={() => setActiveDropdown(null)}>
                                         {d.view_about_page} <ChevronDown className="h-4 w-4 -rotate-90" />
                                     </a>
                                 </div>
@@ -332,7 +345,7 @@ export default function Navbar({ lang: currentLang, t }: NavbarProps) {
                         >
                             <div className="flex flex-col h-[calc(100vh-80px)] overflow-y-auto">
                                 <div className="bg-slate-50 flex justify-between px-6 py-4 border-b border-slate-100 text-sm font-medium text-slate-600">
-                                    <a href="#contacto" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
+                                    <a href={prefixPath('/contacto')} onClick={() => setIsOpen(false)} className="flex items-center gap-2">
                                         <Mail className="h-4 w-4" /> {d.contact}
                                     </a>
                                     <a href={currentLang === 'es' ? '/en' : '/'} className="flex items-center gap-2">
@@ -431,11 +444,29 @@ export default function Navbar({ lang: currentLang, t }: NavbarProps) {
                                             )}
                                         </AnimatePresence>
                                     </div>
+                                    <div className="border-b border-slate-50">
+                                        <a
+                                            href={prefixPath('/impacto-circular')}
+                                            className="w-full px-6 py-4 flex items-center text-lg font-bold uppercase tracking-wide text-slate-800 hover:bg-slate-50 transition-colors"
+                                            onClick={() => setIsOpen(false)}
+                                        >
+                                            {t['nav.activities']}
+                                        </a>
+                                    </div>
+                                    <div className="border-b border-slate-50">
+                                        <a
+                                            href={prefixPath('/nuestros-proyectos')}
+                                            className="w-full px-6 py-4 flex items-center text-lg font-bold uppercase tracking-wide text-slate-800 hover:bg-slate-50 transition-colors"
+                                            onClick={() => setIsOpen(false)}
+                                        >
+                                            {d.catalog}
+                                        </a>
+                                    </div>
                                 </div>
 
                                 <div className="bg-slate-900 px-6 py-8 mt-auto">
                                     <a
-                                        href="#contacto"
+                                        href={prefixPath('/contacto')}
                                         onClick={() => setIsOpen(false)}
                                         className="w-full flex justify-center items-center py-4 rounded-xl bg-brand-green text-white font-bold text-lg hover:bg-brand-blue transition-colors"
                                     >

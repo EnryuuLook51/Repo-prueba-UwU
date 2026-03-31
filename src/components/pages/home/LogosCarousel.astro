@@ -1,0 +1,131 @@
+---
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const logos = [
+    { src: "/images/logosAlianzas/Tasa.png", alt: "Tasa" },
+    { src: "/images/logosAlianzas/Hayduk.jpg", alt: "Hayduk" },
+];
+---
+
+<section class="logos-section">
+    <div class="logos-inner">
+        <p class="logos-label">
+            {
+                lang === "es"
+                    ? "Empresas que confían en nosotros"
+                    : "Companies that trust us"
+            }
+        </p>
+        <div class="logos-track">
+            <!-- Se duplica para el efecto de loop infinito -->
+            <div class="logos-slide">
+                {
+                    logos.map((logo) => (
+                        <div class="logo-item">
+                            <img src={logo.src} alt={logo.alt} loading="lazy" />
+                        </div>
+                    ))
+                }
+            </div>
+            <div class="logos-slide" aria-hidden="true">
+                {
+                    logos.map((logo) => (
+                        <div class="logo-item">
+                            <img src={logo.src} alt={logo.alt} loading="lazy" />
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .logos-section {
+        background: var(--bg-main, #f8fafc);
+        padding: 2.5rem 1rem;
+        border-bottom: 1px solid var(--border-color, rgba(0, 0, 0, 0.06));
+        overflow: hidden;
+    }
+
+    .logos-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .logos-label {
+        font-size: 0.72rem;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--text-secondary, #64748b);
+        margin-bottom: 1.8rem;
+        font-weight: 600;
+    }
+
+    .logos-track {
+        display: flex;
+        width: max-content;
+        animation: scroll-logos 25s linear infinite;
+    }
+
+    .logos-track:hover {
+        animation-play-state: paused;
+    }
+
+    .logos-slide {
+        display: flex;
+        align-items: center;
+        gap: 4rem;
+        padding: 0 2rem;
+    }
+
+    .logo-item {
+        flex-shrink: 0;
+        width: 120px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.45;
+        filter: grayscale(100%);
+        transition: all 0.4s ease;
+    }
+
+    .logo-item:hover {
+        opacity: 1;
+        filter: grayscale(0%);
+        transform: scale(1.1);
+    }
+
+    .logo-item img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    @keyframes scroll-logos {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .logos-section {
+            padding: 2rem 1rem;
+        }
+        .logos-slide {
+            gap: 2.5rem;
+        }
+        .logo-item {
+            width: 90px;
+            height: 40px;
+        }
+    }
+</style>

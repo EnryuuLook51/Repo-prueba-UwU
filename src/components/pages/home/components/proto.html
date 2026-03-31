@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mar & Tierra – Árbol de Vida</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,300;1,500&family=Jost:wght@200;300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --brown: #4A2E0E;
+            --brown-mid: #7A5230;
+            --brown-light: #B08050;
+            --green-dark: #1A4A1A;
+            --green: #2E7D32;
+            --green-light: #66BB6A;
+            --blue-dark: #0D2B45;
+            --blue: #1565C0;
+            --blue-light: #42A5F5;
+            --cream: #F5F0E8;
+            --cream-dark: #E8E0D0;
+            --ink: #1A1208;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--cream);
+            font-family: 'Jost', sans-serif;
+            color: var(--ink);
+            overflow-x: hidden;
+        }
+
+        /* ══ HERO ══ */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(175deg, #0a2818 0%, #0d2b45 100%);
+            color: #fff;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 60% at 50% 80%, rgba(255, 255, 255, .03) 0%, transparent 70%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 300;
+            letter-spacing: .06em;
+            line-height: 1;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: #a8d5a0;
+        }
+
+        .hero p {
+            margin-top: 1.5rem;
+            font-size: clamp(.75rem, 1.5vw, .95rem);
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            opacity: .5;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .5rem;
+            opacity: .4;
+            font-size: .65rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: #fff;
+            animation: bounce 2s infinite;
+        }
+
+        .hero-scroll::after {
+            content: '';
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, #fff, transparent);
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0)
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(6px)
+            }
+        }
+
+        /* ══ MURAL SECTION ══ */
+        #mural {
+            position: relative;
+            /* 600vh = 6 pantallas de scroll para viajar por el árbol */
+            height: 600vh;
+            background: var(--cream);
+        }
+
+        /* El canvas sticky que siempre ocupa el viewport */
+        .mural-stage {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* Gradiente de fondo que cambia con el scroll */
+        .mural-bg {
+            position: absolute;
+            inset: 0;
+            background: var(--cream);
+            transition: background .8s ease;
+        }
+
+        /* El SVG del árbol — enorme, centrado, se mueve con scroll */
+        #tree-svg {
+            position: absolute;
+            left: 50%;
+            /* Empieza mostrando la parte de abajo (raíces) */
+            /* translateY se controla por JS */
+            transform: translateX(-50%) translateY(0px);
+            width: clamp(320px, 55vw, 700px);
+            /* Muy alto para que sea un mural */
+            height: auto;
+            will-change: transform;
+            z-index: 2;
+        }
+
+        /* Estilos SVG */
+        .s-trunk {
+            fill: none;
+            stroke: var(--brown);
+            stroke-width: 22;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .s-branch-main {
+            fill: none;
+            stroke: var(--brown-mid);
+            stroke-width: 14;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .s-branch-sub {
+            fill: none;
+            stroke: var(--brown-light);
+            stroke-width: 8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .s-twig {
+            fill: none;
+            stroke: var(--brown-light);
+            stroke-width: 4;
+            stroke-linecap: round;
+        }
+
+        .s-curl {
+            fill: none;
+            stroke: var(--brown-light);
+            stroke-width: 5;
+            stroke-linecap: round;
+        }
+
+        .s-root-main {
+            fill: none;
+            stroke: var(--brown);
+            stroke-width: 16;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .s-root-sub {
+            fill: none;
+            stroke: var(--brown-mid);
+            stroke-width: 9;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .s-root-tiny {
+            fill: none;
+            stroke: var(--brown-light);
+            stroke-width: 5;
+            stroke-linecap: round;
+        }
+
+        /* Raíces azules (agua) */
+        .s-water-root {
+            fill: none;
+            stroke: var(--blue);
+            stroke-width: 8;
+            stroke-linecap: round;
+        }
+
+        .s-water-tiny {
+            fill: none;
+            stroke: var(--blue-light);
+            stroke-width: 4;
+            stroke-linecap: round;
+        }
+
+        /* Raíces verdes (tierra) */
+        .s-earth-root {
+            fill: none;
+            stroke: var(--green);
+            stroke-width: 8;
+            stroke-linecap: round;
+        }
+
+        .s-earth-tiny {
+            fill: none;
+            stroke: var(--green-light);
+            stroke-width: 4;
+            stroke-linecap: round;
+        }
+
+        /* Hojas */
+        .s-leaf-g {
+            fill: var(--green);
+            stroke: var(--green-dark);
+            stroke-width: 1.5;
+            opacity: 0;
+        }
+
+        .s-leaf-b {
+            fill: var(--blue-light);
+            stroke: var(--blue);
+            stroke-width: 1.5;
+            opacity: 0;
+        }
+
+        .s-fish {
+            fill: none;
+            stroke: var(--blue-light);
+            stroke-width: 3;
+            stroke-linecap: round;
+            opacity: 0;
+        }
+
+        /* Draw animation */
+        .draw {
+            stroke-dasharray: var(--L, 1000);
+            stroke-dashoffset: var(--L, 1000);
+            opacity: 0;
+            transition: none;
+            /* JS controla directo */
+        }
+
+        /* ══ FLOATING CONTENT (títulos, textos, imágenes) ══ */
+        .float-item {
+            position: absolute;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity .9s ease, transform .9s ease;
+            z-index: 10;
+            pointer-events: none;
+            will-change: opacity, transform;
+        }
+
+        .float-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Título grande de sección */
+        .f-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: .02em;
+        }
+
+        .f-title.xl {
+            font-size: clamp(2rem, 5vw, 4.5rem);
+        }
+
+        .f-title.lg {
+            font-size: clamp(1.5rem, 3.5vw, 3rem);
+        }
+
+        .f-title.md {
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+        }
+
+        /* Subtítulo / etiqueta */
+        .f-label {
+            font-size: clamp(.6rem, 1.2vw, .8rem);
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        /* Texto cuerpo */
+        .f-body {
+            font-size: clamp(.8rem, 1.4vw, 1rem);
+            line-height: 1.7;
+            font-weight: 300;
+            max-width: 280px;
+        }
+
+        /* Imagen flotante */
+        .f-image {
+            width: clamp(140px, 22vw, 260px);
+            height: clamp(100px, 15vw, 180px);
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, .15);
+        }
+
+        /* Separador decorativo */
+        .f-line {
+            width: 60px;
+            height: 1px;
+            background: currentColor;
+            opacity: .4;
+        }
+
+        /* Valor pill */
+        .f-value {
+            display: inline-block;
+            padding: .35rem 1rem;
+            border: 1px solid currentColor;
+            border-radius: 99px;
+            font-size: clamp(.65rem, 1.2vw, .8rem);
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin: .2rem;
+        }
+
+        /* Grupo de valores */
+        .f-values {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .3rem;
+            justify-content: center;
+            max-width: 300px;
+        }
+
+        /* Posicionamiento de items */
+        /* Raíces — centro-bajo */
+        .pos-roots-center {
+            bottom: 8vh;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            text-align: center;
+        }
+
+        .pos-roots-center.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Raíces izquierda (agua) */
+        .pos-water-label {
+            bottom: 30vh;
+            left: 5vw;
+        }
+
+        .pos-water-text {
+            bottom: 18vh;
+            left: 3vw;
+        }
+
+        .pos-water-title {
+            bottom: 45vh;
+            left: 4vw;
+        }
+
+        /* Raíces derecha (tierra) */
+        .pos-earth-label {
+            bottom: 30vh;
+            right: 5vw;
+            text-align: right;
+        }
+
+        .pos-earth-text {
+            bottom: 18vh;
+            right: 3vw;
+            text-align: right;
+        }
+
+        .pos-earth-title {
+            bottom: 45vh;
+            right: 4vw;
+            text-align: right;
+        }
+
+        /* Tronco — centro */
+        .pos-trunk-left {
+            top: 50%;
+            left: 5vw;
+            transform: translateY(-50%) translateY(20px);
+        }
+
+        .pos-trunk-left.show {
+            transform: translateY(-50%) translateY(0);
+        }
+
+        .pos-trunk-right {
+            top: 50%;
+            right: 5vw;
+            transform: translateY(-50%) translateY(20px);
+            text-align: right;
+        }
+
+        .pos-trunk-right.show {
+            transform: translateY(-50%) translateY(0);
+        }
+
+        /* Ramas */
+        .pos-branch-left {
+            top: 15vh;
+            left: 5vw;
+        }
+
+        .pos-branch-right {
+            top: 15vh;
+            right: 5vw;
+            text-align: right;
+        }
+
+        .pos-top-center {
+            top: 8vh;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            text-align: center;
+        }
+
+        .pos-top-center.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ══ PROGRESO ══ */
+        .progress-line {
+            position: fixed;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2px;
+            height: 100px;
+            background: rgba(0, 0, 0, .1);
+            border-radius: 99px;
+            z-index: 100;
+        }
+
+        .progress-fill {
+            width: 100%;
+            background: var(--brown-mid);
+            border-radius: 99px;
+            height: 0%;
+            transition: height .15s linear, background .5s ease;
+        }
+
+        /* Dot indicador de fase */
+        .phase-dot {
+            position: fixed;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%) translateY(60px);
+            font-size: .6rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            opacity: .4;
+            writing-mode: vertical-rl;
+            font-weight: 300;
+            transition: opacity .4s;
+            z-index: 100;
+        }
+
+        /* ══ FOOTER ══ */
+        .footer {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+            background: linear-gradient(175deg, #0d2b45 0%, #0a2818 100%);
+            color: #fff;
+            text-align: center;
+        }
+
+        .footer h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 300;
+            font-style: italic;
+            letter-spacing: .03em;
+        }
+
+        .footer p {
+            font-size: .8rem;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            opacity: .4;
+        }
+
+        @media (max-width: 600px) {
+
+            .pos-water-label,
+            .pos-water-text,
+            .pos-water-title,
+            .pos-earth-label,
+            .pos-earth-text,
+            .pos-earth-title {
+                display: none;
+            }
+
+            .pos-trunk-left,
+            .pos-trunk-right {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ══ HERO ══ -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Mar <em>&</em> Tierra</h1>
+            <p>Del océano y la tierra, con respeto</p>
+        </div>
+        <div class="hero-scroll">Scroll</div>
+    </section>
+
+    <!-- ══ MURAL ══ -->
+    <section id="mural">
+        <div class="mural-stage" id="stage">
+
+            <!-- Fondo dinámico -->
+            <div class="mural-bg" id="mural-bg"></div>
+
+            <!-- ══ SVG ÁRBOL GIGANTE ══
+         ViewBox: 0 0 400 1400
+         Parte baja = raíces (y 800–1400)
+         Parte media = tronco (y 400–800)
+         Parte alta = ramas (y 0–400)
+    -->
+            <svg id="tree-svg" viewBox="0 0 400 1400" xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="xMidMid meet">
+
+                <!-- ══ RAMAS SUPERIORES (y 0–420) ══ -->
+
+                <!-- Rama izq principal -->
+                <path class="s-branch-main draw" id="b1" d="M200 420 C185 390 160 360 130 330 C100 300 65 280 30 265" />
+                <!-- Rama der principal -->
+                <path class="s-branch-main draw" id="b2"
+                    d="M200 420 C215 390 240 360 270 330 C300 300 335 280 370 265" />
+                <!-- Sub-ramas izq -->
+                <path class="s-branch-sub draw" id="b3" d="M130 330 C110 310 80 295 50 285
+           M100 300 C80 278 55 262 20 250
+           M65 280 C50 260 30 245 5 238" />
+                <!-- Sub-ramas der -->
+                <path class="s-branch-sub draw" id="b4" d="M270 330 C290 310 320 295 350 285
+           M300 300 C320 278 345 262 380 250
+           M335 280 C350 260 370 245 395 238" />
+                <!-- Twigs izq -->
+                <path class="s-twig draw" id="b5" d="M50 285 C40 272 25 265 8 262
+           M20 250 C10 238 -2 232 -5 228
+           M5 238 C-5 226 -8 218 -4 212" />
+                <!-- Twigs der -->
+                <path class="s-twig draw" id="b6" d="M350 285 C360 272 375 265 392 262
+           M380 250 C390 238 402 232 405 228
+           M395 238 C405 226 408 218 404 212" />
+                <!-- Curls izq -->
+                <path class="s-curl draw" id="c1" d="M8 262 C2 255 0 247 6 242 C12 237 18 243 12 250
+           M-5 228 C-11 220 -10 210 -3 207 C4 204 8 213 2 220
+           M-4 212 C-10 204 -8 194 0 192 C8 190 10 200 4 208" />
+                <!-- Curls der -->
+                <path class="s-curl draw" id="c2" d="M392 262 C398 255 400 247 394 242 C388 237 382 243 388 250
+           M405 228 C411 220 410 210 403 207 C396 204 392 213 398 220
+           M404 212 C410 204 408 194 400 192 C392 190 390 200 396 208" />
+
+                <!-- Hojas en ramas -->
+                <!-- Izq -->
+                <ellipse class="s-leaf-b" cx="50" cy="284" rx="14" ry="8" transform="rotate(-25 50 284)" />
+                <ellipse class="s-leaf-b" cx="20" cy="250" rx="12" ry="7" transform="rotate(-40 20 250)" />
+                <ellipse class="s-leaf-b" cx="5" cy="237" rx="11" ry="6" transform="rotate(-15 5 237)" />
+                <ellipse class="s-leaf-b" cx="30" cy="265" rx="10" ry="6" transform="rotate(-35 30 265)" />
+                <!-- Der -->
+                <ellipse class="s-leaf-g" cx="350" cy="284" rx="14" ry="8" transform="rotate(25 350 284)" />
+                <ellipse class="s-leaf-g" cx="380" cy="250" rx="12" ry="7" transform="rotate(40 380 250)" />
+                <ellipse class="s-leaf-g" cx="395" cy="237" rx="11" ry="6" transform="rotate(15 395 237)" />
+                <ellipse class="s-leaf-g" cx="370" cy="265" rx="10" ry="6" transform="rotate(35 370 265)" />
+
+                <!-- ══ TRONCO (y 420–820) ══ -->
+                <path class="s-trunk draw" id="trunk"
+                    d="M200 820 C200 780 200 740 200 700 C200 660 200 620 200 580 C200 540 200 500 200 460 C200 440 200 430 200 420" />
+
+                <!-- Nudos / textura tronco -->
+                <ellipse class="s-branch-sub draw" id="knot1" cx="194" cy="640" rx="12" ry="8"
+                    transform="rotate(-10 194 640)" />
+                <ellipse class="s-branch-sub draw" id="knot2" cx="206" cy="560" rx="10" ry="6"
+                    transform="rotate(8 206 560)" />
+
+                <!-- ══ RAÍCES (y 820–1400) ══ -->
+
+                <!-- Raíz central -->
+                <path class="s-root-main draw" id="r0"
+                    d="M200 820 C198 860 196 900 194 950 C192 990 190 1030 192 1080" />
+
+                <!-- Raíces secundarias izq (AZUL = agua) -->
+                <path class="s-root-sub draw" id="ra1" d="M200 840 C185 865 165 885 140 910
+           M195 880 C175 905 150 925 120 950
+           M190 920 C165 948 135 968  100 990" />
+                <path class="s-water-root draw" id="ra2" d="M140 910 C115 935  85 955  50 975
+           M120 950 C 90 978  55 998  20 1015
+           M100 990 C 68 1020 30 1042 -5 1058" />
+                <path class="s-water-tiny draw" id="ra3" d="M50 975 C 28 998  0 1018 -25 1030
+           M20 1015 C -5 1040 -30 1058 -50 1068
+           M-5 1058 C-28 1082 -50 1098 -70 1105" />
+                <!-- Raíces izq profundas -->
+                <path class="s-water-tiny draw" id="ra4" d="M-25 1030 C-45 1055 -62 1075 -78 1090 C-90 1102 -100 1112 -108 1125
+           M-50 1068 C-70 1092 -88 1110 -102 1124
+           M-70 1105 C-88 1128 -102 1145 -112 1158" />
+
+                <!-- Raíces secundarias der (VERDE = tierra) -->
+                <path class="s-root-sub draw" id="rb1" d="M200 840 C215 865 235 885 260 910
+           M205 880 C225 905 250 925 280 950
+           M210 920 C235 948 265 968  300 990" />
+                <path class="s-earth-root draw" id="rb2" d="M260 910 C285 935 315 955 350 975
+           M280 950 C310 978 345 998 380 1015
+           M300 990 C332 1020 370 1042 405 1058" />
+                <path class="s-earth-tiny draw" id="rb3" d="M350 975 C372 998 400 1018 425 1030
+           M380 1015 C405 1040 430 1058 450 1068
+           M405 1058 C428 1082 450 1098 470 1105" />
+                <!-- Raíces der profundas -->
+                <path class="s-earth-tiny draw" id="rb4" d="M425 1030 C445 1055 462 1075 478 1090 C490 1102 500 1112 508 1125
+           M450 1068 C470 1092 488 1110 502 1124
+           M470 1105 C488 1128 502 1145 512 1158" />
+
+                <!-- Hojas raíces izq (azules / agua) -->
+                <ellipse class="s-leaf-b" cx="50" cy="974" rx="14" ry="8" transform="rotate(-30 50 974)" />
+                <ellipse class="s-leaf-b" cx="20" cy="1014" rx="12" ry="7" transform="rotate(-45 20 1014)" />
+                <ellipse class="s-leaf-b" cx="-5" cy="1057" rx="11" ry="6" transform="rotate(-20 -5 1057)" />
+                <ellipse class="s-leaf-b" cx="-25" cy="1029" rx="10" ry="6" transform="rotate(-50 -25 1029)" />
+                <ellipse class="s-leaf-b" cx="-50" cy="1067" rx="10" ry="6" transform="rotate(-35 -50 1067)" />
+
+                <!-- Peces en raíces izq -->
+                <path class="s-fish" id="f1" d="M 80 958 C72 952 64 952 74 958 C64 964 72 964 80 958 L74 954 M74 962" />
+                <path class="s-fish" id="f2"
+                    d="M 38 1000 C30 994 22 994 32 1000 C22 1006 30 1006 38 1000 L32 996 M32 1004" />
+                <path class="s-fish" id="f3"
+                    d="M -8 1040 C-16 1034 -24 1034 -14 1040 C-24 1046 -16 1046 -8 1040 L-14 1036 M-14 1044" />
+
+                <!-- Hojas raíces der (verdes / tierra) -->
+                <ellipse class="s-leaf-g" cx="350" cy="974" rx="14" ry="8" transform="rotate(30 350 974)" />
+                <ellipse class="s-leaf-g" cx="380" cy="1014" rx="12" ry="7" transform="rotate(45 380 1014)" />
+                <ellipse class="s-leaf-g" cx="405" cy="1057" rx="11" ry="6" transform="rotate(20 405 1057)" />
+                <ellipse class="s-leaf-g" cx="425" cy="1029" rx="10" ry="6" transform="rotate(50 425 1029)" />
+                <ellipse class="s-leaf-g" cx="450" cy="1067" rx="10" ry="6" transform="rotate(35 450 1067)" />
+
+            </svg>
+
+            <!-- ══ CONTENIDO FLOTANTE ══ -->
+
+            <!-- FASE 1: Valores (raíces, inicio) -->
+            <div class="float-item pos-roots-center" id="fi-values" style="color:var(--brown)">
+                <div class="f-label" style="margin-bottom:.8rem">Nuestras raíces</div>
+                <div class="f-values" id="values-container">
+                    <span class="f-value">Sostenibilidad</span>
+                    <span class="f-value">Transparencia</span>
+                    <span class="f-value">Comunidad</span>
+                    <span class="f-value">Respeto</span>
+                    <span class="f-value">Compromiso</span>
+                </div>
+            </div>
+
+            <!-- FASE 2: Agua (raíces izq) -->
+            <div class="float-item pos-water-label" id="fi-water-label" style="color:var(--blue)">
+                <div class="f-label">Océano</div>
+            </div>
+            <div class="float-item pos-water-title" id="fi-water-title" style="color:var(--blue-dark)">
+                <div class="f-line" style="color:var(--blue); margin-bottom:.8rem"></div>
+                <div class="f-title xl">Pesca<br><em style="font-style:italic">Sostenible</em></div>
+            </div>
+            <div class="float-item pos-water-text" id="fi-water-text" style="color:var(--blue-dark)">
+                <div class="f-body">Trabajamos con comunidades pesqueras que respetan los ciclos del mar. Cuotas
+                    responsables, técnicas de bajo impacto, trazabilidad total del océano a tu mesa.</div>
+            </div>
+
+            <!-- FASE 2: Tierra (raíces der) -->
+            <div class="float-item pos-earth-label" id="fi-earth-label" style="color:var(--green)">
+                <div class="f-label">Campo</div>
+            </div>
+            <div class="float-item pos-earth-title" id="fi-earth-title" style="color:var(--green-dark)">
+                <div class="f-line" style="color:var(--green); margin-bottom:.8rem; margin-left:auto"></div>
+                <div class="f-title xl">Agricultura<br><em style="font-style:italic">Regenerativa</em></div>
+            </div>
+            <div class="float-item pos-earth-text" id="fi-earth-text" style="color:var(--green-dark)">
+                <div class="f-body" style="margin-left:auto">Suelos vivos, sin agroquímicos agresivos. Cosechas que
+                    nutren la tierra mientras la alimentan. Directo del campo, con respeto.</div>
+            </div>
+
+            <!-- FASE 3: Tronco (empresa) -->
+            <div class="float-item pos-trunk-left" id="fi-trunk-left" style="color:var(--brown-mid)">
+                <div class="f-label" style="margin-bottom:.5rem">Quiénes somos</div>
+                <div class="f-title lg">Una empresa<br>que une<br>el mar y la tierra</div>
+            </div>
+            <div class="float-item pos-trunk-right" id="fi-trunk-right" style="color:var(--brown-mid)">
+                <div class="f-body" style="margin-left:auto">Desde 2010 conectamos el trabajo de pescadores y
+                    agricultores locales con consumidores que valoran el origen y el cuidado de cada producto.</div>
+            </div>
+
+            <!-- FASE 4: Ramas (productos / futuro) -->
+            <div class="float-item pos-branch-left" id="fi-branch-left" style="color:var(--blue-dark)">
+                <div class="f-label" style="margin-bottom:.5rem; color:var(--blue)">Del mar</div>
+                <div class="f-title lg">Conservas,<br>Frescos &<br>Ahumados</div>
+            </div>
+            <div class="float-item pos-branch-right" id="fi-branch-right" style="color:var(--green-dark)">
+                <div class="f-label" style="margin-bottom:.5rem; margin-left:auto; color:var(--green)">De la tierra
+                </div>
+                <div class="f-title lg">Aceites,<br>Granos &<br>Vegetales</div>
+            </div>
+            <div class="float-item pos-top-center" id="fi-top" style="color:var(--brown)">
+                <div class="f-title xl" style="font-size:clamp(1rem,3vw,2.5rem)">Hacia un futuro<br><em>próspero y
+                        consciente</em></div>
+            </div>
+
+            <!-- Barra de progreso -->
+            <div class="progress-line">
+                <div class="progress-fill" id="prog-fill"></div>
+            </div>
+            <div class="phase-dot" id="phase-dot">Raíces</div>
+
+        </div><!-- /mural-stage -->
+    </section>
+
+    <!-- ══ FOOTER ══ -->
+    <footer class="footer">
+        <h2>Juntos construimos<br>un futuro sostenible</h2>
+        <p>Mar & Tierra · Desde 2010</p>
+    </footer>
+
+    <script>
+        /* ════════════════════════════════
+           LÓGICA PRINCIPAL
+           ════════════════════════════════ */
+
+        const mural = document.getElementById('mural');
+        const treeSvg = document.getElementById('tree-svg');
+        const progFill = document.getElementById('prog-fill');
+        const phaseDot = document.getElementById('phase-dot');
+        const muralBg = document.getElementById('mural-bg');
+
+        // ViewBox height del SVG
+        const SVG_H = 1400;
+
+        // Fases de scroll (0–1):
+        // 0.00–0.20 : Raíces profundas + valores
+        // 0.20–0.45 : Raíces laterales agua/tierra
+        // 0.45–0.65 : Tronco
+        // 0.65–0.85 : Ramas
+        // 0.85–1.00 : Cimas + curls
+
+        /* ── Medir todos los paths ── */
+        function measurePaths() {
+            document.querySelectorAll('.draw').forEach(el => {
+                const L = el.getTotalLength ? Math.ceil(el.getTotalLength()) + 10 : 800;
+                el.style.setProperty('--L', L);
+                el.style.strokeDasharray = L;
+                el.style.strokeDashoffset = L;
+                el.style.opacity = 1; // visible pero con dashoffset = oculto
+            });
+            document.querySelectorAll('.s-leaf-b, .s-leaf-g, .s-fish').forEach(el => {
+                el.style.opacity = 0;
+            });
+        }
+
+        /* ── Animar un grupo de paths según progreso t (0–1) ── */
+        function animGroup(selector, t, stagger = 0.06) {
+            const els = document.querySelectorAll(selector);
+            els.forEach((el, i) => {
+                const localT = Math.max(0, Math.min(1, (t - i * stagger) / (1 - Math.min(i * stagger, 0.8))));
+                const L = parseFloat(el.style.getPropertyValue('--L')) || 800;
+                el.style.strokeDashoffset = L * (1 - localT);
+            });
+        }
+
+        /* ── Fade in/out simple ── */
+        function fadeEl(el, show) {
+            if (!el) return;
+            if (show) el.classList.add('show');
+            else el.classList.remove('show');
+        }
+
+        /* ── Calcular progreso de scroll ── */
+        function getProgress() {
+            const rect = mural.getBoundingClientRect();
+            const total = mural.offsetHeight - window.innerHeight;
+            return Math.max(0, Math.min(1, -rect.top / total));
+        }
+
+        /* ── Mover el árbol para "viajar" por él ── */
+        function getTreeY(progress) {
+            // SVG viewBox = 1400 de alto
+            // Al inicio (progress=0) queremos ver la parte BAJA (raíces) → desplazar hacia abajo
+            // Al final (progress=1) queremos ver la parte ALTA (ramas)
+            const svgEl = treeSvg;
+            const svgW = svgEl.getBoundingClientRect().width || 400;
+            const svgH = svgW * (SVG_H / 400); // altura real del SVG en px (proporción viewBox 400x1400)
+            const vH = window.innerHeight;
+            // Rango de desplazamiento: de mostrar parte baja a parte alta
+            const maxShift = svgH - vH; // cuánto hay que desplazar
+            // progress 0 → árbol abajo (mostramos raíces)
+            // progress 1 → árbol arriba (mostramos ramas)
+            return maxShift > 0 ? -(maxShift * progress) + (vH * 0.1) : 0;
+        }
+
+        /* ── Colores de fondo según fase ── */
+        const bgColors = [
+            { p: 0.00, c: '#F2EDE0' },  // raíces: crema cálido
+            { p: 0.25, c: '#E8F0F5' },  // agua: azul muy suave
+            { p: 0.50, c: '#EDF5E8' },  // tierra: verde muy suave
+            { p: 0.70, c: '#F5F0E8' },  // tronco: crema
+            { p: 1.00, c: '#EEF5EE' },  // ramas: verde suave
+        ];
+
+        function lerpColor(a, b, t) {
+            // Hex a RGB, interpola, regresa hex
+            const pa = parseInt(a.slice(1), 16);
+            const pb = parseInt(b.slice(1), 16);
+            const r = Math.round(((pa >> 16) & 0xff) * (1 - t) + ((pb >> 16) & 0xff) * t);
+            const g = Math.round(((pa >> 8) & 0xff) * (1 - t) + ((pb >> 8) & 0xff) * t);
+            const bv = Math.round((pa & 0xff) * (1 - t) + (pb & 0xff) * t);
+            return `rgb(${r},${g},${bv})`;
+        }
+
+        function getBg(progress) {
+            for (let i = 0; i < bgColors.length - 1; i++) {
+                const a = bgColors[i], b = bgColors[i + 1];
+                if (progress >= a.p && progress <= b.p) {
+                    const t = (progress - a.p) / (b.p - a.p);
+                    return lerpColor(a.c, b.c, t);
+                }
+            }
+            return bgColors[bgColors.length - 1].c;
+        }
+
+        /* ── Normalizar progreso entre dos valores ── */
+        function norm(p, start, end) {
+            return Math.max(0, Math.min(1, (p - start) / (end - start)));
+        }
+
+        /* ══ LOOP PRINCIPAL ══ */
+        function onScroll() {
+            const p = getProgress();
+
+            // Progreso visual
+            progFill.style.height = (p * 100) + '%';
+
+            // Fondo
+            muralBg.style.background = getBg(p);
+
+            // Mover árbol
+            const treeY = getTreeY(p);
+            treeSvg.style.transform = `translateX(-50%) translateY(${treeY}px)`;
+
+            // ── FASE 0–0.20: Raíces centrales ──
+            const t0 = norm(p, 0, 0.20);
+            animGroup('#r0', t0);
+            fadeEl(document.getElementById('fi-values'), p > 0.02);
+            if (p < 0.15) phaseDot.textContent = 'Raíces';
+
+            // ── FASE 0.10–0.40: Raíces secundarias ──
+            const t1 = norm(p, 0.10, 0.40);
+            animGroup('#ra1, #rb1', t1);
+
+            // ── FASE 0.25–0.55: Raíces agua + tierra ──
+            const t2 = norm(p, 0.25, 0.55);
+            animGroup('#ra2, #rb2', t2);
+            animGroup('#ra3, #rb3', norm(p, 0.32, 0.58));
+            animGroup('#ra4, #rb4', norm(p, 0.38, 0.62));
+
+            // Hojas y peces raíces
+            const showRootDetails = p > 0.28;
+            document.querySelectorAll('.s-leaf-b, .s-leaf-g, .s-fish').forEach(el => {
+                el.style.opacity = showRootDetails ? Math.min(1, (p - 0.28) * 6) : 0;
+            });
+
+            // Textos agua / tierra
+            fadeEl(document.getElementById('fi-water-label'), p > 0.22);
+            fadeEl(document.getElementById('fi-water-title'), p > 0.27);
+            fadeEl(document.getElementById('fi-water-text'), p > 0.32);
+            fadeEl(document.getElementById('fi-earth-label'), p > 0.22);
+            fadeEl(document.getElementById('fi-earth-title'), p > 0.27);
+            fadeEl(document.getElementById('fi-earth-text'), p > 0.32);
+            if (p >= 0.20 && p < 0.45) phaseDot.textContent = 'Orígenes';
+
+            // Ocultar valores cuando sube
+            fadeEl(document.getElementById('fi-values'), p < 0.25);
+
+            // ── FASE 0.45–0.68: Tronco ──
+            const t3 = norm(p, 0.45, 0.68);
+            animGroup('#trunk', t3);
+            animGroup('#knot1, #knot2', norm(p, 0.50, 0.70));
+            fadeEl(document.getElementById('fi-trunk-left'), p > 0.50 && p < 0.80);
+            fadeEl(document.getElementById('fi-trunk-right'), p > 0.55 && p < 0.80);
+            if (p >= 0.45 && p < 0.65) phaseDot.textContent = 'Empresa';
+
+            // Ocultar textos agua/tierra al subir
+            fadeEl(document.getElementById('fi-water-title'), p > 0.27 && p < 0.60);
+            fadeEl(document.getElementById('fi-water-text'), p > 0.32 && p < 0.60);
+            fadeEl(document.getElementById('fi-earth-title'), p > 0.27 && p < 0.60);
+            fadeEl(document.getElementById('fi-earth-text'), p > 0.32 && p < 0.60);
+
+            // ── FASE 0.65–0.85: Ramas ──
+            const t4 = norm(p, 0.65, 0.85);
+            animGroup('#b1, #b2', t4);
+            animGroup('#b3, #b4', norm(p, 0.70, 0.88));
+            animGroup('#b5, #b6', norm(p, 0.75, 0.92));
+            fadeEl(document.getElementById('fi-branch-left'), p > 0.72 && p < 0.97);
+            fadeEl(document.getElementById('fi-branch-right'), p > 0.72 && p < 0.97);
+            if (p >= 0.65 && p < 0.88) phaseDot.textContent = 'Productos';
+
+            // ── FASE 0.85–1.00: Curls + cima ──
+            const t5 = norm(p, 0.85, 1.00);
+            animGroup('#c1, #c2', t5);
+            fadeEl(document.getElementById('fi-top'), p > 0.88);
+            if (p >= 0.88) phaseDot.textContent = 'Futuro';
+
+            // Progreso barra color
+            if (p < 0.3) progFill.style.background = 'var(--brown-mid)';
+            else if (p < 0.55) progFill.style.background = 'linear-gradient(to bottom, var(--blue-light), var(--green))';
+            else progFill.style.background = 'var(--brown-light)';
+        }
+
+        /* ── INIT ── */
+        window.addEventListener('DOMContentLoaded', () => {
+            measurePaths();
+            onScroll();
+        });
+        window.addEventListener('scroll', () => requestAnimationFrame(onScroll), { passive: true });
+        window.addEventListener('resize', () => { measurePaths(); onScroll(); });
+    </script>
+</body>
+
+</html>
