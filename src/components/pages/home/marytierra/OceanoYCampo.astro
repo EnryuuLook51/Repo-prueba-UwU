@@ -1,0 +1,915 @@
+---
+import { getLangFromUrl, useTranslations } from "../../../../i18n/utils";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const prefixPath = (p: string) => (lang === "es" ? p : `/${lang}${p}`);
+
+const slides = [
+    {
+        num: "01",
+        tag: "Océano — Pesca",
+        name: "OCÉANO",
+        title: ["PESCA", "SOSTENIBLE"],
+        body: "Trabajamos con comunidades pesqueras que respetan los ciclos del mar. Cuotas responsables y técnicas de bajo impacto que preservan la biodiversidad marina.",
+        stats: [
+            { num: "10+", label: "Años en el mar" },
+            { num: "100%", label: "Artesanal" },
+        ],
+        img: "/images/Chimbote.jpg",
+        side: "left",
+    },
+    {
+        num: "02",
+        tag: "Campo — Cultivos",
+        name: "CAMPO",
+        title: ["AGRICULTURA", "REGENERATIVA"],
+        body: "Suelos vivos, sin agroquímicos agresivos. Cosechas que nutren la tierra con bioinsumos derivados del procesamiento marino sostenible.",
+        stats: [
+            { num: "0", label: "Agroquímicos" },
+            { num: "100%", label: "Orgánico" },
+        ],
+        img: "/images/agricultura-chimbote.jpg",
+        side: "right",
+    },
+    {
+        num: "03",
+        tag: "Bioinsumos — Biotech",
+        name: "BIOINSUMOS",
+        title: ["SOLUCIONES", "BIOLÓGICAS"],
+        body: "Transformamos residuos del mar en potentes bioestimulantes y biofertilizantes. Tecnología circular aplicada al ciclo natural.",
+        stats: [
+            { num: "10T", label: "Residuos / Mes" },
+            { num: "3×", label: "Rendimiento" },
+        ],
+        img: "/images/Catalogo/Fondo/GpBioEstimulanteFondo.png",
+        side: "left",
+    },
+    {
+        num: "04",
+        tag: "Circular — Economía",
+        name: "CIRCULAR",
+        title: ["ECONOMÍA", "CIRCULAR"],
+        body: "Nuestro modelo cierra el ciclo: del mar a la tierra y de vuelta al ecosistema. Cada residuo tiene un destino, cada proceso suma valor.",
+        stats: [
+            { num: "360°", label: "Valorización" },
+            { num: "0", label: "Residuos perdidos" },
+        ],
+        img: "/images/sostenibilidad-banner.png",
+        side: "right",
+    },
+];
+
+const N = slides.length;
+---
+
+<!-- Google Fonts: Bebas Neue + DM Mono -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400&display=swap"
+    rel="stylesheet"
+/>
+
+<!-- ═══════════════════════════════════════
+     OCÉANO Y CAMPO — Scroll Natural con Cubo Fondo
+     (Sin scroll-jacking)
+═══════════════════════════════════════ -->
+<section class="oc-root" id="operaciones" aria-label="Operaciones Mar y Tierra">
+    <!-- Wrapper principal para toda la sección -->
+    <div class="oc-outer" id="oc-outer">
+        <!-- STAGE: Cubo y UI fija, siempre visible mientras dure la sección -->
+        <div class="oc-stage" id="oc-stage" aria-hidden="true">
+            <!-- Fondos atmosféricos -->
+            <div class="oc-bg">
+                <div class="oc-bg-grain"></div>
+                <div class="oc-bg-glow oc-bg-glow--a"></div>
+                <div class="oc-bg-glow oc-bg-glow--b"></div>
+            </div>
+
+            <!-- CUBO 3D (Z-index bajo, detrás del contenido real) -->
+            <div class="oc-perspective" id="oc-perspective">
+                <div class="oc-cube" id="oc-cube">
+                    {
+                        slides.map((s, i) => (
+                            <div class={`oc-face oc-face--side-${i}`}>
+                                <img
+                                    src={s.img}
+                                    alt={s.name}
+                                    loading={i === 0 ? "eager" : "lazy"}
+                                />
+                                <div class="oc-face-glass" />
+                            </div>
+                        ))
+                    }
+                    <div class="oc-face oc-face--top">
+                        <div class="oc-face-cap-inner">
+                            <svg
+                                viewBox="0 0 40 40"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="0.5"
+                                opacity="0.3"
+                            >
+                                <circle cx="20" cy="20" r="18"></circle><circle
+                                    cx="20"
+                                    cy="20"
+                                    r="10"></circle><circle
+                                    cx="20"
+                                    cy="20"
+                                    r="2"></circle>
+                                <line x1="20" y1="2" x2="20" y2="38"
+                                ></line><line x1="2" y1="20" x2="38" y2="20"
+                                ></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="oc-face oc-face--bottom"></div>
+                </div>
+            </div>
+
+            <!-- HUD: top-right progress -->
+            <div class="oc-hud">
+                <div class="oc-hud-pct" id="oc-hud-pct">00%</div>
+                <div class="oc-hud-bar">
+                    <div class="oc-hud-fill" id="oc-hud-fill"></div>
+                </div>
+                <div class="oc-hud-label" id="oc-hud-label">MAR Y TIERRA</div>
+            </div>
+
+            <!-- DOT NAVIGATION: left -->
+            <nav class="oc-strip" id="oc-strip" aria-label="Navegación Cubo">
+                {
+                    slides.map((s, i) => (
+                        <button
+                            class={`oc-dot${i === 0 ? " oc-dot--active" : ""}`}
+                            data-dot={i}
+                            aria-label={s.name}
+                            type="button"
+                        />
+                    ))
+                }
+            </nav>
+
+            <!-- FACE CAPTION: bottom center -->
+            <div class="oc-caption">
+                <span class="oc-caption-num" id="oc-caption-num">01</span>
+                <span class="oc-caption-name" id="oc-caption-name">OCÉANO</span>
+            </div>
+        </div>
+
+        <!-- STACK DE CONTENIDO: Cada card es un anchor point natural de 100vh de altura -->
+        <div class="oc-scroll-stack" id="oc-stack">
+            {
+                slides.map((s, i) => (
+                    <div class="oc-section" id={`oc-sec-${i}`}>
+                        <div class={`oc-card oc-card--${s.side}`}>
+                            <div class="oc-hline" />
+                            <p class="oc-tag">{s.tag}</p>
+                            <h2 class="oc-title">
+                                {s.title.map((line) => (
+                                    <>
+                                        <span class="oc-title-line">
+                                            {line}
+                                        </span>
+                                        <br />
+                                    </>
+                                ))}
+                            </h2>
+                            <p class="oc-body">{s.body}</p>
+                            <div class="oc-stats">
+                                {s.stats.map((st) => (
+                                    <div class="oc-stat">
+                                        <span class="oc-stat-num">
+                                            {st.num}
+                                        </span>
+                                        <span class="oc-stat-label">
+                                            {st.label}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+                            {i < N - 1 ? (
+                                <div class="oc-cta-row">
+                                    <button
+                                        class="oc-cta-btn"
+                                        data-nav-next={i + 1}
+                                        type="button"
+                                    >
+                                        Siguiente
+                                        <svg
+                                            viewBox="0 0 12 12"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="1.5"
+                                            aria-hidden="true"
+                                        >
+                                            <path d="M1 6h10M6 1l5 5-5 5" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            ) : (
+                                <div class="oc-cta-row">
+                                    <a
+                                        href={prefixPath("/catalogo")}
+                                        class="oc-cta-link"
+                                    >
+                                        Ver nuestros productos
+                                        <svg
+                                            viewBox="0 0 12 12"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="1.5"
+                                            aria-hidden="true"
+                                        >
+                                            <path d="M1 6h10M6 1l5 5-5 5" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    /* ══════════════════════════════════════════════
+     TOKENS & RESET (Light Theme)
+  ══════════════════════════════════════════════ */
+    .oc-root {
+        --oc-bg: #f5f7f2;
+        --oc-fg: #192416;
+        --oc-muted: #7a9977;
+        --oc-accent: #3ea820;
+        --oc-card-bg: rgba(255, 255, 255, 0.9);
+        --oc-card-border: rgba(62, 168, 32, 0.22);
+        --oc-card-shadow: 0 8px 40px rgba(25, 36, 22, 0.08);
+        --oc-hairline: 1px;
+        --oc-ui-inset: 1.75rem;
+        --oc-font-display: "Bebas Neue", sans-serif;
+        --oc-font-mono: "DM Mono", monospace;
+    }
+
+    /* ══════════════════════════════════════════════
+     LAYOUT: OUTER Y STACK DE CONTENIDO NATURAL
+  ══════════════════════════════════════════════ */
+    .oc-outer {
+        position: relative;
+        background: var(--oc-bg);
+    }
+
+    /* Stack de secciones reales. Todo esto scrollea de forma natural */
+    .oc-scroll-stack {
+        position: relative;
+        z-index: 10;
+        /* Ignoramos clicks donde NO haya cards para que el fondo (oc-strip/hud) responda, aunque
+           las cards mismas sí capturarían el click por tener punteros nativos/z-index. */
+        pointer-events: none;
+    }
+
+    /* Cada card crea una sección que el usuario baja leyendo */
+    .oc-section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 4.5vw;
+        position: relative;
+    }
+
+    /* ══════════════════════════════════════════════
+     STAGE STICKY (FONDO 3D Y UI)
+     Se queda congelado detrás de las sections que suben
+  ══════════════════════════════════════════════ */
+    .oc-stage {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+        pointer-events: none; /* Dejamos que los clicks lleguen a los hijos auto */
+    }
+
+    /* ══════════════════════════════════════════════
+     ATMOSFERA
+  ══════════════════════════════════════════════ */
+    .oc-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+    }
+    .oc-bg-grain {
+        position: absolute;
+        inset: 0;
+        opacity: 0.035;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        background-repeat: repeat;
+        background-size: 200px;
+    }
+    .oc-bg-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: 0.6;
+    }
+    .oc-bg-glow--a {
+        width: 55vw;
+        height: 55vw;
+        background: radial-gradient(
+            circle,
+            rgba(103, 189, 69, 0.06) 0%,
+            transparent 70%
+        );
+        top: -10%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .oc-bg-glow--b {
+        width: 40vw;
+        height: 40vw;
+        background: radial-gradient(
+            circle,
+            rgba(0, 109, 182, 0.08) 0%,
+            transparent 70%
+        );
+        bottom: -10%;
+        right: 5%;
+    }
+
+    /* ══════════════════════════════════════════════
+     CUBO 3D
+  ══════════════════════════════════════════════ */
+    .oc-perspective {
+        position: absolute;
+        inset: 0;
+        perspective: 1100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+    }
+
+    .oc-cube {
+        --sz: min(70vw, 70vh, 540px);
+        width: var(--sz);
+        height: var(--sz);
+        position: relative;
+        transform-style: preserve-3d;
+        transform: rotateX(2deg) rotateY(0deg);
+        will-change: transform;
+    }
+
+    .oc-face {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        backface-visibility: hidden;
+        background:
+            repeating-linear-gradient(
+                0deg,
+                rgba(25, 36, 22, 0.05) 0,
+                rgba(25, 36, 22, 0.05) 1px,
+                transparent 1px,
+                transparent 52px
+            ),
+            repeating-linear-gradient(
+                90deg,
+                rgba(25, 36, 22, 0.05) 0,
+                rgba(25, 36, 22, 0.05) 1px,
+                transparent 1px,
+                transparent 52px
+            ),
+            #edf2e8;
+    }
+    .oc-face img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .oc-face-glass {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            160deg,
+            rgba(245, 247, 242, 0.15) 0%,
+            rgba(62, 168, 32, 0.04) 100%
+        );
+        z-index: 1;
+    }
+
+    .oc-face--top {
+        transform: rotateX(-90deg) translateZ(calc(var(--sz) / 2));
+        background: #e8ede3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .oc-face--bottom {
+        transform: rotateX(90deg) translateZ(calc(var(--sz) / 2));
+        background: #dfe6d9;
+    }
+    .oc-face-cap-inner {
+        width: 60%;
+        color: var(--oc-accent);
+    }
+    .oc-face-cap-inner svg {
+        width: 100%;
+        height: auto;
+    }
+
+    .oc-face--side-0 {
+        transform: rotateY(0deg) translateZ(calc(var(--sz) / 2));
+    }
+    .oc-face--side-1 {
+        transform: rotateY(90deg) translateZ(calc(var(--sz) / 2));
+    }
+    .oc-face--side-2 {
+        transform: rotateY(180deg) translateZ(calc(var(--sz) / 2));
+    }
+    .oc-face--side-3 {
+        transform: rotateY(270deg) translateZ(calc(var(--sz) / 2));
+    }
+
+    .oc-face--side-0,
+    .oc-face--side-1,
+    .oc-face--side-2,
+    .oc-face--side-3 {
+        box-shadow: inset 0 0 0 1px rgba(103, 189, 69, 0.14);
+    }
+
+    /* ══════════════════════════════════════════════
+     CARDS CONTENIDO (Natural Flow)
+  ══════════════════════════════════════════════ */
+    .oc-card {
+        width: 100%;
+        max-width: 360px;
+        padding: 2.25rem 2rem;
+        background: var(--oc-card-bg);
+        backdrop-filter: blur(12px) saturate(150%);
+        -webkit-backdrop-filter: blur(12px) saturate(150%);
+        box-shadow: var(--oc-card-shadow);
+        pointer-events: auto; /* IMPORTANTE: capturar clicks en las card para botones */
+
+        /* Animación suave al entrar al viewport (vía Intersection Observer) */
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+            opacity 0.7s ease,
+            transform 0.7s ease;
+    }
+    .oc-card.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .oc-card--left {
+        border-left: var(--oc-hairline) solid var(--oc-card-border);
+        margin-right: auto;
+    }
+    .oc-card--right {
+        border-right: var(--oc-hairline) solid var(--oc-card-border);
+        margin-left: auto;
+        text-align: right;
+    }
+    .oc-card--right .oc-hline {
+        margin-left: auto;
+    }
+    .oc-card--right .oc-stats {
+        justify-content: flex-end;
+    }
+    .oc-card--right .oc-cta-row {
+        justify-content: flex-end;
+    }
+
+    .oc-hline {
+        width: 3rem;
+        height: var(--oc-hairline);
+        background: var(--oc-accent);
+        margin-bottom: 1.2rem;
+    }
+    .oc-tag {
+        font-family: var(--oc-font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--oc-accent);
+        margin-bottom: 1rem;
+    }
+    .oc-title {
+        font-family: var(--oc-font-display);
+        font-size: clamp(2.4rem, 5vw, 4rem);
+        font-weight: 400;
+        line-height: 0.92;
+        letter-spacing: 0.03em;
+        color: var(--oc-fg);
+        margin-bottom: 1.25rem;
+    }
+    .oc-title-line {
+        display: block;
+    }
+
+    .oc-body {
+        font-family: var(--oc-font-mono);
+        font-size: 0.73rem;
+        line-height: 1.85;
+        color: rgba(25, 36, 22, 0.55);
+        margin-bottom: 1.5rem;
+        font-weight: 300;
+    }
+
+    .oc-stats {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 1.75rem;
+    }
+    .oc-stat {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+    }
+    .oc-stat-num {
+        font-family: var(--oc-font-display);
+        font-size: 2rem;
+        line-height: 1;
+        color: var(--oc-accent);
+    }
+    .oc-stat-label {
+        font-family: var(--oc-font-mono);
+        font-size: 0.55rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--oc-muted);
+    }
+
+    .oc-cta-row {
+        display: flex;
+        align-items: center;
+    }
+    .oc-cta-btn,
+    .oc-cta-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.6rem 1.25rem;
+        border: var(--oc-hairline) solid var(--oc-accent);
+        color: var(--oc-accent);
+        font-family: var(--oc-font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        text-decoration: none;
+        cursor: pointer;
+        background: transparent;
+        transition:
+            background 0.2s ease,
+            color 0.2s ease;
+    }
+    .oc-cta-btn:hover,
+    .oc-cta-link:hover {
+        background: var(--oc-accent);
+        color: var(--oc-bg);
+    }
+    .oc-cta-btn svg,
+    .oc-cta-link svg {
+        width: 0.7rem;
+        height: 0.7rem;
+    }
+
+    /* ══════════════════════════════════════════════
+     UI FIXA (HUD / DOTS / CAPTION)
+  ══════════════════════════════════════════════ */
+    .oc-hud {
+        position: absolute;
+        top: var(--oc-ui-inset);
+        right: var(--oc-ui-inset);
+        z-index: 20;
+        text-align: right;
+    }
+    .oc-hud-pct {
+        font-family: var(--oc-font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.15em;
+        color: var(--oc-muted);
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+    }
+    .oc-hud-bar {
+        width: 7rem;
+        height: var(--oc-hairline);
+        background: rgba(25, 36, 22, 0.12);
+        margin-left: auto;
+        position: relative;
+        overflow: hidden;
+    }
+    .oc-hud-fill {
+        position: absolute;
+        inset-block: 0;
+        left: 0;
+        width: 0%;
+        background: var(--oc-accent);
+        transition: width 0.1s linear;
+    }
+    .oc-hud-label {
+        font-family: var(--oc-font-mono);
+        font-size: 0.55rem;
+        letter-spacing: 0.22em;
+        color: var(--oc-accent);
+        text-transform: uppercase;
+        margin-top: 0.4rem;
+        opacity: 0.75;
+    }
+
+    .oc-strip {
+        position: absolute;
+        left: var(--oc-ui-inset);
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        pointer-events: auto; /* Recibe clicks siempre */
+    }
+    .oc-dot {
+        position: relative;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(25, 36, 22, 0.18);
+        cursor: pointer;
+        padding: 0;
+        transition:
+            background 0.3s ease,
+            transform 0.3s ease;
+    }
+    .oc-dot::before {
+        content: "";
+        position: absolute;
+        inset: -8px;
+    }
+    .oc-dot--active {
+        background: var(--oc-accent);
+        transform: scale(1.9);
+    }
+
+    .oc-caption {
+        position: absolute;
+        bottom: var(--oc-ui-inset);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 20;
+        text-align: center;
+    }
+    .oc-caption-num {
+        display: block;
+        font-family: var(--oc-font-mono);
+        font-size: 0.55rem;
+        letter-spacing: 0.3em;
+        color: var(--oc-accent);
+        text-transform: uppercase;
+        margin-bottom: 0.15rem;
+    }
+    .oc-caption-name {
+        display: block;
+        font-family: var(--oc-font-display);
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        letter-spacing: 0.1em;
+        color: var(--oc-fg);
+        opacity: 0.1;
+        line-height: 1;
+    }
+
+    /* ══════════════════════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+        .oc-card {
+            max-width: min(280px, 42vw);
+            padding: 1.5rem 1.25rem;
+        }
+        .oc-title {
+            font-size: clamp(2rem, 8vw, 3rem);
+        }
+        .oc-body {
+            font-size: 0.68rem;
+        }
+        .oc-section {
+            padding: 0 2rem;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .oc-section {
+            min-height: 110vh; /* Da mas aire entre cards */
+            align-items: flex-end; /* Tarjetas abajo en mobile */
+            padding-bottom: 2rem;
+        }
+        .oc-card {
+            max-width: 100%;
+            border-left: none;
+            border-right: none;
+            border-top: var(--oc-hairline) solid var(--oc-card-border);
+            text-align: left;
+        }
+        .oc-card--right .oc-hline {
+            margin-left: 0;
+        }
+        .oc-card--right .oc-stats {
+            justify-content: flex-start;
+        }
+        .oc-card--right .oc-cta-row {
+            justify-content: flex-start;
+        }
+
+        .oc-strip {
+            left: 1rem;
+        }
+        .oc-hud {
+            top: 1rem;
+            right: 1rem;
+        }
+        .oc-caption {
+            display: none;
+        }
+    }
+</style>
+
+<script>
+    (() => {
+        "use strict";
+
+        /* ── Config ── */
+        const N = 4;
+        const STOPS = [
+            { rx: 2, ry: 0 }, // front → Pesca
+            { rx: 0, ry: -90 }, // right → Agricultura
+            { rx: -5, ry: -180 }, // back  → Bioinsumos
+            { rx: 0, ry: -270 }, // left  → Circularidad
+        ];
+        const NAMES = ["OCÉANO", "CAMPO", "BIOINSUMOS", "CIRCULAR"];
+
+        /* ── DOM refs ── */
+        const outer = document.getElementById("oc-outer");
+        const cube = document.getElementById("oc-cube");
+        const dots = [
+            ...document.querySelectorAll("[data-dot]"),
+        ] as HTMLElement[];
+        const cards = [
+            ...document.querySelectorAll(".oc-card"),
+        ] as HTMLElement[];
+
+        const hudPct = document.getElementById("oc-hud-pct");
+        const hudFill = document.getElementById("oc-hud-fill");
+        const hudLbl = document.getElementById("oc-hud-label");
+        const capNum = document.getElementById("oc-caption-num");
+        const capName = document.getElementById("oc-caption-name");
+
+        /* ── Maths ── */
+        const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+        const clamp = (v: number, lo: number, hi: number) =>
+            Math.max(lo, Math.min(hi, v));
+        const easeIO = (t: number) =>
+            t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+        /* ── IntersectionObserver para revelar Cards ── */
+        const cardObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                    }
+                });
+            },
+            { threshold: 0.3 },
+        );
+        cards.forEach((card) => cardObserver.observe(card));
+
+        /* ── Section-scoped progress
+           El sticky domina "oc-outer".
+           El Scrollable height total (lo que se puede scrollear del outer)
+           es la altura de "oc-outer" (las 4 secciones * 100vh) MENOS window.innerHeight.
+        ── */
+        function getProgress(): number {
+            if (!outer) return 0;
+            const rect = outer.getBoundingClientRect();
+            const scrolled = Math.max(0, -rect.top);
+            // Máximo que podemos scrollear es la altura del outer - el viewport
+            const maxScroll = Math.max(
+                1,
+                outer.offsetHeight - window.innerHeight,
+            );
+            return clamp(scrolled / maxScroll, 0, 1);
+        }
+
+        /* ── Cube rotation ── */
+        function setCube(p: number) {
+            const t = p * (N - 1);
+            const i = clamp(Math.floor(t), 0, N - 2);
+            const f = easeIO(t - i);
+            const a = STOPS[i],
+                b = STOPS[i + 1];
+            if (cube) {
+                cube.style.transform = `rotateX(${lerp(a.rx, b.rx, f)}deg) rotateY(${lerp(a.ry, b.ry, f)}deg)`;
+            }
+        }
+
+        /* ── HUD and active dot indexing ── */
+        let lastActiveIdx = -1;
+
+        function setUI(p: number) {
+            const pct = Math.round(p * 100);
+
+            // Decidir slider activo basado en el progreso continuo (divide the space en N partes)
+            let activeIdx = Math.round(p * (N - 1));
+            activeIdx = clamp(activeIdx, 0, N - 1);
+
+            if (hudPct) hudPct.textContent = `${String(pct).padStart(2, "0")}%`;
+            if (hudFill) hudFill.style.width = `${pct}%`;
+
+            if (activeIdx !== lastActiveIdx) {
+                lastActiveIdx = activeIdx;
+                const name = NAMES[activeIdx] ?? "";
+                if (hudLbl) hudLbl.textContent = name;
+                if (capNum)
+                    capNum.textContent = String(activeIdx + 1).padStart(2, "0");
+                if (capName) capName.textContent = name;
+
+                dots.forEach((d, i) =>
+                    d.classList.toggle("oc-dot--active", i === activeIdx),
+                );
+            }
+        }
+
+        /* ── Smooth interpolation (RAF loop) ─────────────────
+           'smooth' lags behind 'tgt' for silky cube rotation. */
+        let tgt = 0;
+        let smooth = 0;
+        let lastNow = performance.now();
+        let rafId: number;
+
+        function tick(now: number) {
+            rafId = requestAnimationFrame(tick);
+            const dt = Math.min((now - lastNow) / 1000, 0.05);
+            lastNow = now;
+            tgt = getProgress();
+
+            // Lerp para suavidad
+            smooth += (tgt - smooth) * (1 - Math.exp(-dt * 7));
+            smooth = clamp(smooth, 0, 1);
+
+            setCube(smooth);
+            setUI(smooth);
+        }
+
+        /* Sólo corremos el loop si la sección visible (para rendimiento) */
+        const startStopRAF = new IntersectionObserver(
+            (entries) => {
+                const [entry] = entries;
+                if (entry.isIntersecting) {
+                    lastNow = performance.now();
+                    rafId = requestAnimationFrame(tick);
+                } else {
+                    cancelAnimationFrame(rafId);
+                }
+            },
+            { rootMargin: "100px" },
+        );
+        if (outer) startStopRAF.observe(outer);
+
+        /* ── Helpers for Click Navigation ── */
+        const scrollToSlide = (idx: number) => {
+            const targetSection = document.getElementById(`oc-sec-${idx}`);
+            if (targetSection) {
+                const targetY =
+                    targetSection.getBoundingClientRect().top + window.scrollY;
+                window.scrollTo({ top: targetY, behavior: "smooth" });
+            }
+        };
+
+        /* ── Dot clicks ── */
+        dots.forEach((dot) => {
+            dot.addEventListener("click", () => {
+                const idx = Number((dot as HTMLElement).dataset.dot);
+                scrollToSlide(idx);
+            });
+        });
+
+        /* ── "Siguiente" buttons ── */
+        document.querySelectorAll("[data-nav-next]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const idx = Number((btn as HTMLElement).dataset.navNext);
+                scrollToSlide(idx);
+            });
+        });
+
+        // Frame estático inicial para prevenir salto en carga
+        setCube(0);
+        setUI(0);
+    })();
+</script>

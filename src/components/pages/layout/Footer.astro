@@ -1,6 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
-
+import "../../../styles/global.css";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
@@ -10,114 +10,451 @@ const prefixPath = (path: string) => {
 };
 ---
 
-<footer class="footer-section pt-24 pb-12 relative overflow-hidden">
-  <div class="custom-container">
-    <div class="grid lg:grid-cols-4 gap-12 border-b border-white/10 pb-20">
-      <div class="lg:col-span-2">
-        <div class="logo-footer mb-8">
-          <img
-            src="/images/greenprod.png"
-            alt="GreenProd Logo"
-            class="h-12 w-auto brightness-0 invert"
-          />
-        </div>
-        <p class="text-white/70 text-lg max-w-md leading-relaxed font-light">
-          {t("footer.tagline")}
-        </p>
-      </div>
+<footer class="footer">
+  <!-- Franja decorativa superior -->
+  <div class="footer-topbar"></div>
 
-      <div>
-        <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-8">
-          {t("footer.nav")}
-        </h4>
-        <ul class="space-y-4">
-          <li>
-            <a
-              href={prefixPath("/nosotros")}
-              class="text-white/60 hover:text-brand-green transition-colors"
-              >{t("nav.about")}</a
-            >
-          </li>
-          <li>
-            <a
-              href={prefixPath("/#lineas-negocio")}
-              class="text-white/60 hover:text-brand-green transition-colors"
-              >{t("nav.services")}</a
-            >
-          </li>
-          <li>
-            <a
-              href={prefixPath("/impacto-circular")}
-              class="text-white/60 hover:text-brand-green transition-colors"
-              >{t("nav.activities")}</a
-            >
-          </li>
-          <li>
-            <a
-              href={prefixPath("/nuestros-proyectos")}
-              class="text-white/60 hover:text-brand-green transition-colors"
-              >{t("nav.projects")}</a
-            >
-          </li>
-        </ul>
-      </div>
+  <div class="footer-inner">
+    <!-- COLUMNA 1: Logo + tagline -->
+    <div class="footer-brand">
+      <a href={prefixPath("/")} class="footer-logo-link">
+        <img
+          src="/images/greenprod.png"
+          alt="Green Prod & Sustainable"
+          class="footer-logo"
+        />
+      </a>
+      <p class="footer-tagline">{t("footer.tagline")}</p>
 
-      <div>
-        <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-8">
-          {t("footer.contact")}
-        </h4>
-        <ul class="space-y-4">
-          <li>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              class="text-white/60 hover:text-brand-green transition-colors flex items-center gap-2"
-            >
-              <i class="fab fa-linkedin text-lg"></i>
-              LinkedIn
-            </a>
-          </li>
-          <li>
-            <a
-              href="mailto:greenprodsustainable@gmail.com"
-              class="text-white/60 hover:text-brand-green transition-colors"
-            >
-              greenprodsustainable@gmail.com
-            </a>
-          </li>
-          <li>
-            <span class="text-white/60"> +51 950 412 534 </span>
-          </li>
-        </ul>
+      <!-- Redes Sociales -->
+      <div class="footer-socials">
+        <a
+          href="https://www.facebook.com/share/TaR3vZpTHC/?mibextid=wwXIfr"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-pill"
+          aria-label="Facebook"
+        >
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a
+          href="https://www.instagram.com/greenprodsustainable?igsh=MWE0ZXlynHdpYjBoZA=="
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-pill"
+          aria-label="Instagram"
+        >
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a
+          href="https://www.tiktok.com/@greenprodsustainable?_r=1&_t=ZS-94pPT4ilMwL"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-pill"
+          aria-label="TikTok"
+        >
+          <i class="fab fa-tiktok"></i>
+        </a>
       </div>
     </div>
 
-    <div
-      class="footer-bottom mt-12 flex flex-col md:flex-row justify-between items-center gap-6"
-    >
-      <p class="text-white/30 text-sm italic">
-        {t("footer.made_with")}
-      </p>
-      <p class="text-white/30 text-sm">
-        {t("footer.copyright")}
-      </p>
+    <!-- COLUMNA 2: Navegación -->
+    <div class="footer-col">
+      <h4 class="footer-col-title">{t("footer.nav")}</h4>
+      <ul class="footer-links">
+        <li>
+          <a href={prefixPath("/nosotros")} class="footer-link">
+            <span class="link-arrow">→</span>
+            {t("nav.about")}
+          </a>
+        </li>
+        <li>
+          <a href={prefixPath("/#lineas-negocio")} class="footer-link">
+            <span class="link-arrow">→</span>
+            {t("nav.services")}
+          </a>
+        </li>
+        <li>
+          <a href={prefixPath("/impacto-circular")} class="footer-link">
+            <span class="link-arrow">→</span>
+            {t("nav.activities")}
+          </a>
+        </li>
+        <li>
+          <a href={prefixPath("/nuestros-proyectos")} class="footer-link">
+            <span class="link-arrow">→</span>
+            {t("nav.projects")}
+          </a>
+        </li>
+        <li>
+          <a href={prefixPath("/catalogo")} class="footer-link">
+            <span class="link-arrow">→</span>
+            {t("navbar.catalog")}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- COLUMNA 3: Contacto -->
+    <div class="footer-col">
+      <h4 class="footer-col-title">{t("footer.contact")}</h4>
+      <ul class="footer-contact-list">
+        <li>
+          <a
+            href="mailto:greenprodsustainable@gmail.com"
+            class="footer-contact-item"
+          >
+            <span class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <span>greenprodsustainable@gmail.com</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://wa.me/51950412534"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-contact-item"
+          >
+            <span class="contact-icon">
+              <i class="fab fa-whatsapp"></i>
+            </span>
+            <span>+51 950 412 534</span>
+          </a>
+        </li>
+        <li>
+          <a href={prefixPath("/contacto")} class="footer-cta-btn">
+            {t("nav.contact")}
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 
-  {/* Background accents */}
-  <div
-    class="absolute -bottom-20 -right-20 w-96 h-96 bg-brand-green/10 rounded-full blur-[1000px]"
-  >
+  <!-- Separador y barra inferior -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <p class="footer-made">{t("footer.made_with")}</p>
+      <p class="footer-copy">{t("footer.copyright")}</p>
+    </div>
   </div>
-  <div
-    class="absolute -top-20 -left-20 w-96 h-96 bg-white/5 rounded-full blur-[1000px]"
-  >
-  </div>
+
+  <!-- Destellos de fondo -->
+  <div class="footer-glow footer-glow-1"></div>
+  <div class="footer-glow footer-glow-2"></div>
 </footer>
 
 <style>
-  .footer-section {
-    background: var(--brand-blue); /* Solid company blue */
+  /* ═══════════════════════════════════════
+     FOOTER — DISEÑO PREMIUM
+  ═══════════════════════════════════════ */
+
+  .footer {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, #02457a 0%, #006db6 55%, #014f86 100%);
     color: white;
+  }
+
+  /* Franja superior con gradiente verde→azul */
+  .footer-topbar {
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      var(--brand-green) 0%,
+      var(--brand-blue-3) 50%,
+      var(--brand-green) 100%
+    );
+    background-size: 200% auto;
+    animation: shimmer 4s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 0% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  /* ── Layout principal ── */
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 2rem 4rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  /* ── Columna 1: Marca ── */
+  .footer-logo-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-logo {
+    height: 48px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    transition: opacity 0.3s ease;
+  }
+
+  .footer-logo:hover {
+    opacity: 0.85;
+  }
+
+  .footer-tagline {
+    font-family: var(--font-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 300px;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── Redes Sociales ── */
+  .footer-socials {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .social-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition:
+      background 0.3s ease,
+      color 0.3s ease,
+      border-color 0.3s ease,
+      transform 0.3s ease;
+    backdrop-filter: blur(8px);
+  }
+
+  .social-pill:hover {
+    background: var(--brand-green);
+    border-color: var(--brand-green);
+    color: white;
+    transform: translateY(-4px);
+  }
+
+  /* ── Columnas de enlaces ── */
+  .footer-col-title {
+    font-family: var(--font-primary);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--brand-green);
+    margin-bottom: 1.8rem;
+    position: relative;
+    padding-bottom: 1rem;
+  }
+
+  .footer-col-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 28px;
+    height: 2px;
+    background: var(--brand-green);
+    border-radius: 2px;
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .footer-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+    transition:
+      color 0.25s ease,
+      gap 0.25s ease;
+  }
+
+  .footer-link:hover {
+    color: white;
+    gap: 0.9rem;
+  }
+
+  .link-arrow {
+    font-size: 0.75rem;
+    color: var(--brand-green);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .footer-link:hover .link-arrow {
+    opacity: 1;
+  }
+
+  /* ── Columna de contacto ── */
+  .footer-contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .footer-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    font-family: var(--font-secondary);
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+    line-height: 1.5;
+    transition: color 0.25s ease;
+  }
+
+  .footer-contact-item:hover {
+    color: white;
+  }
+
+  .contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    background: rgba(103, 189, 69, 0.15);
+    border-radius: 8px;
+    color: var(--brand-green);
+    font-size: 0.85rem;
+    transition: background 0.25s ease;
+  }
+
+  .footer-contact-item:hover .contact-icon {
+    background: rgba(103, 189, 69, 0.28);
+  }
+
+  /* Botón CTA pequeño */
+  .footer-cta-btn {
+    margin-top: 0.4rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.65rem 1.4rem;
+    background: var(--brand-green);
+    color: white;
+    text-decoration: none;
+    border-radius: 99px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    font-family: var(--font-primary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition:
+      background 0.3s ease,
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .footer-cta-btn:hover {
+    background: white;
+    color: var(--brand-green);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  /* ── Barra inferior ── */
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .footer-bottom-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.6rem 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .footer-made,
+  .footer-copy {
+    font-family: var(--font-secondary);
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.28);
+  }
+
+  /* ── Destellos de fondo ── */
+  .footer-glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+  }
+
+  .footer-glow-1 {
+    width: 400px;
+    height: 400px;
+    background: rgba(103, 189, 69, 0.08);
+    bottom: -100px;
+    right: -80px;
+  }
+
+  .footer-glow-2 {
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.04);
+    top: -60px;
+    left: -60px;
+  }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 900px) {
+    .footer-inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      padding: 3.5rem 1.5rem 3rem;
+      gap: 2.5rem;
+    }
+
+    .footer-bottom-inner {
+      flex-direction: column;
+      text-align: center;
+      gap: 0.4rem;
+    }
   }
 </style>

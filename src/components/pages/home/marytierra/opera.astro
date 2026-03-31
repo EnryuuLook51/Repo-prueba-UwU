@@ -1,0 +1,935 @@
+---
+import { getLangFromUrl, useTranslations } from "../../../../i18n/utils";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const prefixPath = (p: string) => (lang === "es" ? p : `/${lang}${p}`);
+
+const slides = [
+    {
+        num: "01",
+        tag: "Océano",
+        name: "OCÉANO",
+        title: ["PESCA", "SOSTENIBLE"],
+        body: "Trabajamos con comunidades pesqueras que respetan los ciclos del mar. Cuotas responsables y técnicas de bajo impacto que preservan la biodiversidad marina.",
+        stats: [
+            { num: "10+", label: "Años en el mar" },
+            { num: "100%", label: "Artesanal" },
+        ],
+        img: "/images/Chimbote.jpg",
+        side: "left",
+    },
+    {
+        num: "02",
+        tag: "Campo",
+        name: "CAMPO",
+        title: ["AGRICULTURA", "REGENERATIVA"],
+        body: "Suelos vivos, sin agroquímicos agresivos. Cosechas que nutren la tierra con bioinsumos derivados del procesamiento marino sostenible.",
+        stats: [
+            { num: "0", label: "Agroquímicos" },
+            { num: "100%", label: "Orgánico" },
+        ],
+        img: "/images/agricultura-chimbote.jpg",
+        side: "right",
+    },
+    {
+        num: "03",
+        tag: "Bioinsumos",
+        name: "BIOINSUMOS",
+        title: ["SOLUCIONES", "BIOLÓGICAS"],
+        body: "Transformamos residuos del mar en potentes bioestimulantes y biofertilizantes, cerrando el ciclo natural con tecnología de vanguardia.",
+        stats: [
+            { num: "10T", label: "Residuos / Mes" },
+            { num: "3×", label: "Rendimiento" },
+        ],
+        img: "/images/Catalogo/Fondo/GpBioEstimulanteFondo.png",
+        side: "left",
+    },
+    {
+        num: "04",
+        tag: "Circularidad",
+        name: "CIRCULAR",
+        title: ["ECONOMÍA", "CIRCULAR"],
+        body: "Nuestro modelo cierra el ciclo: del mar a la tierra y de vuelta al ecosistema. Cada residuo tiene un destino, cada proceso suma valor.",
+        stats: [
+            { num: "360°", label: "Valorización" },
+            { num: "0", label: "Residuos perdidos" },
+        ],
+        img: "/images/sostenibilidad-banner.png",
+        side: "right",
+    },
+];
+
+const N = slides.length;
+---
+
+<!-- ════════════════════════════════════════════
+     opera.astro — Cube Scroll Section
+     PATRÓN: sticky canvas, sin position:fixed,
+     sin interceptar wheel global.
+     Progreso relativo al contenedor, no a la página.
+════════════════════════════════════════════ -->
+<section
+    class="op-root"
+    id="op-operaciones"
+    aria-label="Operaciones Mar y Tierra"
+>
+    <!-- Outer: altura total = 1 viewport + (N-1) transiciones + 1 plateau -->
+    <div class="op-outer" id="op-outer" style={`--op-n:${N}`}>
+        <!-- Stage: se queda pegado en pantalla mientras scrolleas el outer -->
+        <div class="op-stage" id="op-stage">
+            <!-- Fondo atmosférico -->
+            <div class="op-bg" aria-hidden="true">
+                <div class="op-bg-grain"></div>
+                <div class="op-bg-glow op-bg-glow--a"></div>
+                <div class="op-bg-glow op-bg-glow--b"></div>
+            </div>
+
+            <!-- ── CUBO 3D ── -->
+            <div class="op-perspective" aria-hidden="true">
+                <div class="op-cube" id="op-cube">
+                    {
+                        slides.map((s, i) => (
+                            <div class={`op-face op-face-${i}`} data-face={i}>
+                                <img
+                                    src={s.img}
+                                    alt={s.name}
+                                    loading={i === 0 ? "eager" : "lazy"}
+                                />
+                                <div class="op-face-overlay" />
+                            </div>
+                        ))
+                    }
+                    <div class="op-face op-face-top">
+                        <div class="op-face-cap">
+                            <svg
+                                viewBox="0 0 40 40"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="0.5"
+                                opacity="0.25"
+                            >
+                                <circle cx="20" cy="20" r="18"></circle>
+                                <circle cx="20" cy="20" r="10"></circle>
+                                <circle cx="20" cy="20" r="2"></circle>
+                                <line x1="20" y1="2" x2="20" y2="38"></line>
+                                <line x1="2" y1="20" x2="38" y2="20"></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="op-face op-face-bottom"></div>
+                </div>
+            </div>
+
+            <!-- ── CARDS (overlays, JS controla visibilidad) ── -->
+            <div class="op-cards" id="op-cards" aria-live="polite">
+                {
+                    slides.map((s, i) => (
+                        <div
+                            class={`op-card op-card--${s.side}`}
+                            data-op-card={i}
+                            aria-hidden={i !== 0 ? "true" : "false"}
+                        >
+                            <div class="op-hline" />
+                            <p class="op-tag">
+                                <span class="op-tag-num">{s.num}</span>
+                                <span class="op-tag-sep">—</span>
+                                <span class="op-tag-name">{s.tag}</span>
+                            </p>
+                            <h3 class="op-title">
+                                {s.title.map((line) => (
+                                    <span class="op-title-line">{line}</span>
+                                ))}
+                            </h3>
+                            <p class="op-body">{s.body}</p>
+                            <div class="op-stats">
+                                {s.stats.map((st) => (
+                                    <div class="op-stat">
+                                        <span class="op-stat-num">
+                                            {st.num}
+                                        </span>
+                                        <span class="op-stat-label">
+                                            {st.label}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+                            {i < N - 1 ? (
+                                <div class="op-cta-row">
+                                    <button
+                                        class="op-cta-btn"
+                                        data-op-nav-next={i + 1}
+                                        type="button"
+                                    >
+                                        Siguiente
+                                        <svg
+                                            viewBox="0 0 12 12"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="1.5"
+                                        >
+                                            <path d="M1 6h10M6 1l5 5-5 5" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            ) : (
+                                <div class="op-cta-row">
+                                    <a
+                                        href={prefixPath("/catalogo")}
+                                        class="op-cta-link"
+                                    >
+                                        Ver productos
+                                        <svg
+                                            viewBox="0 0 12 12"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="1.5"
+                                        >
+                                            <path d="M1 6h10M6 1l5 5-5 5" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            )}
+                        </div>
+                    ))
+                }
+            </div>
+
+            <!-- ── HUD: esquina superior derecha ── -->
+            <div class="op-hud" aria-hidden="true">
+                <div class="op-hud-pct" id="op-hud-pct">00%</div>
+                <div class="op-hud-bar">
+                    <div class="op-hud-fill" id="op-hud-fill"></div>
+                </div>
+                <div class="op-hud-label" id="op-hud-label">MAR Y TIERRA</div>
+            </div>
+
+            <!-- ── DOTS: izquierda ── -->
+            <nav class="op-dots" id="op-dots" aria-label="Navegar secciones">
+                {
+                    slides.map((s, i) => (
+                        <button
+                            class={`op-dot${i === 0 ? " op-dot--active" : ""}`}
+                            data-op-dot={i}
+                            aria-label={s.name}
+                            type="button"
+                        />
+                    ))
+                }
+            </nav>
+
+            <!-- ── CAPTION: inferior central ── -->
+            <div class="op-caption" aria-hidden="true">
+                <span class="op-caption-num" id="op-caption-num">01</span>
+                <span class="op-caption-name" id="op-caption-name">OCÉANO</span>
+            </div>
+        </div><!-- /op-stage -->
+    </div><!-- /op-outer -->
+</section>
+
+<style>
+    /* ══════════════════════════════════════════
+       TOKENS (scoped al componente, no a :root)
+    ══════════════════════════════════════════ */
+    .op-root {
+        --op-bg: #f5f7f2;
+        --op-fg: #192416;
+        --op-muted: #7a9977;
+        --op-accent: #3ea820;
+        --op-card-bg: rgba(255, 255, 255, 0.9);
+        --op-card-border: rgba(62, 168, 32, 0.22);
+        --op-card-shadow: 0 8px 40px rgba(25, 36, 22, 0.08);
+        --op-hairline: 1px;
+        --op-ui-inset: 1.75rem;
+        --op-font-display: var(--font-primary, "Bebas Neue", sans-serif);
+        --op-font-body: var(--font-secondary, "DM Sans", sans-serif);
+        --op-reveal-dur: 0.5s;
+    }
+
+    /* ══════════════════════════════════════════
+       OUTER: crea el espacio de scroll
+       Con N=4: 100 + 3×55 + 100 = 365 vh
+    ══════════════════════════════════════════ */
+    .op-outer {
+        position: relative;
+        height: calc(100vh + (var(--op-n) - 1) * 55vh + 100vh);
+        background: var(--op-bg);
+    }
+
+    /* STAGE: sticky canvas, visible mientras scrolleas el outer */
+    .op-stage {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* ══════════════════════════════════════════
+       FONDO ATMOSFÉRICO
+    ══════════════════════════════════════════ */
+    .op-bg {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .op-bg-grain {
+        position: absolute;
+        inset: 0;
+        opacity: 0.035;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        background-size: 200px;
+    }
+
+    .op-bg-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+    }
+    .op-bg-glow--a {
+        width: 55vw;
+        height: 55vw;
+        opacity: 0.5;
+        background: radial-gradient(
+            circle,
+            rgba(103, 189, 69, 0.07) 0%,
+            transparent 70%
+        );
+        top: -10%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .op-bg-glow--b {
+        width: 40vw;
+        height: 40vw;
+        opacity: 0.4;
+        background: radial-gradient(
+            circle,
+            rgba(0, 109, 182, 0.08) 0%,
+            transparent 70%
+        );
+        bottom: -10%;
+        right: 5%;
+    }
+
+    /* ══════════════════════════════════════════
+       CUBO 3D
+    ══════════════════════════════════════════ */
+    .op-perspective {
+        position: absolute;
+        inset: 0;
+        perspective: 1200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .op-cube {
+        --sz: min(60vw, 62vh, 520px);
+        width: var(--sz);
+        height: var(--sz);
+        position: relative;
+        transform-style: preserve-3d;
+        transform: rotateX(12deg) rotateY(0deg);
+        will-change: transform;
+    }
+
+    /* Caras base */
+    .op-face {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        backface-visibility: hidden;
+        background:
+            repeating-linear-gradient(
+                0deg,
+                rgba(25, 36, 22, 0.05) 0,
+                rgba(25, 36, 22, 0.05) 1px,
+                transparent 1px,
+                transparent 52px
+            ),
+            repeating-linear-gradient(
+                90deg,
+                rgba(25, 36, 22, 0.05) 0,
+                rgba(25, 36, 22, 0.05) 1px,
+                transparent 1px,
+                transparent 52px
+            ),
+            #edf2e8;
+    }
+
+    .op-face img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .op-face-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            160deg,
+            rgba(245, 247, 242, 0.15) 0%,
+            rgba(62, 168, 32, 0.04) 100%
+        );
+        z-index: 1;
+    }
+
+    /* Posiciones 4 caras laterales (Y‑axis rotation) */
+    .op-face-0 {
+        transform: rotateY(0deg) translateZ(calc(var(--sz) / 2));
+    }
+    .op-face-1 {
+        transform: rotateY(90deg) translateZ(calc(var(--sz) / 2));
+    }
+    .op-face-2 {
+        transform: rotateY(180deg) translateZ(calc(var(--sz) / 2));
+    }
+    .op-face-3 {
+        transform: rotateY(270deg) translateZ(calc(var(--sz) / 2));
+    }
+
+    /* Rim light en aristas */
+    .op-face-0,
+    .op-face-1,
+    .op-face-2,
+    .op-face-3 {
+        box-shadow: inset 0 0 0 1px rgba(103, 189, 69, 0.13);
+    }
+
+    /* Tapa superior y base */
+    .op-face-top {
+        transform: rotateX(-90deg) translateZ(calc(var(--sz) / 2));
+        background: #e8ede3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .op-face-bottom {
+        transform: rotateX(90deg) translateZ(calc(var(--sz) / 2));
+        background: #dfe6d9;
+    }
+    .op-face-cap {
+        width: 55%;
+        color: var(--op-accent);
+    }
+    .op-face-cap svg {
+        width: 100%;
+        height: auto;
+    }
+
+    /* ══════════════════════════════════════════
+       CARDS OVERLAY
+    ══════════════════════════════════════════ */
+    .op-cards {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 10;
+    }
+
+    .op-card {
+        position: absolute;
+        top: 50%;
+        max-width: min(360px, 28vw);
+        padding: 2.25rem 2rem;
+        background: var(--op-card-bg);
+        border-left: var(--op-hairline) solid var(--op-card-border);
+        box-shadow: var(--op-card-shadow);
+        backdrop-filter: blur(12px) saturate(150%);
+        -webkit-backdrop-filter: blur(12px) saturate(150%);
+        opacity: 0;
+        transform: translateY(-50%) translateX(28px);
+        pointer-events: none;
+        transition:
+            opacity var(--op-reveal-dur) ease,
+            transform var(--op-reveal-dur) ease;
+        will-change: opacity, transform;
+    }
+
+    .op-card--left {
+        left: 4.5vw;
+    }
+    .op-card--right {
+        right: 4.5vw;
+        left: auto;
+        border-left: none;
+        border-right: var(--op-hairline) solid var(--op-card-border);
+        text-align: right;
+    }
+    .op-card--right .op-hline {
+        margin-left: auto;
+    }
+    .op-card--right .op-stats {
+        justify-content: flex-end;
+    }
+    .op-card--right .op-cta-row {
+        justify-content: flex-end;
+    }
+    .op-card--right .op-tag {
+        justify-content: flex-end;
+    }
+
+    /* Línea decorativa */
+    .op-hline {
+        width: 36px;
+        height: var(--op-hairline);
+        background: var(--op-accent);
+        margin-bottom: 1.2rem;
+    }
+
+    /* Tag */
+    .op-tag {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.6rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--op-accent);
+        margin-bottom: 1rem;
+        font-family: var(--op-font-body);
+    }
+    .op-tag-num {
+        font-weight: 700;
+    }
+    .op-tag-sep {
+        opacity: 0.4;
+    }
+
+    /* Título */
+    .op-title {
+        font-family: var(--op-font-display);
+        font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+        font-weight: 400;
+        line-height: 0.92;
+        letter-spacing: 0.02em;
+        color: var(--op-fg);
+        margin-bottom: 1.25rem;
+        display: flex;
+        flex-direction: column;
+    }
+    .op-card--right .op-title {
+        align-items: flex-end;
+    }
+    .op-title-line {
+        display: block;
+    }
+
+    /* Body */
+    .op-body {
+        font-family: var(--op-font-body);
+        font-size: 0.78rem;
+        line-height: 1.8;
+        color: rgba(25, 36, 22, 0.55);
+        margin-bottom: 1.5rem;
+    }
+
+    /* Stats */
+    .op-stats {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.75rem;
+    }
+    .op-stat {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+    }
+    .op-stat-num {
+        font-family: var(--op-font-display);
+        font-size: 2rem;
+        line-height: 1;
+        color: var(--op-accent);
+    }
+    .op-stat-label {
+        font-size: 0.55rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--op-muted);
+    }
+
+    /* CTA */
+    .op-cta-row {
+        display: flex;
+    }
+    .op-cta-btn,
+    .op-cta-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.6rem 1.25rem;
+        border: var(--op-hairline) solid var(--op-accent);
+        color: var(--op-accent);
+        font-family: var(--op-font-body);
+        font-size: 0.6rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        text-decoration: none;
+        cursor: pointer;
+        background: transparent;
+        transition:
+            background 0.2s ease,
+            color 0.2s ease;
+        pointer-events: auto;
+    }
+    .op-cta-btn:hover,
+    .op-cta-link:hover {
+        background: var(--op-accent);
+        color: var(--op-bg);
+    }
+    .op-cta-btn svg,
+    .op-cta-link svg {
+        width: 0.7rem;
+        height: 0.7rem;
+    }
+
+    /* ══════════════════════════════════════════
+       HUD — esquina superior derecha
+       position: absolute (dentro del stage)
+    ══════════════════════════════════════════ */
+    .op-hud {
+        position: absolute;
+        top: var(--op-ui-inset);
+        right: var(--op-ui-inset);
+        z-index: 20;
+        text-align: right;
+        pointer-events: none;
+    }
+    .op-hud-pct {
+        font-size: 0.6rem;
+        letter-spacing: 0.15em;
+        color: var(--op-muted);
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+        font-family: var(--op-font-body);
+    }
+    .op-hud-bar {
+        width: 7rem;
+        height: var(--op-hairline);
+        background: rgba(25, 36, 22, 0.12);
+        margin-left: auto;
+        position: relative;
+        overflow: hidden;
+    }
+    .op-hud-fill {
+        position: absolute;
+        inset-block: 0;
+        left: 0;
+        width: 0%;
+        background: var(--op-accent);
+        transition: width 0.1s linear;
+    }
+    .op-hud-label {
+        font-size: 0.55rem;
+        letter-spacing: 0.22em;
+        color: var(--op-accent);
+        text-transform: uppercase;
+        margin-top: 0.4rem;
+        font-family: var(--op-font-body);
+        opacity: 0.75;
+    }
+
+    /* ══════════════════════════════════════════
+       DOTS — izquierda
+       position: absolute (dentro del stage)
+    ══════════════════════════════════════════ */
+    .op-dots {
+        position: absolute;
+        left: var(--op-ui-inset);
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        background: transparent;
+        border: none;
+        padding: 0;
+    }
+    .op-dot {
+        position: relative;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(25, 36, 22, 0.18);
+        cursor: pointer;
+        padding: 0;
+        transition:
+            background 0.3s ease,
+            transform 0.3s ease;
+    }
+    .op-dot::before {
+        content: "";
+        position: absolute;
+        inset: -8px;
+    }
+    .op-dot--active {
+        background: var(--op-accent);
+        transform: scale(1.9);
+    }
+
+    /* ══════════════════════════════════════════
+       CAPTION — inferior central
+       position: absolute (dentro del stage)
+    ══════════════════════════════════════════ */
+    .op-caption {
+        position: absolute;
+        bottom: var(--op-ui-inset);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 20;
+        text-align: center;
+        pointer-events: none;
+        user-select: none;
+    }
+    .op-caption-num {
+        display: block;
+        font-size: 0.55rem;
+        letter-spacing: 0.3em;
+        color: var(--op-accent);
+        text-transform: uppercase;
+        margin-bottom: 0.15rem;
+        font-family: var(--op-font-body);
+    }
+    .op-caption-name {
+        display: block;
+        font-family: var(--op-font-display);
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        letter-spacing: 0.1em;
+        color: var(--op-fg);
+        opacity: 0.1;
+        line-height: 1;
+    }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════ */
+    @media (max-width: 900px) {
+        .op-card {
+            max-width: min(280px, 42vw);
+            padding: 1.5rem 1.25rem;
+        }
+        .op-title {
+            font-size: clamp(2rem, 8vw, 3rem);
+        }
+    }
+
+    @media (max-width: 600px) {
+        .op-card {
+            position: absolute;
+            bottom: 0;
+            left: 0 !important;
+            right: 0;
+            top: auto;
+            max-width: 100%;
+            transform: none !important;
+            border-left: none;
+            border-right: none;
+            border-top: var(--op-hairline) solid var(--op-card-border);
+            text-align: left;
+        }
+        .op-card--right .op-hline {
+            margin-left: 0;
+        }
+        .op-card--right .op-stats {
+            justify-content: flex-start;
+        }
+        .op-card--right .op-cta-row {
+            justify-content: flex-start;
+        }
+        .op-card--right .op-tag {
+            justify-content: flex-start;
+        }
+        .op-dots {
+            left: 1rem;
+        }
+        .op-hud {
+            top: 1rem;
+            right: 1rem;
+        }
+        .op-caption {
+            display: none;
+        }
+    }
+</style>
+
+<script>
+    (() => {
+        "use strict";
+
+        /* ── Configuración ── */
+        const N = 4;
+        const STOPS = [
+            { rx: 12, ry: 0 }, // front → Pesca
+            { rx: 0, ry: -90 }, // right → Agricultura
+            { rx: -8, ry: -180 }, // back  → Bioinsumos
+            { rx: 0, ry: -270 }, // left  → Circularidad
+        ];
+        const NAMES = ["OCÉANO", "CAMPO", "BIOINSUMOS", "CIRCULAR"];
+
+        /* ── DOM ── */
+        const outer = document.getElementById("op-outer") as HTMLElement | null;
+        const cube = document.getElementById("op-cube") as HTMLElement | null;
+        const cards = [
+            ...document.querySelectorAll("[data-op-card]"),
+        ] as HTMLElement[];
+        const dots = [
+            ...document.querySelectorAll("[data-op-dot]"),
+        ] as HTMLElement[];
+        const hudPct = document.getElementById("op-hud-pct");
+        const hudFill = document.getElementById("op-hud-fill");
+        const hudLbl = document.getElementById("op-hud-label");
+        const capNum = document.getElementById("op-caption-num");
+        const capName = document.getElementById("op-caption-name");
+
+        if (!outer || !cube) return;
+
+        /* ── Helpers ── */
+        const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+        const clamp = (v: number, lo: number, hi: number) =>
+            Math.max(lo, Math.min(hi, v));
+        const easeIO = (t: number) =>
+            t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+        /* ── Progreso RELATIVO AL COMPONENTE ────────────────
+         *  55 vh por transición, plateau de 100 vh al final.
+         *  progress = 0 al entrar, 1 tras la última transición,
+         *  y se mantiene en 1 durante el plateau antes de salir.
+         */
+        const PER_SLIDE_VH = 55;
+
+        function getProgress(): number {
+            const rect = outer!.getBoundingClientRect();
+            const transitionTotal =
+                ((N - 1) * PER_SLIDE_VH * window.innerHeight) / 100;
+            return Math.min(1, Math.max(0, -rect.top) / transitionTotal);
+        }
+
+        /* ── Cubo ── */
+        function setCube(p: number) {
+            const t = p * (N - 1);
+            const i = clamp(Math.floor(t), 0, N - 2);
+            const f = easeIO(t - i);
+            const a = STOPS[i],
+                b = STOPS[i + 1];
+            cube!.style.transform = `rotateX(${lerp(a.rx, b.rx, f)}deg) rotateY(${lerp(a.ry, b.ry, f)}deg)`;
+        }
+
+        /* ── Cards ── */
+        function setCards(p: number) {
+            const band = 0.6 / (N - 1);
+            cards.forEach((c, i) => {
+                const centre = i / (N - 1);
+                const dist = Math.abs(p - centre);
+                const op = clamp(1 - dist / band, 0, 1);
+                const isRight = c.classList.contains("op-card--right");
+                const dir = isRight ? 1 : -1;
+                const isMobile = window.innerWidth <= 600;
+                if (isMobile) {
+                    c.style.opacity = String(op);
+                    c.style.transform = `translateX(${dir * (1 - op) * 22}px)`;
+                } else {
+                    c.style.opacity = String(op);
+                    c.style.transform = `translateY(-50%) translateX(${dir * (1 - op) * 26}px)`;
+                }
+                c.setAttribute("aria-hidden", op < 0.05 ? "true" : "false");
+                c.style.pointerEvents = op > 0.55 ? "auto" : "none";
+            });
+        }
+
+        /* ── HUD y dots ── */
+        let lastActive = -1;
+
+        function setUI(p: number) {
+            const pct = Math.round(p * 100);
+            const active = Math.round(p * (N - 1));
+            if (hudPct) hudPct.textContent = `${String(pct).padStart(2, "0")}%`;
+            if (hudFill) hudFill.style.width = `${pct}%`;
+            if (active !== lastActive) {
+                lastActive = active;
+                const name = NAMES[active] ?? "";
+                if (hudLbl) hudLbl.textContent = name;
+                if (capNum)
+                    capNum.textContent = String(active + 1).padStart(2, "0");
+                if (capName) capName.textContent = name;
+                dots.forEach((d, i) =>
+                    d.classList.toggle("op-dot--active", i === active),
+                );
+            }
+        }
+
+        /* ── RAF loop ─────────────────────────────────────────
+         *  smooth interpola el target para una rotación suave.
+         *  El loop se pausa cuando la sección sale del viewport.
+         */
+        let tgt = 0;
+        let smooth = 0;
+        let lastNow = performance.now();
+        let rafId: number;
+
+        function tick(now: number) {
+            rafId = requestAnimationFrame(tick);
+            const dt = Math.min((now - lastNow) / 1000, 0.05);
+            lastNow = now;
+            tgt = getProgress();
+            smooth += (tgt - smooth) * (1 - Math.exp(-dt * 7));
+            smooth = clamp(smooth, 0, 1);
+            setCube(smooth);
+            setCards(smooth);
+            setUI(smooth);
+        }
+
+        /* Pausa el RAF cuando la sección no es visible */
+        const io = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    lastNow = performance.now();
+                    rafId = requestAnimationFrame(tick);
+                } else {
+                    cancelAnimationFrame(rafId);
+                }
+            },
+            { rootMargin: "200px" },
+        );
+        io.observe(outer);
+
+        /* ── Navegación helper ── */
+        const scrollToSlide = (idx: number) => {
+            if (!outer) return;
+            const outerTop = outer.getBoundingClientRect().top + window.scrollY;
+            const totalScroll = outer.offsetHeight - window.innerHeight;
+            const targetY = outerTop + (idx / (N - 1)) * totalScroll;
+            window.scrollTo({ top: targetY, behavior: "smooth" });
+        };
+
+        /* Dots */
+        dots.forEach((dot) => {
+            dot.addEventListener("click", () =>
+                scrollToSlide(Number((dot as HTMLElement).dataset.opDot)),
+            );
+        });
+
+        /* Botones "Siguiente" */
+        document.querySelectorAll("[data-op-nav-next]").forEach((btn) => {
+            btn.addEventListener("click", () =>
+                scrollToSlide(Number((btn as HTMLElement).dataset.opNavNext)),
+            );
+        });
+
+        /* Frame inicial */
+        setCube(0);
+        setCards(0);
+        setUI(0);
+    })();
+</script>

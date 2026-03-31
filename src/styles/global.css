@@ -111,7 +111,7 @@ body {
   font-size: 14px;
   letter-spacing: 0.015em;
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
   font-weight: 400;
   background: var(--bg-main);
   color: var(--text-primary);

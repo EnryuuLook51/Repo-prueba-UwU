@@ -104,6 +104,7 @@ export const ui = {
         'marytierra.products.p2.desc': 'Bioinsumos, Abonos',
         'marytierra.future.title': 'Hacia un futuro <em>próspero y consciente</em>',
         'marytierra.future.button': 'Conoce más',
+        'marytierra.products.verMas': 'Ver más',
     },
     en: {
         'nav.services': 'Business Lines',
