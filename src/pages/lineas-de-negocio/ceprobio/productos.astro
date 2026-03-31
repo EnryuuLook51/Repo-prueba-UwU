@@ -1,0 +1,841 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Footer from "../../../components/pages/layout/Footer.astro";
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
+import "../../../styles/global.css";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const title =
+    "Productos Ceprobio | Nutrición Orgánica | Green Prod & Sustainable";
+
+const categories = [
+    {
+        title: "BIOFUNGICIDAS / BIOESTIMULANTES",
+        items: [
+            {
+                name: "GP-Trich",
+                spec: "Trichoderma harzianum cepa T22, Trichoderma viride",
+                conc: "1 x 10⁹ conidios x (g/ml)",
+                prices: "Polvo 500g: S/80 | Litro: S/90",
+                application: "Suelo: 1-2 kg/Ha | Foliar: 500g/cilindro",
+                desc: "Funguicida biológico con acción combinada de hongos biocontroladores. Mejora la absorción de nutrientes y fortalece la resistencia natural.",
+                imgBg: "/images/Catalogo/Fondo/gpTrich.jpg",
+                imgProduct: "/images/Catalogo/Pngs/gpTrich.png",
+            },
+            {
+                name: "GP-Trichobác",
+                spec: "Trichoderma spp., Bacillus subtilis",
+                conc: "1x10⁹ conidios x (g/ml), 1x10⁹ UFCx (g/ml)",
+                prices: "Polvo 500g: S/75 | Líquido: 1-2 L/cil",
+                application: "Suelo: 1-2 kg/Ha | Foliar: 500g/cilindro",
+                desc: "Biofungicida de acción dual. Controla hongos fitopatógenos como Fusarium, Rhizoctonia y Pythium.",
+                imgBg: "/images/Catalogo/Fondo/gpTrichobac.jpeg",
+                imgProduct: "/images/Catalogo/Pngs/gpTrichobac.png",
+            },
+            {
+                name: "GP-Subtix",
+                spec: "Bacillus subtilis",
+                conc: "1 x 10¹⁰ UFC/(g/ml)",
+                prices: "Polvo 500g: S/50 | Litro: S/40",
+                application: "Suelo: 1-2 kg/Ha | Foliar: 500g",
+                desc: "Biofungicida para el control de patógenos como Fusarium, Pythium y Rhizoctonia.",
+                imgBg: "/images/Catalogo/Fondo/gpSubtix.jpeg",
+                imgProduct: "/images/Catalogo/Pngs/gpSubtix.png",
+            },
+        ],
+    },
+    {
+        title: "INSECTICIDAS BIOLÓGICOS",
+        items: [
+            {
+                name: "GP-Wardúo",
+                spec: "Beauveria bassiana, Metarhizium anisopliae",
+                conc: "1 x 10⁹ conidios x (g/ml)",
+                prices: "Polvo 500g: S/100 | Litro: S/110",
+                application: "Suelo: 1-2 kg/Ha | Foliar: 500g/cilindro",
+                desc: "Insecticida biológico eficaz contra plagas agrícolas. Coloniza al insecto causándole la muerte sin generar resistencia.",
+                imgBg: "/images/Catalogo/Fondo/gpWarduo.jpeg",
+                imgProduct: "/images/Catalogo/Pngs/gpWarduo.png",
+            },
+            {
+                name: "GP-Bauver",
+                spec: "Beauveria bassiana",
+                conc: "1 x 10⁹ conidios x (g/ml)",
+                prices: "Polvo 500g: S/90 | Litro: S/100",
+                application: "Suelo: 1-2 kg/Ha | Foliar: 500g/cilindro",
+                desc: "Infecta y reduce insectos plaga en cultivos. Alternativa para manejo fitosanitario sostenible.",
+                imgBg: "/images/Catalogo/Fondo/gpBauver.jpg",
+                imgProduct: "/images/Catalogo/Pngs/gpBauver.png",
+            },
+            {
+                name: "GP-Meta",
+                spec: "Metarhizium anisopliae",
+                conc: "1 x 10⁹ conidios x (g/ml)",
+                prices: "Polvo 500g: S/90 | Litro: S/100",
+                application: "Suelo: 1-2 kg/Ha | Foliar: 500g/cilindro",
+                desc: "Insecticida biológico conocido por su capacidad para infectar y reducir poblaciones de insectos plaga.",
+                imgBg: "/images/Catalogo/Fondo/gpMeta.jpeg",
+                imgProduct: "/images/Catalogo/Pngs/gpMeta.png",
+            },
+            {
+                name: "GP-Thuring",
+                spec: "Bacillus thuringiensis var. Kurstaki",
+                conc: "1 x 10¹⁰ UFC/(g/ml)",
+                prices: "Polvo 500g: S/50 | Litro: S/40",
+                application: "Suelo: 1-2 kg/Ha | Foliar: 500g",
+                desc: "Controla larvas de diversos lepidópteros plaga como Spodoptera y Plutella.",
+                imgBg: "/images/Catalogo/Fondo/gpThuring.jpeg",
+                imgProduct: "/images/Catalogo/Pngs/gpThuring.png",
+            },
+        ],
+    },
+    {
+        title: "BIONEMATICIDAS",
+        items: [
+            {
+                name: "GP-Lilox",
+                spec: "Purpureocillium lilacinum",
+                conc: "1 x 10⁹ conidios x (g/ml)",
+                prices: "Polvo 500g: S/80 | Litro: S/90",
+                application: "Suelo: 500g/cil | 1-2 kg/Ha",
+                desc: "Parasita huevos y hembras de nematodos del suelo, mejorando el desarrollo del cultivo.",
+                imgBg: "/images/Catalogo/Fondo/gpLilax.jpeg",
+                imgProduct: "/images/Catalogo/Pngs/gpLilax.png",
+            },
+        ],
+    },
+];
+---
+
+<Layout title={title}>
+    <section class="products-top-banner">
+        <div class="banner-overlay"></div>
+        <div class="custom-container relative z-10">
+            <a href="/lineas-de-negocio/ceprobio" class="back-link white">
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    class="arrow-back"
+                >
+                    <path d="M19 12H5M12 19l-7-7 7-7"></path>
+                </svg>
+                Volver a Ceprobio
+            </a>
+            <h1 class="font-heading text-white">Catálogo de Bioinsumos</h1>
+            <p class="tagline text-white/80">
+                "Biotecnología aplicada para una agricultura sostenible"
+            </p>
+        </div>
+    </section>
+
+    <section class="filters-section">
+        <div class="custom-container">
+            <div class="filter-group">
+                <button class="filter-btn active" data-filter="all"
+                    >Todos los Productos</button
+                >
+                <button class="filter-btn" data-filter="insecticida"
+                    >Insecticidas</button
+                >
+                <button class="filter-btn" data-filter="fungicida"
+                    >Fungicidas</button
+                >
+                <button class="filter-btn" data-filter="biofungicida"
+                    >Biofungicidas</button
+                >
+                <button class="filter-btn" data-filter="nematicida"
+                    >Nematicidas</button
+                >
+            </div>
+        </div>
+    </section>
+
+    <section class="catalog-section">
+        <div class="custom-container" id="catalogContainer">
+            {
+                categories.map((cat) => (
+                    <div class="category-block" data-reveal>
+                        <h2 class="category-title">{cat.title}</h2>
+                        <div class="product-grid">
+                            {cat.items.map((item) => {
+                                // Dynamic categories based on name/desc
+                                const c = item.desc.toLowerCase();
+                                const cats = [];
+                                if (c.includes("insecticida"))
+                                    cats.push("insecticida");
+                                if (c.includes("fungicida")) {
+                                    cats.push("fungicida");
+                                    cats.push("biofungicida");
+                                }
+                                if (c.includes("nematicida"))
+                                    cats.push("nematicida");
+                                if (item.name.toLowerCase().includes("trich")) {
+                                    cats.push("fungicida");
+                                    cats.push("biofungicida");
+                                }
+
+                                return (
+                                    <article
+                                        class="product-card-3d"
+                                        data-product-btn
+                                        data-category={cats.join(" ")}
+                                        data-name={item.name}
+                                        data-spec={item.spec}
+                                        data-conc={item.conc}
+                                        data-prices={item.prices}
+                                        data-app={item.application}
+                                        data-desc={item.desc}
+                                        data-img={item.imgProduct}
+                                        data-bg={item.imgBg}
+                                    >
+                                        <div class="card-image-wrap">
+                                            <img
+                                                src={item.imgBg}
+                                                alt={item.name}
+                                                class="bg-img"
+                                            />
+                                            <img
+                                                src={item.imgProduct}
+                                                alt={item.name}
+                                                class="product-img"
+                                            />
+                                        </div>
+                                        <div class="card-info">
+                                            <h3>{item.name}</h3>
+                                            <span class="spec">
+                                                {item.spec}
+                                            </span>
+                                            <p class="line-clamp-2">
+                                                {item.desc}
+                                            </p>
+                                        </div>
+                                    </article>
+                                );
+                            })}
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </section>
+
+    <!-- PRODUCT MODAL -->
+    <div id="productModal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="closeModal" class="modal-close" aria-label="Cerrar">
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                >
+                    <path d="M18 6L6 18M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <div class="modal-grid">
+                <div class="modal-media">
+                    <img id="m-bg" src="" alt="" class="m-bg-img" />
+                    <img id="m-prod" src="" alt="" class="m-prod-img" />
+                </div>
+
+                <div class="modal-details">
+                    <div class="modal-header">
+                        <span id="m-spec" class="m-label"></span>
+                        <h2 id="m-name" class="font-heading"></h2>
+                    </div>
+
+                    <div class="m-specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Concentración</span>
+                            <p id="m-conc"></p>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Modo de Aplicación</span>
+                            <p id="m-app"></p>
+                        </div>
+                    </div>
+
+                    <div class="spec-item highlight">
+                        <span class="spec-label">Precios sugeridos</span>
+                        <p id="m-prices"></p>
+                    </div>
+
+                    <div class="modal-desc">
+                        <span class="spec-label">Beneficios</span>
+                        <p id="m-desc"></p>
+                    </div>
+
+                    <a
+                        href="https://wa.me/51919514085"
+                        target="_blank"
+                        class="cta-whatsapp"
+                    >
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12.031 6.172c-2.32 0-4.518.953-6.19 2.684-1.63 1.684-2.529 3.922-2.529 6.297l.004.382c.004.223.012.441.023.655l-1.074 3.922 4.023-1.055c.441.137.898.223 1.371.277.781.086 1.57.129 2.371.129 2.32 0 4.516-.953 6.191-2.684 1.633-1.684 2.527-3.922 2.527-6.297 0-2.375-.898-4.613-2.527-6.297-1.676-1.73-3.871-2.684-6.191-2.684zm5.105 11.234c-1.359 1.391-3.164 2.16-5.074 2.16-.621 0-1.238-.043-1.855-.133-.355-.051-.711-.121-1.066-.219l-.262-.074-2.852.75.766-2.793-.102-.184c-.453-.805-.688-1.711-.688-2.641 0-1.93 0-1.922 0-1.93 0-1.91 0-1.91 0-1.922 0-1.93 0-1.93 0-1.934.004-1.918.73-3.719 2.051-5.074 1.348-1.391 3.148-2.16 5.059-2.16s3.711.77 5.059 2.16c1.32 1.355 2.047 3.156 2.047 5.074.004 1.918-.727 3.719-2.047 5.074z"
+                            ></path>
+                        </svg>
+                        Solicitar Cotización por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <Footer />
+</Layout>
+
+<style>
+    .products-top-banner {
+        padding: 14rem 0 8rem;
+        background: url("/images/Catalogo/Fondo/gpZvariosTodos.jpg")
+            center/cover no-repeat;
+        position: relative;
+        overflow: hidden;
+    }
+    .banner-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.2),
+            /* Lighter overlay */ rgba(0, 0, 0, 0.4)
+        );
+    }
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--brand-green);
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        margin-bottom: 2rem;
+        text-decoration: none;
+    }
+    .back-link.white {
+        color: white;
+    }
+    .arrow-back {
+        width: 1.1rem;
+        height: 1.1rem;
+    }
+    h1 {
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        line-height: 1;
+        margin-bottom: 1rem;
+        color: var(--brand-green); /* Corporate Green */
+        /* Suave contorno blanco */
+        text-shadow:
+            1px 1px 0 #fff,
+            -1px -1px 0 #fff,
+            1px -1px 0 #fff,
+            -1px 1px 0 #fff,
+            0 1px 0 #fff,
+            1px 0 0 #fff,
+            0 -1px 0 #fff,
+            -1px 0 0 #fff;
+    }
+    .tagline {
+        font-family: var(--font-primary);
+        font-style: italic;
+        color: var(--brand-blue);
+        font-size: 2rem;
+        font-weight: 600;
+        /* Subtler white contour */
+        text-shadow:
+            1px 1px 0 #fff,
+            -1px -1px 0 #fff,
+            1px -1px 0 #fff,
+            -1px 1px 0 #fff;
+    }
+
+    .catalog-section {
+        padding: 4rem 0 6rem;
+        background: white;
+    }
+
+    /* FILTERS STYLE */
+    .filters-section {
+        padding: 4rem 0 1rem;
+        background: white;
+    }
+    .filter-group {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    .filter-btn {
+        padding: 0.8rem 1.8rem;
+        border-radius: 50px;
+        border: 1px solid var(--border-color);
+        background: transparent;
+        color: var(--text-secondary);
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.05em;
+    }
+    .filter-btn:hover {
+        border-color: var(--brand-green);
+        color: var(--brand-green);
+    }
+    .filter-btn.active {
+        background: var(--brand-green);
+        border-color: var(--brand-green);
+        color: white;
+        box-shadow: 0 10px 20px rgba(76, 175, 80, 0.2);
+    }
+
+    .product-card-3d.hidden {
+        display: none !important;
+    }
+    .category-block.hidden {
+        display: none !important;
+    }
+
+    .category-block {
+        margin-bottom: 8rem;
+    }
+    .category-title {
+        font-family: var(--font-primary);
+        font-weight: 800;
+        font-size: 1rem;
+        color: var(--brand-green);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 3.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    .category-title::after {
+        content: "";
+        height: 1px;
+        flex: 1;
+        background: var(--bg-main);
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 4rem 2rem;
+    }
+
+    /* 3D CARD STYLE - USER SPECIFIC */
+    .product-card-3d {
+        position: relative;
+        width: 280px;
+        margin: 0 auto;
+        transition: all 0.4s ease;
+        cursor: pointer;
+    }
+
+    .card-image-wrap {
+        position: relative;
+        height: 350px;
+        border-radius: 12px;
+        overflow: visible;
+        margin-bottom: 2rem;
+    }
+
+    .bg-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+        transition: all 0.5s ease;
+    }
+
+    .product-img {
+        position: absolute;
+        width: 300px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        transform: translateY(20%);
+        transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        opacity: 0;
+        z-index: 2;
+    }
+
+    /* White Platform overlay on hover */
+    .product-card-3d::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 350px;
+        width: 100%;
+        background: white;
+        opacity: 0;
+        transition: all 0.4s ease;
+        z-index: 1;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .product-card-3d:hover .bg-img {
+        opacity: 0.1; /* Fade out background to show white platform */
+        filter: grayscale(1);
+        transform: scale(0.95);
+    }
+
+    .product-card-3d:hover {
+        transform: perspective(1000px) rotateX(15deg) translateY(-5%)
+            translateZ(0);
+    }
+
+    .product-card-3d:hover::before {
+        opacity: 1;
+    }
+
+    .product-card-3d:hover .product-img {
+        opacity: 1;
+        transform: translateY(-10%);
+    }
+
+    /* Info below card */
+    .card-info {
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+
+    .product-card-3d:hover .card-info {
+        transform: translateY(10px);
+    }
+
+    .card-info h3 {
+        font-size: 1.4rem;
+        color: var(--text-primary);
+        margin-bottom: 0.3rem;
+        font-family: var(--font-primary);
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    .spec {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--brand-green);
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        letter-spacing: 0.1em;
+    }
+    .card-info p {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+        padding: 0 1rem;
+    }
+
+    /* Reveal animations */
+    [data-reveal] {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 1s ease;
+    }
+    [data-reveal].revealed {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* MODAL STYLES */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(8px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.4s ease;
+        padding: 2rem;
+    }
+    .modal-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    .modal-content {
+        background: white;
+        width: 100%;
+        max-width: 1000px;
+        border-radius: 20px;
+        position: relative;
+        overflow: hidden;
+        transform: translateY(40px);
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .modal-overlay.active .modal-content {
+        transform: translateY(0);
+    }
+    .modal-close {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        background: #f1f5f9;
+        border: none;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        transition: all 0.3s ease;
+    }
+    .modal-close:hover {
+        background: var(--brand-blue);
+        color: white;
+        transform: rotate(90deg);
+    }
+
+    .modal-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .modal-media {
+        background: #f8fafc;
+        position: relative;
+        height: 100%;
+        min-height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    .m-bg-img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.1;
+    }
+    .m-prod-img {
+        position: relative;
+        width: 85%;
+        filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+        animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    .modal-details {
+        padding: 4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .m-label {
+        color: var(--brand-green);
+        font-weight: 800;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+    .modal-header h2 {
+        font-size: 3rem;
+        color: var(--brand-blue);
+        margin-top: 0.5rem;
+    }
+
+    .m-specs-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    .spec-label {
+        display: block;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        color: #94a3b8;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+    }
+    .spec-item p {
+        font-size: 0.95rem;
+        color: #334155;
+        font-weight: 500;
+    }
+    .highlight {
+        background: #f0fdf4;
+        padding: 1rem;
+        border-radius: 8px;
+        border-left: 4px solid var(--brand-green);
+    }
+    .modal-desc p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: #64748b;
+    }
+
+    .cta-whatsapp {
+        margin-top: 1rem;
+        background: #25d366;
+        color: white;
+        padding: 1.2rem;
+        border-radius: 12px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        font-weight: 700;
+        transition: all 0.3s ease;
+    }
+    .cta-whatsapp:hover {
+        transform: scale(1.02);
+        filter: brightness(1.1);
+        box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+    }
+    .cta-whatsapp svg {
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+
+    @media (max-width: 900px) {
+        .modal-grid {
+            grid-template-columns: 1fr;
+        }
+        .modal-media {
+            min-height: 300px;
+        }
+        .modal-details {
+            padding: 2rem;
+        }
+        .modal-content {
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .product-card-3d {
+            width: 100%;
+            max-width: 320px;
+        }
+        .product-img {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<script>
+    const modal = document.getElementById("productModal");
+    const closeBtn = document.getElementById("closeModal");
+
+    // DOM Elements to update
+    const mName = document.getElementById("m-name");
+    const mSpec = document.getElementById("m-spec");
+    const mConc = document.getElementById("m-conc");
+    const mApp = document.getElementById("m-app");
+    const mPrices = document.getElementById("m-prices");
+    const mDesc = document.getElementById("m-desc");
+    const mProd = document.getElementById("m-prod") as HTMLImageElement;
+    const mBg = document.getElementById("m-bg") as HTMLImageElement;
+
+    document.querySelectorAll("[data-product-btn]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const data = (btn as HTMLElement).dataset;
+
+            mName.innerText = data.name;
+            mSpec.innerText = data.spec;
+            mConc.innerText = data.conc;
+            mApp.innerText = data.app;
+            mPrices.innerText = data.prices;
+            mDesc.innerText = data.desc;
+            mProd.src = data.img;
+            mBg.src = data.bg;
+
+            modal.classList.add("active");
+            document.body.style.overflow = "hidden";
+        });
+    });
+
+    const closeModal = () => {
+        modal.classList.remove("active");
+        document.body.style.overflow = "";
+    };
+
+    closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const products = document.querySelectorAll(".product-card-3d");
+    const blocks = document.querySelectorAll(".category-block");
+
+    filterBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const filter = btn.getAttribute("data-filter");
+
+            // Update active state
+            filterBtns.forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            // Filter products
+            products.forEach((prod) => {
+                const cats = prod.getAttribute("data-category");
+                if (filter === "all" || cats.includes(filter)) {
+                    prod.classList.remove("hidden");
+                } else {
+                    prod.classList.add("hidden");
+                }
+            });
+
+            // Filter blocks (hide if no visible products)
+            blocks.forEach((block) => {
+                const visibleProds = block.querySelectorAll(
+                    ".product-card-3d:not(.hidden)",
+                );
+                if (visibleProds.length > 0) {
+                    block.classList.remove("hidden");
+                } else {
+                    block.classList.add("hidden");
+                }
+            });
+        });
+    });
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting)
+                    entry.target.classList.add("revealed");
+            });
+        },
+        { threshold: 0.1 },
+    );
+    document
+        .querySelectorAll("[data-reveal]")
+        .forEach((el) => observer.observe(el));
+</script>

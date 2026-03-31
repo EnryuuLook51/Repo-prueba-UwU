@@ -1,0 +1,160 @@
+---
+/* 
+   OpUI.astro — HUD, Navegación y Captions
+*/
+interface Props {
+    slides: any[];
+}
+const { slides } = Astro.props;
+---
+
+<!-- ── HUD: esquina superior derecha ── -->
+<div class="op-hud" aria-hidden="true">
+    <div class="op-hud-pct" id="op-hud-pct">00%</div>
+    <div class="op-hud-bar">
+        <div class="op-hud-fill" id="op-hud-fill"></div>
+    </div>
+    <div class="op-hud-label" id="op-hud-label">MAR Y TIERRA</div>
+</div>
+
+<!-- ── DOTS: izquierda ── -->
+<nav class="op-dots" id="op-dots" aria-label="Navegar secciones">
+    {
+        slides.map((s, i) => (
+            <button
+                class={`op-dot${i === 0 ? " op-dot--active" : ""}`}
+                data-op-dot={i}
+                aria-label={s.name}
+                type="button"
+            />
+        ))
+    }
+</nav>
+
+<!-- ── CAPTION: inferior central ── -->
+<div class="op-caption" aria-hidden="true">
+    <span class="op-caption-num" id="op-caption-num">01</span>
+    <span class="op-caption-name" id="op-caption-name">OCÉANO</span>
+</div>
+
+<style>
+    /* HUD */
+    .op-hud {
+        position: absolute;
+        top: var(--op-ui-inset, 1.75rem);
+        right: var(--op-ui-inset, 1.75rem);
+        z-index: 20;
+        text-align: right;
+        pointer-events: none;
+    }
+    .op-hud-pct {
+        font-size: 0.6rem;
+        letter-spacing: 0.15em;
+        color: var(--op-muted, #7a9977);
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+        font-family: var(--op-font-body);
+    }
+    .op-hud-bar {
+        width: 7rem;
+        height: var(--op-hairline, 1px);
+        background: color-mix(in srgb, var(--op-fg), transparent 88%);
+        margin-left: auto;
+        position: relative;
+        overflow: hidden;
+    }
+    .op-hud-fill {
+        position: absolute;
+        inset-block: 0;
+        left: 0;
+        width: 0%;
+        background: var(--op-accent, #3ea820);
+        transition: width 0.1s linear;
+    }
+    .op-hud-label {
+        font-size: 0.55rem;
+        letter-spacing: 0.22em;
+        color: var(--op-accent, #3ea820);
+        text-transform: uppercase;
+        margin-top: 0.4rem;
+        font-family: var(--op-font-body);
+        opacity: 0.75;
+    }
+
+    /* DOTS */
+    .op-dots {
+        position: absolute;
+        left: var(--op-ui-inset, 1.75rem);
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    .op-dot {
+        position: relative;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        border: none;
+        background: color-mix(in srgb, var(--op-fg), transparent 82%);
+        cursor: pointer;
+        padding: 0;
+        transition:
+            background 0.3s ease,
+            transform 0.3s ease;
+    }
+    .op-dot::before {
+        content: "";
+        position: absolute;
+        inset: -8px;
+    }
+    .op-dot--active {
+        background: var(--op-accent, #3ea820);
+        transform: scale(1.9);
+    }
+
+    /* CAPTION */
+    .op-caption {
+        position: absolute;
+        bottom: var(--op-ui-inset, 1.75rem);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 20;
+        text-align: center;
+        pointer-events: none;
+        user-select: none;
+    }
+    .op-caption-num {
+        display: block;
+        font-size: 0.55rem;
+        letter-spacing: 0.3em;
+        color: var(--op-accent, #3ea820);
+        text-transform: uppercase;
+        margin-bottom: 0.15rem;
+        font-family: var(--op-font-body);
+    }
+    .op-caption-name {
+        display: block;
+        font-family: var(--op-font-display);
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        letter-spacing: 0.1em;
+        color: var(--op-fg, #192416);
+        opacity: 0.1;
+        line-height: 1;
+    }
+
+    @media (max-width: 600px) {
+        .op-dots {
+            left: 1rem;
+        }
+        .op-hud {
+            top: 1rem;
+            right: 1rem;
+        }
+        .op-caption {
+            display: none;
+        }
+    }
+</style>

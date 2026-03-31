@@ -412,61 +412,69 @@ const t = useTranslations(lang);
 </style>
 
 <script>
+    function initLoader() {
+        const pctEl = document.getElementById("pct");
+        const loader = document.getElementById("loader");
+        const fill = document.querySelector(".bar-fill") as HTMLElement;
+        if (!pctEl || !loader) return;
+
+        let progress = 0;
+        let startTime = Date.now();
+        const duration = 3000; // 3 seconds to reach 99%
+
+        function update() {
+            const now = Date.now();
+            const elapsed = now - startTime;
+
+            // Linear progress for simplicity and reliability
+            if (progress < 99) {
+                progress = Math.min(99, (elapsed / duration) * 99);
+                pctEl.textContent = Math.round(progress) + "%";
+                if (fill) fill.style.width = progress + "%";
+            }
+
+            if (progress < 99) {
+                requestAnimationFrame(update);
+            }
+        }
+
+        requestAnimationFrame(update);
+
+        const finishLoader = () => {
+            // Jump to 100
+            progress = 100;
+            pctEl.textContent = "100%";
+            if (fill) fill.style.width = "100%";
+
+            setTimeout(() => {
+                loader.style.transition =
+                    "opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s ease";
+                loader.style.opacity = "0";
+                loader.style.transform = "scale(1.1)";
+                setTimeout(() => {
+                    loader.style.display = "none";
+                }, 800);
+            }, 400);
+        };
+
+        // Finish on window load OR after 4 seconds safety timeout
+        window.addEventListener("load", finishLoader);
+        setTimeout(finishLoader, 4000);
+    }
+
+    // Run on start
+    initLoader();
+
+    // Particles (Minimal & Safe)
     const pc = document.getElementById("particles");
     if (pc) {
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 15; i++) {
             const p = document.createElement("div");
             p.className = "particle";
             const size = 2 + Math.random() * 3;
-            const color = Math.random() > 0.55 ? "#67bd45" : "#006db6";
-            const dur = 5 + Math.random() * 7;
-            const delay = Math.random() * 6;
-            p.style.cssText = `left:${Math.random() * 100}%;width:${size}px;height:${size}px;background:${color};animation-duration:${dur}s;animation-delay:${delay}s;`;
+            const color = Math.random() > 0.5 ? "#67bd45" : "#006db6";
+            p.style.cssText = `left:${Math.random() * 100}%;width:${size}px;height:${size}px;background:${color};top:${Math.random() * 100}%;opacity:${0.1 + Math.random() * 0.2};`;
             pc.appendChild(p);
         }
     }
-
-    const pct = document.getElementById("pct");
-    if (pct) {
-        const steps = [
-            [300, 8],
-            [700, 30],
-            [1200, 55],
-            [1700, 78],
-            [2200, 92],
-            [2700, 100],
-        ];
-        let prev = 0;
-        steps.forEach(([time, val], idx) => {
-            setTimeout(() => {
-                const from = prev;
-                const to = val;
-                prev = val;
-                const dur =
-                    idx < steps.length - 1 ? steps[idx + 1][0] - time : 400;
-                let s = 0;
-                const n = 20;
-                const iv = setInterval(() => {
-                    s++;
-                    pct.textContent =
-                        Math.round(from + (to - from) * (s / n)) + "%";
-                    if (s >= n) clearInterval(iv);
-                }, dur / n);
-            }, time);
-        });
-    }
-
-    // Hide loader after animation completes
-    window.addEventListener("load", () => {
-        const loader = document.getElementById("loader");
-        if (loader) {
-            setTimeout(() => {
-                loader.style.transition = "opacity 0.5s ease";
-                loader.style.opacity = "0";
-                setTimeout(() => {
-                    loader.style.display = "none";
-                }, 500);
-            }, 3000);
-        }
-    });
 </script>

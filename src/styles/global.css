@@ -10,6 +10,7 @@
 
 /* FUENTE PRINCIPAL - Urbane (usando DM Sans como alternativa cercana) */
 /* DM Sans tiene características similares a Urbane: geométrica, moderna, legible */
+/* 
 @font-face {
   font-family: "Urbane";
   src: url('/fonts/Urbane-DemiBold.woff2') format('woff2'),
@@ -27,6 +28,7 @@
   font-style: normal;
   font-display: swap;
 }
+*/
 
 /* Bahnschrift - Fuente de Windows/Microsoft */
 /* Disponible en varios CDNs */
@@ -168,6 +170,13 @@ body {
   padding-right: 2rem;
 }
 
+@media (max-width: 640px) {
+  .custom-container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -188,11 +197,11 @@ body {
 
 /* CLASES PARA FUENTES DE LA EMPRESA */
 .font-urbane {
-  font-family: var(--font-primary);
+  font-family: var(--font-secondary);
 }
 
 .font-bahnschrift {
-  font-family: var(--font-secondary);
+  font-family: var(--font-primary);
 }
 
 /* Títulos principales - Urbane */

@@ -26,8 +26,7 @@ const getSwitchLangPath = (targetLang: string) => {
 
 // Data for navigation
 const navLinks = [
-    { name: t("nav.about"), href: prefixPath("/#identidad") },
-    { name: t("navbar.catalog"), href: prefixPath("/#productos-servicios") },
+    { name: t("nav.about"), href: prefixPath("/nosotros") },
     { name: t("navbar.sustainability"), href: prefixPath("/#valores") },
 ];
 
@@ -35,27 +34,27 @@ const productsItems = [
     {
         name: t("navbar.ceprobio"),
         desc: t("navbar.ceprobio_desc"),
-        href: prefixPath("/#productos-servicios"),
+        href: prefixPath("/lineas-de-negocio/ceprobio"),
     },
     {
         name: t("navbar.proveeduria"),
         desc: t("navbar.proveeduria_desc"),
-        href: prefixPath("/#productos-servicios"),
+        href: prefixPath("/lineas-de-negocio/proveeduria"),
     },
     {
         name: t("navbar.balik"),
         desc: t("navbar.balik_desc"),
-        href: prefixPath("/#productos-servicios"),
+        href: prefixPath("/lineas-de-negocio/balik"),
     },
     {
         name: t("navbar.proyectos"),
         desc: t("navbar.proyectos_desc"),
-        href: prefixPath("/#productos-servicios"),
+        href: prefixPath("/nuestros-proyectos"),
     },
     {
         name: t("navbar.planta"),
         desc: t("navbar.planta_desc"),
-        href: prefixPath("/#productos-servicios"),
+        href: prefixPath("/lineas-de-negocio/planta-de-tratamiento"),
     },
 ];
 
@@ -71,9 +70,21 @@ const aboutItems = [
         href: prefixPath("/#valores"),
     },
 ];
+
+const isTransparentPage =
+    currentPath === "/" ||
+    currentPath === "/en" ||
+    currentPath === "/en/" ||
+    currentPath.includes("/ceprobio") ||
+    currentPath.includes("/proveeduria") ||
+    currentPath.includes("/balik") ||
+    currentPath.includes("/nosotros");
+const headerClass = isTransparentPage
+    ? "main-header"
+    : "main-header solid subpage";
 ---
 
-<header class="main-header" id="mainHeader">
+<header class={headerClass} id="mainHeader">
     <!-- Top Bar -->
     <div class="top-bar">
         <div class="top-bar-inner">
@@ -154,9 +165,7 @@ const aboutItems = [
                     <div class="mega-menu" id="dropdown-nosotros">
                         <div class="mega-content">
                             <div class="mega-main">
-                                <h3 class="mega-title">
-                                    Green Prod & Sustainable
-                                </h3>
+                                <h3 class="mega-title">Sobre Nosotros</h3>
                                 <div class="mega-grid two-cols">
                                     {
                                         aboutItems.map((item) => (
@@ -389,9 +398,6 @@ const aboutItems = [
             <a href={prefixPath("/impacto-circular")} class="mobile-link"
                 >{t("nav.activities")}</a
             >
-            <a href={prefixPath("/nuestros-proyectos")} class="mobile-link"
-                >{t("navbar.catalog")}</a
-            >
         </div>
         <div class="mobile-menu-footer">
             <a href={prefixPath("/contacto")} class="cta-mobile-btn">
@@ -425,11 +431,20 @@ const aboutItems = [
         background: transparent;
     }
 
-    .main-header.scrolled,
-    .main-header.solid {
+    .main-header.scrolled {
         background: var(--text-white);
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         border-bottom: 1px solid var(--border-color);
+    }
+
+    .main-header.solid.subpage {
+        background: var(--brand-blue);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        border-bottom: none;
+    }
+
+    .main-header.nav-hidden {
+        transform: translateY(-100%);
     }
 
     /* Top Bar */
@@ -519,12 +534,14 @@ const aboutItems = [
         opacity: 1;
     }
 
-    .main-header.scrolled .logo-white {
+    .main-header.scrolled .logo-white,
+    .main-header.solid.subpage .logo-dark {
         opacity: 0;
         visibility: hidden;
         position: absolute;
     }
-    .main-header.scrolled .logo-dark {
+    .main-header.scrolled .logo-dark,
+    .main-header.solid.subpage .logo-white {
         opacity: 1;
         visibility: visible;
         position: relative;
@@ -541,7 +558,7 @@ const aboutItems = [
     .nav-link {
         padding: 1rem 1.5rem;
         font-family: var(--font-primary);
-        font-size: 0.82rem;
+        font-size: 0.95rem;
         font-weight: 700;
         color: var(--text-white);
         text-transform: uppercase;
@@ -560,8 +577,20 @@ const aboutItems = [
         color: var(--text-primary);
     }
 
-    .nav-link:hover {
+    .main-header.solid.subpage .nav-link,
+    .main-header.solid.subpage .top-link {
+        color: white;
+    }
+
+    .nav-link:hover,
+    .main-header.solid.subpage .nav-link:hover {
         color: var(--brand-green);
+    }
+
+    .main-header.solid.subpage .nav-link:hover {
+        color: white;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
     }
 
     .chevron {
@@ -840,18 +869,27 @@ const aboutItems = [
 <script>
     // Scroll Logic
     const header = document.getElementById("mainHeader");
+    let lastScrollY = window.scrollY;
+
     const updateScroll = () => {
-        if (window.scrollY > 50) {
-            if (header) {
-                header.classList.add("scrolled");
+        const currentScrollY = window.scrollY;
+
+        // Sticky on scroll up, hide on scroll down
+        if (currentScrollY > 100) {
+            header?.classList.add("scrolled");
+            if (currentScrollY > lastScrollY && currentScrollY > 400) {
+                header?.classList.add("nav-hidden");
+            } else {
+                header?.classList.remove("nav-hidden");
             }
         } else {
-            if (header) {
-                header.classList.remove("scrolled");
-            }
+            header?.classList.remove("scrolled");
+            header?.classList.remove("nav-hidden");
         }
+
+        lastScrollY = currentScrollY;
     };
-    window.addEventListener("scroll", updateScroll);
+    window.addEventListener("scroll", updateScroll, { passive: true });
     updateScroll();
 
     // Mobile Menu Toggle

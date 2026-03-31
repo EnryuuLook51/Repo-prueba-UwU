@@ -1,0 +1,270 @@
+---
+/* 
+   OpCard.astro — El diseño de la tarjeta informativa lateral
+*/
+interface Props {
+    slide: any;
+    index: number;
+    N: number;
+    prefixPath: (p: string) => string;
+}
+const { slide, index, N, prefixPath } = Astro.props;
+---
+
+<div
+    class={`op-card op-card--${slide.side}`}
+    data-op-card={index}
+    aria-hidden={index !== 0 ? "true" : "false"}
+>
+    <div class="op-hline"></div>
+    <p class="op-tag">
+        <span class="op-tag-num">{slide.num}</span>
+        <span class="op-tag-sep">—</span>
+        <span class="op-tag-name">{slide.tag}</span>
+    </p>
+    <h3 class="op-title">
+        {
+            slide.title.map((line: string) => (
+                <span class="op-title-line">{line}</span>
+            ))
+        }
+    </h3>
+    <p class="op-body">{slide.body}</p>
+    <div class="op-stats">
+        {
+            slide.stats.map((st: any) => (
+                <div class="op-stat">
+                    <span class="op-stat-num">{st.num}</span>
+                    <span class="op-stat-label">{st.label}</span>
+                </div>
+            ))
+        }
+    </div>
+
+    <div class="op-cta-row">
+        {
+            index < N - 1 ? (
+                <button
+                    class="op-cta-btn"
+                    data-op-nav-next={index + 1}
+                    type="button"
+                >
+                    Siguiente
+                    <svg
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                    >
+                        <path d="M1 6h10M6 1l5 5-5 5" />
+                    </svg>
+                </button>
+            ) : (
+                <a href={prefixPath("/catalogo")} class="op-cta-link">
+                    Ver productos
+                    <svg
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                    >
+                        <path d="M1 6h10M6 1l5 5-5 5" />
+                    </svg>
+                </a>
+            )
+        }
+    </div>
+</div>
+
+<style>
+    .op-card {
+        position: absolute;
+        top: 50%;
+        max-width: min(500px, 40vw);
+        padding: 3rem 2.5rem;
+        background: var(--op-card-bg, rgba(255, 255, 255, 0.9));
+        border-left: var(--op-hairline, 1px) solid
+            var(--op-card-border, rgba(62, 168, 32, 0.22));
+        box-shadow: var(--op-card-shadow);
+        backdrop-filter: blur(14px) saturate(160%);
+        -webkit-backdrop-filter: blur(14px) saturate(160%);
+        opacity: 0;
+        transform: translateY(-50%) translateX(28px);
+        pointer-events: none;
+        will-change: opacity, transform;
+    }
+
+    .op-card--left {
+        left: 5vw;
+    }
+    .op-card--right {
+        right: 5vw;
+        left: auto;
+        border-left: none;
+        border-right: var(--op-hairline, 1px) solid
+            var(--op-card-border, rgba(62, 168, 32, 0.22));
+        text-align: right;
+    }
+    .op-card--right .op-hline,
+    .op-card--right .op-stats,
+    .op-card--right .op-cta-row,
+    .op-card--right .op-tag {
+        margin-left: auto;
+        justify-content: flex-end;
+    }
+
+    .op-hline {
+        width: 50px;
+        height: 2px;
+        background: var(--op-accent, #3ea820);
+        margin-bottom: 2rem;
+    }
+
+    .op-tag {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.85rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--op-accent, #67bd45);
+        margin-bottom: 1.5rem;
+        font-family: var(--op-font-body);
+    }
+    .op-tag-num {
+        font-weight: 700;
+    }
+    .op-tag-sep {
+        opacity: 0.4;
+    }
+
+    .op-title {
+        font-family: var(--op-font-display);
+        /* Ajustado tras feedback: de 2.2-4.2 a 2-3.2 */
+        font-size: clamp(2rem, 3.8vw, 3.2rem);
+        font-weight: 400;
+        line-height: 0.9;
+        letter-spacing: 0.01em;
+        color: var(--op-fg, #192416);
+        margin-bottom: 1.8rem;
+        display: flex;
+        flex-direction: column;
+    }
+    .op-card--right .op-title {
+        align-items: flex-end;
+    }
+    .op-title-line {
+        display: block;
+    }
+
+    .op-body {
+        font-family: var(--op-font-body);
+        font-size: 1.15rem;
+        line-height: 1.7;
+        color: color-mix(in srgb, var(--op-fg), transparent 35%);
+        margin-bottom: 2rem;
+    }
+
+    .op-stats {
+        display: flex;
+        gap: 3rem;
+        flex-wrap: wrap;
+        margin-bottom: 2.2rem;
+    }
+    .op-stat {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    .op-stat-num {
+        font-family: var(--op-font-display);
+        font-size: clamp(2rem, 8vw, 3.2rem);
+        line-height: 1;
+        color: var(--op-accent, #67bd45);
+    }
+    .op-stat-label {
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--op-muted, #7a9977);
+    }
+
+    .op-cta-btn,
+    .op-cta-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 0.8rem 1.6rem;
+        border: var(--op-hairline, 1px) solid var(--op-accent, #67bd45);
+        color: var(--op-accent, #67bd45);
+        font-family: var(--op-font-body);
+        font-size: 0.75rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        text-decoration: none;
+        cursor: pointer;
+        background: transparent;
+        transition:
+            background 0.2s ease,
+            color 0.2s ease;
+        pointer-events: auto;
+    }
+    .op-cta-btn:hover,
+    .op-cta-link:hover {
+        background: var(--op-accent, #3ea820);
+        color: var(--op-bg, #f5f7f2);
+    }
+    .op-cta-btn svg,
+    .op-cta-link svg {
+        width: 0.7rem;
+        height: 0.7rem;
+    }
+
+    @media (max-width: 900px) {
+        .op-card {
+            max-width: min(280px, 42vw);
+            padding: 1.5rem 1.25rem;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .op-card {
+            position: absolute;
+            bottom: 0;
+            left: 0 !important;
+            right: 0;
+            top: auto;
+            max-width: 100%;
+            transform: none !important;
+            border-left: none;
+            border-right: none;
+            border-top: var(--op-hairline, 1px) solid var(--op-card-border);
+            text-align: left;
+            padding: 2rem 1.5rem 3rem; /* Más balanceado */
+            background: linear-gradient(
+                to top,
+                white 80%,
+                rgba(255, 255, 255, 0.9)
+            );
+        }
+        .op-title {
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+        }
+        .op-body {
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+        }
+        .op-stats {
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .op-card--right .op-hline,
+        .op-card--right .op-stats,
+        .op-card--right .op-cta-row,
+        .op-card--right .op-tag {
+            margin-left: 0;
+            justify-content: flex-start;
+        }
+    }
+</style>

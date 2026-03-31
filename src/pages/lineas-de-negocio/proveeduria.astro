@@ -1,0 +1,606 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/pages/layout/Footer.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import "../../styles/global.css";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const title = "Proveeduría | Green Prod & Sustainable";
+---
+
+<Layout title={title}>
+    <!-- Hero Section -->
+    <section class="provee-hero">
+        <div class="hero-overlay"></div>
+        <div class="custom-container relative z-10">
+            <span class="badge" data-reveal
+                >Línea de Suministro Estratégico</span
+            >
+            <div class="hero-content">
+                <h1 class="font-heading" data-reveal>
+                    {t("proveeduria.hero.title")}
+                </h1>
+                <p class="hero-desc" data-reveal>
+                    {t("proveeduria.hero.desc")}
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quienes Somos / Identidad -->
+    <section class="provee-identity">
+        <div class="custom-container">
+            <div class="identity-grid">
+                <div class="identity-text" data-reveal>
+                    <h2 class="font-heading">
+                        {t("proveeduria.identity.title")}
+                    </h2>
+                    <p class="font-body mt-6">
+                        {t("proveeduria.identity.p1")}
+                    </p>
+                    <p class="font-body mt-4">
+                        {t("proveeduria.identity.p2")}
+                    </p>
+                </div>
+                <div class="identity-visual" data-reveal>
+                    <div class="stats-box">
+                        <div class="stat-item">
+                            <span class="num">100%</span>
+                            <span class="lab">Trazable</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="num">24/7</span>
+                            <span class="lab">Operativo</span>
+                        </div>
+                    </div>
+                    <img
+                        src="/images/lineas/proveeduria/warehouse.png"
+                        alt="Logística de Proveeduría"
+                        class="rounded-3xl shadow-2xl transition-transform duration-700 hover:scale-105"
+                    />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Propuesta de Valor -->
+    <section class="provee-value">
+        <div class="custom-container">
+            <h2 class="section-title text-center" data-reveal>
+                {t("proveeduria.valor.title")}
+            </h2>
+            <div class="value-grid mt-16">
+                {
+                    [1, 2, 3, 4, 5].map((i) => (
+                        <div class="value-card" data-reveal>
+                            <div class="icon-wrap">
+                                <i
+                                    class={`fas fa-${["boxes-stacked", "clock-rotate-left", "shield-check", "handshake-angle", "anchor-circle-check"][i - 1]}`}
+                                />
+                            </div>
+                            <h3>
+                                {t(`proveeduria.valor.item${i}.title` as any)}
+                            </h3>
+                            <p>{t(`proveeduria.valor.item${i}.desc` as any)}</p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Valor Diferencial -->
+    <section class="provee-diff">
+        <div class="custom-container">
+            <div class="diff-header" data-reveal>
+                <h2 class="font-heading">
+                    {t("proveeduria.diferencial.title")}
+                </h2>
+            </div>
+            <div class="diff-stack mt-12">
+                {
+                    [1, 2, 3, 4, 5].map((i) => (
+                        <div class="diff-row" data-reveal>
+                            <span class="row-num">0{i}</span>
+                            <div class="row-content">
+                                <h3>
+                                    {t(
+                                        `proveeduria.diferencial.item${i}.title` as any,
+                                    )}
+                                </h3>
+                                <p>
+                                    {t(
+                                        `proveeduria.diferencial.item${i}.desc` as any,
+                                    )}
+                                </p>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos -->
+    <section class="provee-products">
+        <div class="custom-container">
+            <div class="products-box" data-reveal>
+                <h2 class="font-heading text-center">
+                    {t("proveeduria.productos.title")}
+                </h2>
+                <p class="text-center mt-4 max-w-2xl mx-auto opacity-70">
+                    {t("proveeduria.productos.desc")}
+                </p>
+                <div class="categories-grid mt-16">
+                    {
+                        [1, 2, 3, 4, 5].map((i) => (
+                            <div class="cat-pill">
+                                <i class="fas fa-check-circle" />
+                                <span>
+                                    {t(`proveeduria.productos.cat${i}` as any)}
+                                </span>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Infraestructura y Capacidad -->
+    <section class="provee-infra">
+        <div class="custom-container">
+            <h2 class="section-title text-center" data-reveal>
+                {t("proveeduria.infra.title")}
+            </h2>
+            <div class="infra-grid mt-16">
+                {
+                    [1, 2, 3, 4, 5].map((i) => (
+                        <div class="infra-card" data-reveal>
+                            <div class="infra-icon">
+                                <i
+                                    class={`fas fa-${["industry", "snowflake", "tools", "microscope", "user-tie"][i - 1]}`}
+                                />
+                            </div>
+                            <div class="infra-text">
+                                <h3>
+                                    {t(
+                                        `proveeduria.infra.item${i}.title` as any,
+                                    )}
+                                </h3>
+                                <p>
+                                    {t(
+                                        `proveeduria.infra.item${i}.desc` as any,
+                                    )}
+                                </p>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="provee-cta">
+        <div class="custom-container text-center" data-reveal>
+            <h2 class="font-heading">
+                ¿Listo para optimizar su operación naval?
+            </h2>
+            <p class="mt-6 text-xl opacity-80">
+                Contáctenos hoy para una cotización personalizada y trazable.
+            </p>
+            <div class="mt-10 flex justify-center gap-6">
+                <a href="mailto:ventas@greenprod.pe" class="btn-main"
+                    >Escríbanos</a
+                >
+                <a href="https://wa.me/51950412534" class="btn-outline"
+                    >WhatsApp</a
+                >
+            </div>
+        </div>
+    </section>
+
+    <Footer />
+
+    <style>
+        /* Hero */
+        .provee-hero {
+            padding: 16rem 0 12rem;
+            background: url("/images/lineas/proveeduria/hero.png") center/cover
+                no-repeat;
+            background-attachment: fixed; /* Parallax básico */
+            position: relative;
+            color: white;
+            overflow: hidden;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(2, 69, 122, 0.8),
+                rgba(0, 0, 0, 0.4)
+            );
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.6rem 1.4rem;
+            background: var(--brand-green);
+            color: white;
+            border-radius: 100px;
+            font-weight: 800;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+        }
+        .provee-hero h1 {
+            font-size: clamp(4rem, 10vw, 6.5rem);
+            line-height: 0.95;
+            margin-bottom: 2rem;
+            font-family: var(--font-primary);
+            font-weight: 800;
+        }
+        .hero-desc {
+            font-size: 1.75rem;
+            max-width: 800px;
+            line-height: 1.4;
+            opacity: 0.95;
+            font-family: var(--font-secondary);
+        }
+
+        /* Identity */
+        .provee-identity {
+            padding: 10rem 0;
+            background: white;
+        }
+        .identity-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+        .identity-text h2 {
+            font-size: 3.5rem;
+            color: var(--brand-blue);
+            font-family: var(--font-primary);
+            line-height: 1.1;
+        }
+        .identity-visual {
+            position: relative;
+        }
+        .stats-box {
+            position: absolute;
+            bottom: -2rem;
+            left: -2rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 3rem;
+            z-index: 5;
+        }
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .stat-item .num {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--brand-green);
+            line-height: 1;
+        }
+        .stat-item .lab {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--brand-blue);
+            letter-spacing: 0.1em;
+            margin-top: 0.5rem;
+        }
+
+        /* Propuesta de Valor */
+        .provee-value {
+            padding: 8rem 0;
+            background: #f8fafc;
+        }
+        .section-title {
+            font-size: 3.5rem;
+            color: var(--brand-blue);
+            font-family: var(--font-primary);
+        }
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 2.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* 3 items on top */
+        .value-grid > *:nth-child(1),
+        .value-grid > *:nth-child(2),
+        .value-grid > *:nth-child(3) {
+            grid-column: span 2;
+        }
+
+        /* 2 items on bottom, centered */
+        .value-grid > *:nth-child(4) {
+            grid-column: 2 / 4;
+        }
+        .value-grid > *:nth-child(5) {
+            grid-column: 4 / 6;
+        }
+
+        @media (max-width: 1024px) {
+            .value-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .value-grid > * {
+                grid-column: span 2 !important;
+            }
+            /* Move 5th item to be centered on a 2-col row if alone? 
+               Actually 2+2 on mid-screen is fine. */
+            .value-grid > *:nth-child(5) {
+                grid-column: 2 / 4 !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+            .value-grid > * {
+                grid-column: 1 / -1 !important;
+            }
+        }
+        .value-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 3rem 2.2rem;
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.5s var(--transition-premium);
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+        }
+        .value-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: var(--brand-green);
+            background: white;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+        }
+        .icon-wrap {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(
+                135deg,
+                rgba(103, 189, 69, 0.15),
+                rgba(0, 109, 182, 0.05)
+            );
+            color: var(--brand-green);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 2rem;
+            transition: all 0.5s ease;
+            box-shadow: 0 8px 20px rgba(103, 189, 69, 0.1);
+        }
+        .value-card:hover .icon-wrap {
+            transform: scale(1.1) rotate(5deg);
+            background: var(--brand-green);
+            color: white;
+            box-shadow: 0 15px 30px rgba(103, 189, 69, 0.3);
+        }
+        .value-card h3 {
+            font-size: 1.25rem;
+            color: var(--brand-blue);
+            margin-bottom: 1rem;
+        }
+        .value-card p {
+            font-size: 1.05rem;
+            color: #64748b;
+            line-height: 1.7;
+            font-family: var(--font-secondary);
+        }
+
+        /* Diferencial */
+        .provee-diff {
+            padding: 10rem 0;
+            background: white;
+        }
+        .diff-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .diff-row {
+            display: flex;
+            gap: 3rem;
+            padding: 3rem;
+            background: #fdfdfd;
+            border: 1px solid #f1f5f9;
+            border-radius: 20px;
+            align-items: center;
+            transition: border-color 0.3s ease;
+        }
+        .diff-row:hover {
+            border-color: var(--brand-blue-3);
+        }
+        .row-num {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--brand-green);
+            opacity: 0.2;
+        }
+        .row-content h3 {
+            font-size: 1.5rem;
+            color: var(--brand-blue);
+            margin-bottom: 0.5rem;
+        }
+        .row-content p {
+            color: #475569;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            font-family: var(--font-secondary);
+        }
+
+        /* Productos */
+        .provee-products {
+            padding: 8rem 0;
+            background: var(--brand-blue);
+            color: white;
+        }
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .cat-pill {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1.1rem;
+        }
+        .cat-pill i {
+            color: var(--brand-green);
+        }
+
+        /* Infra */
+        .provee-infra {
+            padding: 10rem 0;
+            background: white;
+        }
+        .infra-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        .infra-card {
+            display: flex;
+            gap: 2rem;
+            padding: 2.5rem;
+            background: #f8fafc;
+            border-radius: 24px;
+            align-items: flex-start;
+        }
+        .infra-icon {
+            width: 50px;
+            height: 50px;
+            min-width: 50px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brand-blue);
+            font-size: 1.25rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+        .infra-text h3 {
+            font-size: 1.2rem;
+            color: var(--brand-blue);
+            margin-bottom: 0.5rem;
+        }
+        .infra-text p {
+            font-size: 1.05rem;
+            color: #64748b;
+            line-height: 1.6;
+            font-family: var(--font-secondary);
+        }
+
+        /* CTA */
+        .provee-cta {
+            padding: 10rem 0;
+            background: linear-gradient(
+                rgba(103, 189, 69, 0.05),
+                rgba(2, 69, 122, 0.05)
+            );
+        }
+        .btn-main {
+            background: var(--brand-blue);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 100px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .btn-main:hover {
+            background: var(--brand-green);
+            transform: translateY(-5px);
+        }
+        .btn-outline {
+            border: 2px solid var(--brand-blue);
+            color: var(--brand-blue);
+            padding: 1rem 2.5rem;
+            border-radius: 100px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .btn-outline:hover {
+            background: var(--brand-blue);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* Reveal animations */
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        [data-reveal].revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 1024px) {
+            .identity-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+        }
+    </style>
+
+    <script>
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Stagger effect for items in the same container
+                        setTimeout(
+                            () => {
+                                entry.target.classList.add("revealed");
+                            },
+                            (index % 5) * 150,
+                        );
+                    }
+                });
+            },
+            { threshold: 0.15 },
+        );
+        document
+            .querySelectorAll("[data-reveal]")
+            .forEach((el) => observer.observe(el));
+
+        // Parallax smooth script (optional mobile fix)
+        window.addEventListener("scroll", () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector(".provee-hero") as HTMLElement;
+            if (hero) {
+                hero.style.backgroundPositionY = -(scrolled * 0.25) + "px";
+            }
+        });
+    </script>
+</Layout>

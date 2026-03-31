@@ -1,60 +1,59 @@
 ---
-import Valores from "./marytierra/Valores.astro";
 import OceanoYCampo from "./marytierra/opera.astro";
-import QuienesSomos from "./marytierra/QuienesSomos.astro";
-import Productos from "./marytierra/Productos.astro";
-import CtaFinal from "./marytierra/CtaFinal.astro";
 ---
 
-<section class="story" id="identidad">
-    <Valores />
+<section class="story-root" id="identidad">
     <OceanoYCampo />
-    <QuienesSomos />
-    <Productos />
-    <CtaFinal />
 </section>
 
 <style>
-    .story {
+    .story-root {
         width: 100%;
+        position: relative;
     }
 </style>
 
 <script>
-    // Intersection Observer — fade in al entrar, fade out al salir
-    const revealElements = document.querySelectorAll("[data-reveal]");
+    /**
+     * Sistema Global de Revelado (Storytelling)
+     * Maneja el fade-in de secciones y el stagger de sus elementos hijos.
+     */
+    const initRevealObserver = () => {
+        const revealElements = document.querySelectorAll("[data-reveal]");
+        if (revealElements.length === 0) return;
 
-    const observer = new IntersectionObserver(
-        (entries) => {
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px",
+        };
+
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("revealed");
+                const target = entry.target;
 
-                    // Stagger de hijos
-                    const children = entry.target.querySelectorAll(
+                if (entry.isIntersecting) {
+                    target.classList.add("revealed");
+
+                    // Staggering para elementos hijos
+                    const children = target.querySelectorAll(
                         "[data-reveal-child]",
                     );
                     children.forEach((child, i) => {
                         setTimeout(() => {
                             child.classList.add("revealed");
-                        }, 150 * i);
+                        }, 120 * i);
                     });
                 } else {
-                    entry.target.classList.remove("revealed");
-                    const children = entry.target.querySelectorAll(
-                        "[data-reveal-child]",
-                    );
-                    children.forEach((child) =>
-                        child.classList.remove("revealed"),
-                    );
+                    // Opcional: remover clases si se desea re-animar al volver a subir
+                    // target.classList.remove("revealed");
                 }
             });
-        },
-        {
-            threshold: 0.15,
-            rootMargin: "0px 0px -50px 0px",
-        },
-    );
+        }, observerOptions);
 
-    revealElements.forEach((el) => observer.observe(el));
+        revealElements.forEach((el) => observer.observe(el));
+    };
+
+    // Ejecutar al cargar y tras navegaciones de Astro (si se usa View Transitions)
+    initRevealObserver();
+    document.addEventListener("astro:after-swap", initRevealObserver);
 </script>

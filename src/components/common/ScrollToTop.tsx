@@ -41,7 +41,7 @@ const ScrollToTop = () => {
                     className="fixed bottom-8 right-8 z-[60] p-4 bg-brand-green text-white rounded-full shadow-lg hover:bg-brand-blue transition-colors duration-300 flex items-center justify-center group"
                     aria-label="Scroll to top"
                 >
-                    <ArrowUp className="w-6 h-6 transition-transform duration-300 group-hover:-translate-y-1 text-blackb" />
+                    <ArrowUp strokeWidth={3} className="w-6 h-6 transition-transform duration-300 group-hover:-translate-y-1 text-black" />
                 </motion.button>
             )}
         </AnimatePresence>

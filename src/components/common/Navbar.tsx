@@ -44,8 +44,7 @@ export default function Navbar({ lang: currentLang, t }: NavbarProps) {
     };
 
     const navLinks = [
-        { name: d.about, href: prefixPath('/#identidad') },
-        { name: d.catalog, href: prefixPath('/nuestros-proyectos') },
+        { name: d.about, href: prefixPath('/nosotros') },
         { name: d.sustainability, href: prefixPath('/impacto-circular') },
     ];
 
@@ -88,14 +87,19 @@ export default function Navbar({ lang: currentLang, t }: NavbarProps) {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const rawPath = currentPath.replace(`/${currentLang}`, '') || '/';
-    const isTransparentPage = rawPath === '/';
+    const rawPath = currentPath.replace(`/${currentLang}`, "") || "/";
+    const isTransparentPage =
+        rawPath === "/" ||
+        rawPath === "/en/" ||
+        rawPath.includes("/ceprobio") ||
+        rawPath.includes("/nosotros");
     const isSolid = isScrolled || !isTransparentPage || isOpen;
 
     // Dynamic styles based on scroll state
-    const textColorClass = isSolid ? 'text-slate-900' : 'text-white';
-    const hoverColorClass = isSolid ? 'hover:text-brand-blue' : 'hover:text-brand-green';
-    const iconColorClass = isSolid ? 'text-slate-600' : 'text-white';
+    const isHeaderColored = isSolid && !isTransparentPage;
+    const textColorClass = isHeaderColored ? 'text-white' : (isSolid ? 'text-slate-900' : 'text-white');
+    const hoverColorClass = isHeaderColored ? 'hover:text-white/80' : (isSolid ? 'hover:text-brand-blue' : 'hover:text-brand-green');
+    const iconColorClass = isHeaderColored ? 'text-white' : (isSolid ? 'text-slate-600' : 'text-white');
 
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -128,7 +132,7 @@ export default function Navbar({ lang: currentLang, t }: NavbarProps) {
 
             <header
                 className={`fixed top-0 z-50 w-full transition-all duration-700 ${isSolid
-                    ? 'bg-white border-b border-slate-100'
+                    ? (isTransparentPage ? 'bg-white border-b border-slate-100' : 'bg-brand-blue border-none')
                     : 'bg-transparent'
                     }`}
                 onMouseLeave={handleMouseLeave}
@@ -150,7 +154,7 @@ export default function Navbar({ lang: currentLang, t }: NavbarProps) {
                     <a href={currentLang === 'es' ? '/' : '/en'} className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
                         <div className="relative transition-all duration-700 h-14 w-36 md:h-16 md:w-48">
                             <img
-                                src={!isSolid ? "/images/greenprod-blanco.png" : "/images/greenprod.png"}
+                                src={(!isSolid || isHeaderColored) ? "/images/greenprod-blanco.png" : "/images/greenprod.png"}
                                 alt="Green Prod & Sustainable Logo"
                                 className="h-full w-auto object-contain transition-all duration-700"
                             />
@@ -247,11 +251,11 @@ export default function Navbar({ lang: currentLang, t }: NavbarProps) {
                                                             // Ampliamos el área de clic (hitbox) y agregamos fondo al hacer hover
                                                             className="group flex flex-col p-3 -mx-3 rounded-xl hover:bg-slate-50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-green/20"
                                                         >
-                                                            <h4 className="text-base font-bold text-slate-800 group-hover:text-brand-green transition-colors mb-1 flex items-center justify-between">
+                                                            <h4 className="text-base font-bold text-black group-hover:text-brand-green transition-colors mb-1 flex items-center justify-between">
                                                                 {item.name}
                                                                 {/* Flecha indicadora que aparece sutilmente al hacer hover */}
                                                                 <span className="text-brand-green opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-                                                                    <i className="fas fa-arrow-right text-sm"></i>
+                                                                    <i className="fas fa-arrow-right text-sm [text-stroke:1px_currentColor] [-webkit-text-stroke:1px_currentColor] color"></i>
                                                                 </span>
                                                             </h4>
                                                             {/* line-clamp-2 evita que el diseño se rompa si la descripción es muy larga */}
@@ -451,15 +455,6 @@ export default function Navbar({ lang: currentLang, t }: NavbarProps) {
                                             onClick={() => setIsOpen(false)}
                                         >
                                             {t['nav.activities']}
-                                        </a>
-                                    </div>
-                                    <div className="border-b border-slate-50">
-                                        <a
-                                            href={prefixPath('/nuestros-proyectos')}
-                                            className="w-full px-6 py-4 flex items-center text-lg font-bold uppercase tracking-wide text-slate-800 hover:bg-slate-50 transition-colors"
-                                            onClick={() => setIsOpen(false)}
-                                        >
-                                            {d.catalog}
                                         </a>
                                     </div>
                                 </div>

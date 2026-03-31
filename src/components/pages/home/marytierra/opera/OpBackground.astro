@@ -1,0 +1,59 @@
+---
+/* 
+   OpBackground.astro — Fondo atmosférico del componente Opera
+*/
+---
+
+<div class="op-bg" aria-hidden="true">
+    <div class="op-bg-grain"></div>
+    <div class="op-bg-glow op-bg-glow--a"></div>
+    <div class="op-bg-glow op-bg-glow--b"></div>
+</div>
+
+<style>
+    .op-bg {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .op-bg-grain {
+        position: absolute;
+        inset: 0;
+        opacity: 0.035;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        background-size: 200px;
+    }
+
+    .op-bg-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+    }
+    .op-bg-glow--a {
+        width: 55vw;
+        height: 55vw;
+        opacity: 0.5;
+        background: radial-gradient(
+            circle,
+            rgba(103, 189, 69, 0.07) 0%,
+            transparent 70%
+        );
+        top: -10%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .op-bg-glow--b {
+        width: 40vw;
+        height: 40vw;
+        opacity: 0.4;
+        background: radial-gradient(
+            circle,
+            rgba(0, 109, 182, 0.08) 0%,
+            transparent 70%
+        );
+        bottom: -10%;
+        right: 5%;
+    }
+</style>
