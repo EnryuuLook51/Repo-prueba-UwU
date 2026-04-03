@@ -92,6 +92,9 @@ const { slide, index, N, prefixPath } = Astro.props;
         transform: translateY(-50%) translateX(28px);
         pointer-events: none;
         will-change: opacity, transform;
+        transition:
+            border-color 0.4s ease,
+            box-shadow 0.4s ease;
     }
 
     .op-card--left {

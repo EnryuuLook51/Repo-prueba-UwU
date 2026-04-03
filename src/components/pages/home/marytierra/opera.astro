@@ -1,6 +1,7 @@
 ---
 import { getLangFromUrl, useTranslations } from "../../../../i18n/utils";
 import OpBackground from "./opera/OpBackground.astro";
+import OpImages from "./opera/OpImages.astro";
 import OpCube from "./opera/OpCube.astro";
 import OpCard from "./opera/OpCard.astro";
 import OpUI from "./opera/OpUI.astro";
@@ -72,7 +73,7 @@ const slides = [
             { num: "3T", label: "Ton/Día" },
             { num: "1T", label: "Almacén" },
         ],
-        img: "/images/cube/NuevasFronteras.png",
+        img: "/images/FiletePescado.jpg",
         side: "left",
     },
     {
@@ -85,7 +86,7 @@ const slides = [
             { num: "100%", label: "Seguro" },
             { num: "OK", label: "SANIPES" },
         ],
-        img: "/images/cube/sostenibilidad-banner.png",
+        img: "/images/lineas/ceprobio/laboratorio.jpg",
         side: "right",
     },
 ];
@@ -104,7 +105,12 @@ const slideNames = slides.map((s) => s.name);
     <div class="op-outer" id="op-outer" style={`--op-n:${N}`}>
         <div class="op-stage" id="op-stage">
             <OpBackground />
-            <OpCube slides={slides} />
+            <div class="op-desktop-view">
+                <OpCube slides={slides} />
+            </div>
+            <div class="op-mobile-view">
+                <OpImages slides={slides} />
+            </div>
 
             <div class="op-cards" id="op-cards" aria-live="polite">
                 {
@@ -143,11 +149,15 @@ const slideNames = slides.map((s) => s.name);
         --op-reveal-dur: 0.5s;
     }
 
+    .op-stage {
+        z-index: 1;
+    }
+
     .op-outer {
         position: relative;
         height: calc(
-            100vh + (var(--op-n) - 1) * 65vh + 100vh
-        ); /* Aumentamos elvh para dar más fluidez a 6 caras */
+            100vh + (var(--op-n) - 1) * 100vh + 100vh
+        ); /* Aumentado a 100vh para dar más tiempo a la lectura */
         background: var(--op-bg);
     }
 
@@ -167,6 +177,22 @@ const slideNames = slides.map((s) => s.name);
         pointer-events: none;
         z-index: 10;
     }
+
+    .op-desktop-view {
+        display: block;
+    }
+    .op-mobile-view {
+        display: none;
+    }
+
+    @media (max-width: 1024px) {
+        .op-desktop-view {
+            display: none;
+        }
+        .op-mobile-view {
+            display: block;
+        }
+    }
 </style>
 
 <script>
@@ -180,21 +206,11 @@ const slideNames = slides.map((s) => s.name);
         const N = parseInt(root.dataset.n || "6");
         const NAMES = JSON.parse(root.dataset.names || "[]");
 
-        /*
-           Ruta del cubo predefinida para 6 caras sin provocar giros completos innecesarios
-        */
-        const STOPS = [
-            { rx: 12, ry: 0 }, // 0: Frontal
-            { rx: 0, ry: -90 }, // 1: Derecha
-            { rx: -8, ry: -180 }, // 2: Trasera
-            { rx: 0, ry: -270 }, // 3: Izquierda
-            { rx: -90, ry: -360 }, // 4: Superior (Completa un giro lateral de -360 = 0 mientras cabecea arriba)
-            { rx: 90, ry: -360 }, // 5: Inferior (Cabecea hacia abajo desde la perspectiva de -360)
-        ];
-
         /* ── DOM ── */
         const outer = document.getElementById("op-outer") as HTMLElement | null;
-        const cube = document.getElementById("op-cube") as HTMLElement | null;
+        const imgWrappers = [
+            ...document.querySelectorAll("[data-op-image]"),
+        ] as HTMLElement[];
         const cards = [
             ...document.querySelectorAll("[data-op-card]"),
         ] as HTMLElement[];
@@ -206,8 +222,9 @@ const slideNames = slides.map((s) => s.name);
         const hudLbl = document.getElementById("op-hud-label");
         const capNum = document.getElementById("op-caption-num");
         const capName = document.getElementById("op-caption-name");
+        const cube = document.getElementById("op-cube");
 
-        if (!outer || !cube) return;
+        if (!outer) return;
 
         /* Evitar inicialización doble (Ej: view transitions de Astro) */
         if (outer.dataset.initialized === "true") return;
@@ -220,7 +237,7 @@ const slideNames = slides.map((s) => s.name);
         const easeIO = (t: number) =>
             t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 
-        const PER_SLIDE_VH = 65;
+        const PER_SLIDE_VH = 100; // Incrementado para que se sienta que requiere más scroll
 
         function getProgress(): number {
             const rect = outer!.getBoundingClientRect();
@@ -229,36 +246,89 @@ const slideNames = slides.map((s) => s.name);
             return Math.min(1, Math.max(0, -rect.top) / transitionTotal);
         }
 
-        function setCube(p: number) {
-            const t = p * (N - 1);
-            const i = clamp(Math.floor(t), 0, N - 2);
-            const f = easeIO(t - i);
-            const a = STOPS[i],
-                b = STOPS[i + 1];
-            cube!.style.transform = `rotateX(${lerp(a.rx, b.rx, f)}deg) rotateY(${lerp(a.ry, b.ry, f)}deg)`;
+        function setImages(p: number) {
+            const isMobile = window.innerWidth <= 1024;
+
+            if (isMobile) {
+                imgWrappers.forEach((img, i) => {
+                    const centre = i / (N - 1);
+                    const diff = (p - centre) * (N - 1);
+                    const op = clamp(1.4 - Math.abs(diff) * 2.5, 0, 1);
+                    const slideFactor = diff * 120;
+                    const isSquared = Math.abs(diff) < 0.1;
+                    const highlight = isSquared ? 1 : 0;
+
+                    img.style.opacity = String(op);
+                    img.style.transform = `translateY(${slideFactor}px) scale(${1 + highlight * 0.02})`;
+                    img.style.filter = `brightness(${1 + highlight * 0.08}) drop-shadow(0 ${10 + highlight * 15}px 40px rgba(0,0,0,${0.15 + highlight * 0.1}))`;
+                    img.setAttribute(
+                        "aria-hidden",
+                        op < 0.05 ? "true" : "false",
+                    );
+                });
+            } else if (cube) {
+                // Lógica del CUBO (ESCRITORIO)
+                // Dividimos el progreso en segmentos según Slide (0 a N-1)
+                const segment = 1 / (N - 1);
+
+                // Rotación base Y para las primeras 4 caras (índices 0, 1, 2, 3)
+                // 0 -> 0deg, 1 -> -90deg, 2 -> -180deg, 3 -> -270deg
+                let rotY = 0;
+                let rotX = 12; // Inclinación constante
+
+                if (p <= 3 * segment) {
+                    // Caras laterales: 0, 1, 2, 3
+                    rotY = -p * (N - 1) * 90;
+                    rotX = 12;
+                } else if (p <= 4 * segment) {
+                    // Transición a TOP (Slide 5)
+                    const subP = (p - 3 * segment) / segment; // 0 a 1
+                    rotY = -270 + subP * 270; // Volver a Y=0 para el Top? o mantener -270?
+                    // Para ver el top desde el "Back" o "Left"?
+                    // Si Slide 3 era Left (-270), y queremos ver Top:
+                    rotY = -270;
+                    rotX = 12 - subP * 102; // De 12 a -90
+                } else {
+                    // Transición a BOTTOM (Slide 6)
+                    const subP = (p - 4 * segment) / segment; // 0 a 1
+                    rotY = -270 + subP * 90; // Ajuste
+                    rotX = -90 + subP * 180; // De -90 a 90
+                }
+
+                cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+            }
         }
 
         function setCards(p: number) {
-            const band = 0.8 / (N - 1); // Ampliado para suavizar el fade
+            const band = 1.0 / (N - 1);
             cards.forEach((c, i) => {
                 const centre = i / (N - 1);
                 const dist = Math.abs(p - centre);
-                const op = clamp(1 - dist / band, 0, 1);
+                // Opacidad con meseta para la tarjeta
+                const op = clamp(1.4 - dist * (N - 1) * 2, 0, 1);
 
-                // Si centre > p (falta bajar más), el offset es POSITIVO (la tarjeta arranca desde abajo).
-                // Si centre < p (pasamos la tarjeta), offset NEGATIVO (la tarjeta sube hasta salir).
-                const parallaxY = (centre - p) * 1500;
-
+                const parallaxY = (centre - p) * 1200;
                 const isMobile = window.innerWidth <= 600;
 
                 c.style.opacity = String(op);
+
+                // Indicación visual: cambio de borde y sombra al estar cuadrado
+                const isSquared = dist < 0.08 / (N - 1);
+                if (isSquared) {
+                    c.style.borderColor = "var(--op-accent)";
+                    c.style.boxShadow = "0 30px 60px rgba(103, 189, 69, 0.15)";
+                } else {
+                    c.style.borderColor = "var(--op-card-border)";
+                    c.style.boxShadow = "var(--op-card-shadow)";
+                }
+
                 if (isMobile) {
                     c.style.transform = `translateY(${parallaxY}px)`;
                 } else {
                     c.style.transform = `translateY(calc(-50% + ${parallaxY}px))`;
                 }
                 c.setAttribute("aria-hidden", op < 0.05 ? "true" : "false");
-                c.style.pointerEvents = op > 0.55 ? "auto" : "none";
+                c.style.pointerEvents = op > 0.5 ? "auto" : "none";
             });
         }
 
@@ -292,7 +362,7 @@ const slideNames = slides.map((s) => s.name);
             tgt = getProgress();
             smooth += (tgt - smooth) * (1 - Math.exp(-dt * 7));
             smooth = clamp(smooth, 0, 1);
-            setCube(smooth);
+            setImages(smooth);
             setCards(smooth);
             setUI(smooth);
         }
@@ -343,7 +413,7 @@ const slideNames = slides.map((s) => s.name);
         });
 
         const init = () => {
-            setCube(0);
+            setImages(0);
             setCards(0);
             setUI(0);
         };

@@ -1,0 +1,137 @@
+---
+/* 
+   BioParticles.astro — Plexus/Network Effect for Ceprobio
+   Representa la conexión biológica y molecular.
+   Soporta múltiples instancias.
+*/
+---
+
+<div class="bio-particles-container">
+    <canvas class="bio-particles-canvas"></canvas>
+</div>
+
+<style>
+    .bio-particles-container {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        overflow: hidden;
+        pointer-events: none;
+        background: transparent;
+    }
+    .bio-particles-canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+</style>
+
+<script>
+    // Usamos querySelectorAll para inicializar todas las instancias de partículas en la página
+    const canvases = document.querySelectorAll(".bio-particles-canvas");
+
+    canvases.forEach((canvasEl) => {
+        const canvas = canvasEl as HTMLCanvasElement;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        let particlesArray: any[] = [];
+        const colors = ["#1b4332", "#2d6a4f", "#1b4332", "#67bd45"];
+
+        const resize = () => {
+            const parent = canvas.parentElement;
+            if (parent) {
+                canvas.width = parent.clientWidth * window.devicePixelRatio;
+                canvas.height = parent.clientHeight * window.devicePixelRatio;
+                ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+            }
+            init();
+        };
+
+        class Particle {
+            x: number;
+            y: number;
+            size: number;
+            color: string;
+            vx: number;
+            vy: number;
+
+            constructor() {
+                this.x =
+                    Math.random() * (canvas.width / window.devicePixelRatio);
+                this.y =
+                    Math.random() * (canvas.height / window.devicePixelRatio);
+                this.size = Math.random() * 2 + 1;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.vx = (Math.random() - 0.5) * 0.6;
+                this.vy = (Math.random() - 0.5) * 0.6;
+            }
+
+            draw() {
+                if (!ctx) return;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = 0.5;
+                ctx.fill();
+            }
+
+            update() {
+                const w = canvas.width / window.devicePixelRatio;
+                const h = canvas.height / window.devicePixelRatio;
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > w) this.vx *= -1;
+                if (this.y < 0 || this.y > h) this.vy *= -1;
+            }
+        }
+
+        const init = () => {
+            particlesArray = [];
+            const w = canvas.width / window.devicePixelRatio;
+            const h = canvas.height / window.devicePixelRatio;
+            const count = (w * h) / 15000;
+            for (let i = 0; i < count; i++) {
+                particlesArray.push(new Particle());
+            }
+        };
+
+        const connect = () => {
+            if (!ctx) return;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a + 1; b < particlesArray.length; b++) {
+                    const dx = particlesArray[a].x - particlesArray[b].x;
+                    const dy = particlesArray[a].y - particlesArray[b].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = "#2d6a4f";
+                        ctx.globalAlpha = (1 - distance / 150) * 0.3;
+                        ctx.lineWidth = 0.8;
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        };
+
+        const animate = () => {
+            const w = canvas.width / window.devicePixelRatio;
+            const h = canvas.height / window.devicePixelRatio;
+            ctx.clearRect(0, 0, w, h);
+            particlesArray.forEach((p) => {
+                p.update();
+                p.draw();
+            });
+            connect();
+            requestAnimationFrame(animate);
+        };
+
+        window.addEventListener("resize", resize);
+        resize();
+        animate();
+    });
+</script>

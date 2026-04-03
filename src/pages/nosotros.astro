@@ -22,7 +22,7 @@ const title = "Sobre Nosotros | Green Prod & Sustainable";
     </section>
 
     <!-- Quienes Somos -->
-    <section class="about-intro">
+    <section class="about-intro" id="quienes-somos">
         <div class="custom-container">
             <div class="intro-grid">
                 <div class="intro-content" data-reveal>
@@ -53,7 +53,7 @@ const title = "Sobre Nosotros | Green Prod & Sustainable";
     </section>
 
     <!-- Modelo Circular -->
-    <section class="circular-model">
+    <section class="circular-model" id="modelo-circular">
         <div class="custom-container">
             <h2 class="section-title text-center" data-reveal>
                 {t("nosotros.modelo.title")}
@@ -65,8 +65,10 @@ const title = "Sobre Nosotros | Green Prod & Sustainable";
                             <div class="card-icon-wrap">
                                 <span class="card-num">0{i}</span>
                             </div>
-                            <h3>{t(`nosotros.modelo.item${i}.title`)}</h3>
-                            <p>{t(`nosotros.modelo.item${i}.desc`)}</p>
+                            <h3>
+                                {t(`nosotros.modelo.item${i}.title` as any)}
+                            </h3>
+                            <p>{t(`nosotros.modelo.item${i}.desc` as any)}</p>
                         </div>
                     ))
                 }
@@ -75,7 +77,7 @@ const title = "Sobre Nosotros | Green Prod & Sustainable";
     </section>
 
     <!-- Ejes Económicos -->
-    <section class="economic-axes">
+    <section class="economic-axes" id="ejes-economicos">
         <div class="custom-container">
             <h2 class="section-title text-center mb-20" data-reveal>
                 {t("nosotros.ejes.title")}
@@ -215,7 +217,7 @@ const title = "Sobre Nosotros | Green Prod & Sustainable";
     </section>
 
     <!-- Team Section -->
-    <section class="team-section">
+    <section class="team-section" id="nuestro-equipo">
         <div class="custom-container">
             <h2 class="section-title text-center" data-reveal>
                 {t("nosotros.team.title")}

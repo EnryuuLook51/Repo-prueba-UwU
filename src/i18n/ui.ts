@@ -23,7 +23,7 @@ export const ui = {
         'navbar.our_history': 'Modelo Circular',
         'navbar.our_history_desc': 'Transformando residuos en nutrición orgánica.',
         'navbar.ceprobio': 'Ceprobio',
-        'navbar.ceprobio_desc': 'Biotecnología avanzada y soluciones biológicas para una producción industrial limpia.',
+        'navbar.ceprobio_desc': 'Centro de producción de bioinsumos.',
         'navbar.proveeduria': 'Proveeduría',
         'navbar.proveeduria_desc': 'Logística e insumos para el sector agro-industrial sostenible.',
         'navbar.balik': 'Balik',
@@ -34,8 +34,8 @@ export const ui = {
         'navbar.planta_desc': 'Valorización de residuos y tratamiento de hidrobiológicos.',
 
         'hero.title': 'Hola, somos Green Prod & Sustainable.',
-        'hero.subtitle.p1': 'Tu camino hacia',
-        'hero.subtitle.p2': 'La Sostenibilidad',
+        'hero.subtitle.p1': 'Aseguramos la',
+        'hero.subtitle.p2': 'nutrición orgánica',
         'hero.description': 'Comprometidos con el cuidado del ecosistema marino y el desarrollo de una agricultura sostenible',
         'hero.badge.fishing': 'Pesca Responsable Artesanal',
         'hero.badge.organic': 'Abonos 100% Orgánicos',
@@ -184,6 +184,7 @@ export const ui = {
         'proveeduria.infra.item4.desc': 'Validación analítica de alimentos y monitoreo constante de la inocuidad.',
         'proveeduria.infra.item5.title': 'Talento Técnico',
         'proveeduria.infra.item5.desc': 'Profesionales responsables del control sanitario y la optimización de procesos.',
+        'proveeduria.cta.button': 'HABLA CON UN ASESOR',
     },
     en: {
         'nav.services': 'Business Lines',
@@ -202,7 +203,7 @@ export const ui = {
         'navbar.our_history': 'Circular Model',
         'navbar.our_history_desc': 'Transforming waste into organic nutrition.',
         'navbar.ceprobio': 'Ceprobio',
-        'navbar.ceprobio_desc': 'Advanced biotechnology and clean industrial solutions.',
+        'navbar.ceprobio_desc': 'Bio-input production center.',
         'navbar.proveeduria': 'Supply',
         'navbar.proveeduria_desc': 'Logistics and inputs for the sustainable agro-industrial sector.',
         'navbar.balik': 'Balik',
@@ -282,5 +283,6 @@ export const ui = {
         'marytierra.products.p2.desc': 'Eco-inputs, Fertilizers',
         'marytierra.future.title': 'Towards a <em>prosperous and conscious</em> future',
         'marytierra.future.button': 'Learn more',
+        'proveeduria.cta.button': 'TALK TO AN ADVISOR',
     },
 } as const;

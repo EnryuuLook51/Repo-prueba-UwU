@@ -14,255 +14,418 @@ const prefixPath = (path: string) => {
 ---
 
 <Layout title={`${t("contact.badge")} | Green Prod & Sustainable`}>
-  <section class="contact-page py-20 lg:py-28 min-h-screen">
+  <section class="contact-banner">
+    <div class="banner-overlay"></div>
+  </section>
+
+  <section class="contact-content-section py-20 lg:py-32">
     <div class="custom-container">
-      <div class="text-center mb-12">
-        <span
-          class="inline-flex items-center gap-2 text-[#2374b9] font-semibold tracking-widest text-xs uppercase mb-4 px-4 py-2 bg-[#2374b9]/10 rounded-full"
-        >
-          <span class="w-2 h-2 bg-[#2374b9] rounded-full animate-pulse"></span>
+      <!-- Section Title -->
+      <div class="text-center mb-20">
+        <span class="content-badge">
           {t("contact.badge")}
         </span>
-        <h1 class="text-4xl lg:text-5xl font-black text-slate-900 mb-4">
+        <h2 class="content-title">
           {t("contact.title")}
-        </h1>
-        <p class="text-lg text-slate-600 max-w-xl mx-auto">
+        </h2>
+        <p class="content-subtitle">
           {t("contact.description")}
         </p>
       </div>
 
-      <div class="grid lg:grid-cols-2 gap-12 xl:gap-16 max-w-6xl mx-auto">
+      <div class="contact-grid">
         <!-- Formulario -->
-        <div
-          class="bg-white rounded-3xl p-8 lg:p-10 shadow-xl border border-slate-100"
-        >
-          <form class="space-y-6">
-            <div class="grid md:grid-cols-2 gap-6">
-              <div>
-                <label class="block text-sm font-bold text-slate-700 mb-2"
-                  >{t("contact.form.name")}</label
-                >
+        <div class="form-card">
+          <form class="space-y-8">
+            <div class="grid md:grid-cols-2 gap-8">
+              <div class="form-group">
+                <label for="firstName">{t("contact.form.name")}</label>
                 <input
                   type="text"
+                  id="firstName"
                   placeholder={t("contact.form.name")}
-                  class="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 text-slate-800 focus:ring-2 focus:ring-[#6cbe4f]/30 focus:border-[#6cbe4f] outline-none transition-all"
+                  class="input-style"
                 />
               </div>
-              <div>
-                <label class="block text-sm font-bold text-slate-700 mb-2"
-                  >{t("contact.form.lastname")}</label
-                >
+              <div class="form-group">
+                <label for="lastName">{t("contact.form.lastname")}</label>
                 <input
                   type="text"
+                  id="lastName"
                   placeholder={t("contact.form.lastname")}
-                  class="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 text-slate-800 focus:ring-2 focus:ring-[#6cbe4f]/30 focus:border-[#6cbe4f] outline-none transition-all"
+                  class="input-style"
                 />
               </div>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-6">
-              <div>
-                <label class="block text-sm font-bold text-slate-700 mb-2"
-                  >{t("contact.form.email")}</label
-                >
+            <div class="grid md:grid-cols-2 gap-8">
+              <div class="form-group">
+                <label for="email">{t("contact.form.email")}</label>
                 <input
                   type="email"
+                  id="email"
                   placeholder="email@address.com"
-                  class="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 text-slate-800 focus:ring-2 focus:ring-[#6cbe4f]/30 focus:border-[#6cbe4f] outline-none transition-all"
+                  class="input-style"
                 />
               </div>
-              <div>
-                <label class="block text-sm font-bold text-slate-700 mb-2">
+              <div class="form-group">
+                <label for="company">
                   {t("contact.form.company")}
-                  <span class="text-xs text-slate-400 font-normal"
-                    >{t("contact.form.optional")}</span
+                  <span class="text-[10px] opacity-50 font-normal"
+                    >({t("contact.form.optional")})</span
                   >
                 </label>
                 <input
                   type="text"
+                  id="company"
                   placeholder={t("contact.form.company")}
-                  class="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 text-slate-800 focus:ring-2 focus:ring-[#6cbe4f]/30 focus:border-[#6cbe4f] outline-none transition-all"
+                  class="input-style"
                 />
               </div>
             </div>
 
-            <div>
-              <label class="block text-sm font-bold text-slate-700 mb-2"
-                >{t("contact.form.message")}</label
-              >
+            <div class="form-group">
+              <label for="message">{t("contact.form.message")}</label>
               <textarea
-                placeholder="Cuéntanos..."
-                class="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 text-slate-800 focus:ring-2 focus:ring-[#6cbe4f]/30 focus:border-[#6cbe4f] outline-none transition-all h-40 resize-none"
-              ></textarea>
+                id="message"
+                placeholder="Cuéntanos sobre tu proyecto o consulta..."
+                class="input-style h-40 resize-none"></textarea>
             </div>
 
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-4">
               <input
                 type="checkbox"
                 id="privacy"
-                class="w-5 h-5 rounded border-slate-300 text-[#6cbe4f] focus:ring-[#6cbe4f]"
+                class="w-6 h-6 rounded accent-[#67bd45]"
               />
               <label
                 for="privacy"
-                class="text-sm text-slate-500 font-medium cursor-pointer"
+                class="text-sm font-medium text-slate-500 cursor-pointer"
               >
                 {t("contact.form.privacy")}
               </label>
             </div>
 
-            <button
-              type="submit"
-              class="w-full bg-[#6cbe4f] hover:bg-[#5ab33f] text-white font-bold py-4 rounded-2xl shadow-lg shadow-[#6cbe4f]/20 transition-all duration-300 transform hover:-translate-y-1"
-            >
+            <button type="submit" class="submit-btn">
               {t("contact.form.send")}
             </button>
           </form>
         </div>
 
         <!-- Info de contacto -->
-        <div class="space-y-6">
-          <!-- Logo card -->
-          <div
-            class="bg-slate-50 rounded-3xl p-8 text-center border border-slate-100"
-          >
-            <img
-              src="/images/greenprod.png"
-              alt="Green Prod Logo"
-              class="max-w-[200px] mx-auto mb-6"
-            />
-            <p class="text-slate-600 text-sm">
-              Conectando el mar con el campo para un futuro orgánico
-            </p>
-          </div>
-
-          <!-- Contact info -->
-          <div
-            class="bg-white rounded-3xl p-8 shadow-lg border border-slate-100 space-y-4"
-          >
-            <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl">
-              <div
-                class="w-12 h-12 bg-[#6cbe4f]/10 rounded-xl flex items-center justify-center text-[#6cbe4f]"
-              >
-                <i class="fas fa-envelope text-xl"></i>
-              </div>
-              <div>
-                <p
-                  class="text-xs font-bold text-slate-400 uppercase tracking-wider"
-                >
-                  Email
-                </p>
-                <a
-                  href="mailto:greenprodsustainable@gmail.com"
-                  class="text-base font-bold text-slate-800 hover:text-[#6cbe4f] transition-colors"
-                >
-                  greenprodsustainable@gmail.com
-                </a>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl">
-              <div
-                class="w-12 h-12 bg-[#6cbe4f]/10 rounded-xl flex items-center justify-center text-[#6cbe4f]"
-              >
-                <i class="fas fa-phone-alt text-xl"></i>
-              </div>
-              <div>
-                <p
-                  class="text-xs font-bold text-slate-400 uppercase tracking-wider"
-                >
-                  Teléfono
-                </p>
-                <a
-                  href="tel:+51950412534"
-                  class="text-lg font-bold text-slate-800 hover:text-[#6cbe4f] transition-colors"
-                >
-                  +51 950 412 534
-                </a>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl">
-              <div
-                class="w-12 h-12 bg-[#2374b9]/10 rounded-xl flex items-center justify-center text-[#2374b9]"
-              >
-                <i class="fab fa-whatsapp text-xl"></i>
-              </div>
-              <div>
-                <p
-                  class="text-xs font-bold text-slate-400 uppercase tracking-wider"
-                >
-                  WhatsApp
-                </p>
-                <a
-                  href="https://wa.me/51950412534"
-                  target="_blank"
-                  class="text-lg font-bold text-slate-800 hover:text-[#2374b9] transition-colors"
-                >
-                  +51 950 412 534
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Redes sociales -->
-          <div
-            class="bg-white rounded-3xl p-8 shadow-lg border border-slate-100"
-          >
-            <p
-              class="text-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-6"
+        <div class="space-y-8">
+          <div class="info-card">
+            <a
+              href="mailto:greenprodsustainable@gmail.com"
+              class="contact-item"
             >
-              {t("contact.follow_us")}
-            </p>
-            <div class="flex justify-center gap-4">
+              <div class="icon-wrap">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="item-content">
+                <span class="item-label">Email Corporativo</span>
+                <span class="item-value">greenprodsustainable@gmail.com</span>
+              </div>
+            </a>
+
+            <a href="tel:+51950412534" class="contact-item">
+              <div class="icon-wrap">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div class="item-content">
+                <span class="item-label">Atención Telefónica</span>
+                <span class="item-value">+51 950 412 534</span>
+              </div>
+            </a>
+
+            <a
+              href="https://wa.me/51950412534"
+              target="_blank"
+              class="contact-item alt"
+            >
+              <div class="icon-wrap" style="color: #2374b9;">
+                <i class="fab fa-whatsapp"></i>
+              </div>
+              <div class="item-content">
+                <span class="item-label">WhatsApp Directo</span>
+                <span class="item-value">+51 950 412 534</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="social-card">
+            <span class="item-label mb-6 block">Síguenos en Redes Sociales</span
+            >
+            <div class="social-links">
               <a
-                href="#"
-                class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-[#1877F2] hover:bg-[#1877F2] hover:text-white transition-all hover:-translate-y-1 shadow"
+                href="https://www.facebook.com/share/TaR3vZpTHC/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn"
                 aria-label="Facebook"
               >
-                <i class="fab fa-facebook-f text-lg"></i>
+                <i class="fab fa-facebook-f"></i>
               </a>
               <a
-                href="#"
-                class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-[#E4405F] hover:bg-gradient-to-br hover:from-[#f09433] hover:to-[#e6683c] hover:text-white transition-all hover:-translate-y-1 shadow"
+                href="https://www.instagram.com/greenprodsustainable?igsh=MWE0ZXlynHdpYjBoZA=="
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn"
                 aria-label="Instagram"
               >
-                <i class="fab fa-instagram text-lg"></i>
+                <i class="fab fa-instagram"></i>
               </a>
               <a
-                href="#"
-                class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-slate-800 hover:bg-black hover:text-white transition-all hover:-translate-y-1 shadow"
+                href="https://www.tiktok.com/@greenprodsustainable?_r=1&_t=ZS-94pPT4ilMwL"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn"
                 aria-label="TikTok"
               >
-                <i class="fab fa-tiktok text-lg"></i>
+                <i class="fab fa-tiktok"></i>
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/greenprodsustainable/"
                 target="_blank"
-                class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-all hover:-translate-y-1 shadow"
+                rel="noopener noreferrer"
+                class="social-btn"
                 aria-label="LinkedIn"
               >
-                <i class="fab fa-linkedin-in text-lg"></i>
-              </a>
-              <a
-                href="https://wa.me/51950412534"
-                target="_blank"
-                class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all hover:-translate-y-1 shadow"
-                aria-label="WhatsApp"
-              >
-                <i class="fab fa-whatsapp text-lg"></i>
+                <i class="fab fa-linkedin-in"></i>
               </a>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <Footer />
   </section>
-
-  <Footer />
 </Layout>
 
 <style>
-  .contact-page {
-    background: linear-gradient(180deg, var(--bg-main, #f8fafc) 0%, white 100%);
+  .contact-banner {
+    position: relative;
+    height: 35vh;
+    min-height: 300px;
+    background: url("/images/banners/ceprobio.jpg") center/cover no-repeat;
+    background-attachment: fixed;
+  }
+
+  .banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 32, 63, 0.4),
+      rgba(255, 255, 255, 0)
+    );
+  }
+
+  .content-badge {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background: rgba(103, 189, 69, 0.1);
+    color: var(--brand-green);
+    border-radius: 100px;
+    font-weight: 800;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
+  }
+
+  .content-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--brand-blue);
+    font-weight: 950;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+  .content-subtitle {
+    font-size: 1.15rem;
+    color: #475569;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 5rem;
+    max-width: 1250px;
+    margin: 0 auto;
+  }
+
+  .form-card {
+    background: white;
+    border-radius: 2.5rem;
+    padding: 4rem;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.06);
+    border: 1px solid #f1f5f9;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: 800;
+    font-size: 0.8rem;
+    color: var(--brand-blue);
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+  }
+
+  .input-style {
+    width: 100%;
+    background: #f8fafc;
+    border: 2px solid #f1f5f9;
+    border-radius: 1.2rem;
+    padding: 1.25rem 1.8rem;
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    color: var(--text-primary);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .input-style:focus {
+    background: white;
+    border-color: var(--brand-green);
+    outline: none;
+    box-shadow: 0 8px 25px rgba(103, 189, 69, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .submit-btn {
+    width: 100%;
+    background: var(--brand-green);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 1.2rem;
+    font-weight: 800;
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s var(--transition-premium);
+    box-shadow: 0 15px 35px rgba(103, 189, 69, 0.3);
+  }
+
+  .submit-btn:hover {
+    background: var(--brand-blue);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 45px rgba(0, 109, 182, 0.3);
+  }
+
+  .info-card {
+    background: #f8fafc;
+    border-radius: 2.5rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2.5rem;
+    background: white;
+    border-radius: 2rem;
+    transition: all 0.5s var(--transition-premium);
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+  }
+
+  .contact-item:hover {
+    transform: translateX(12px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  .icon-wrap {
+    width: 64px;
+    height: 64px;
+    background: #f1f5f9;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: var(--brand-green);
+    transition: all 0.4s ease;
+  }
+
+  .contact-item:hover .icon-wrap {
+    background: var(--brand-green);
+    color: white;
+    transform: rotate(10deg);
+  }
+
+  .item-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .item-value {
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: var(--brand-blue);
+  }
+
+  .social-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 2.5rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.04);
+    text-align: center;
+    border: 1px solid #f1f5f9;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 2rem;
+  }
+
+  .social-btn {
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+    color: var(--brand-blue);
+    border-radius: 16px;
+    font-size: 1.3rem;
+    transition: all 0.4s var(--transition-premium);
+  }
+
+  .social-btn:hover {
+    background: var(--brand-green);
+    color: white;
+    transform: translateY(-8px) scale(1.1);
+  }
+
+  @media (max-width: 1024px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .contact-banner {
+      height: 25vh;
+    }
+    .form-card {
+      padding: 2.5rem;
+    }
   }
 </style>

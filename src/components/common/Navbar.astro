@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { Image } from "astro:assets";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -26,8 +27,8 @@ const getSwitchLangPath = (targetLang: string) => {
 
 // Data for navigation
 const navLinks = [
-    { name: t("nav.about"), href: prefixPath("/nosotros") },
     { name: t("navbar.sustainability"), href: prefixPath("/#valores") },
+    { name: t("nav.activities"), href: prefixPath("/impacto-circular") },
 ];
 
 const productsItems = [
@@ -35,39 +36,67 @@ const productsItems = [
         name: t("navbar.ceprobio"),
         desc: t("navbar.ceprobio_desc"),
         href: prefixPath("/lineas-de-negocio/ceprobio"),
+        icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8a7 7 0 0 1-7 7c-1.18 0-2.29-.29-3.27-.8"/><path d="M11 20c-1.17 0-2.31-.29-3.32-.82C4.59 17.5 3.5 15 3.5 12c0-5.5 4.5-10 10-10"/></svg>`,
+        color: "#67bd45",
     },
     {
         name: t("navbar.proveeduria"),
         desc: t("navbar.proveeduria_desc"),
         href: prefixPath("/lineas-de-negocio/proveeduria"),
+        icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>`,
+        color: "#006db6",
     },
     {
         name: t("navbar.balik"),
         desc: t("navbar.balik_desc"),
         href: prefixPath("/lineas-de-negocio/balik"),
+        icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 7c.5 0 1 .2 1.4.6.4.4.6.9.6 1.4 0 .5-.2 1-.6 1.4-.4.4-.9.6-1.4.6h-2c-.5 0-1-.2-1.4-.6-.4-.4-.6-.9-.6-1.4 0-.5.2-1 .6-1.4.4-.4.9-.6 1.4-.6h2Z"/><path d="M12 13h.01"/><path d="M18 13h.01"/><path d="M6 13h.01"/><path d="M12 18h.01"/><path d="M18 18h.01"/><path d="M6 18h.01"/><path d="M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2"/></svg>`,
+        color: "#00a9e0",
     },
     {
         name: t("navbar.proyectos"),
         desc: t("navbar.proyectos_desc"),
         href: prefixPath("/nuestros-proyectos"),
+        icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/><path d="M7 3v13"/><path d="M17 3v13"/><path d="M12 3v13"/></svg>`,
+        color: "#f39200",
     },
     {
         name: t("navbar.planta"),
         desc: t("navbar.planta_desc"),
         href: prefixPath("/lineas-de-negocio/planta-de-tratamiento"),
+        icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7Z"/></svg>`,
+        color: "#009640",
     },
 ];
 
 const aboutItems = [
     {
-        name: t("navbar.who_we_are"),
-        desc: t("navbar.who_we_are_desc"),
-        href: prefixPath("/#nosotros"),
+        name: "Propósito y Esencia",
+        desc: "Comprometidos con el ecosistema marino y el campo.",
+        href: prefixPath("/nosotros#quienes-somos"),
+        icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+        color: "#67bd45",
     },
     {
-        name: t("navbar.our_history"),
-        desc: t("navbar.our_history_desc"),
-        href: prefixPath("/#valores"),
+        name: "Modelo Circular",
+        desc: "Transformando residuos en nutrición orgánica.",
+        href: prefixPath("/nosotros#modelo-circular"),
+        icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20"/><path d="M2 12h20"/><path d="M12 2a14.5 14.5 0 0 1 0 20"/></svg>`,
+        color: "#006db6",
+    },
+    {
+        name: "Ejes Estratégicos",
+        desc: "Nuestros pilares operativos y tecnológicos.",
+        href: prefixPath("/nosotros#ejes-economicos"),
+        icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-7"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg>`,
+        color: "#00a9e0",
+    },
+    {
+        name: "Nuestro Equipo",
+        desc: "El talento humano detrás de la innovación.",
+        href: prefixPath("/nosotros#nuestro-equipo"),
+        icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+        color: "#f39200",
     },
 ];
 
@@ -79,12 +108,15 @@ const isTransparentPage =
     currentPath.includes("/proveeduria") ||
     currentPath.includes("/balik") ||
     currentPath.includes("/nosotros");
+
+const isBalik = currentPath.includes("/balik");
+
 const headerClass = isTransparentPage
     ? "main-header"
     : "main-header solid subpage";
 ---
 
-<header class={headerClass} id="mainHeader">
+<header class={`${headerClass} ${isBalik ? "balik-nav" : ""}`} id="mainHeader">
     <!-- Top Bar -->
     <div class="top-bar">
         <div class="top-bar-inner">
@@ -130,25 +162,31 @@ const headerClass = isTransparentPage
         <div class="nav-inner">
             <!-- Logo -->
             <a href={prefixPath("/")} class="nav-logo-link">
-                <img
+                <Image
                     src="/images/greenprod-blanco.png"
                     alt="Logo"
+                    width={181}
+                    height={56}
                     class="logo logo-white"
                     id="logoWhite"
+                    loading="eager"
                 />
-                <img
+                <Image
                     src="/images/greenprod.png"
                     alt="Logo"
+                    width={181}
+                    height={56}
                     class="logo logo-dark"
                     id="logoDark"
+                    loading="eager"
                 />
             </a>
 
             <!-- Desktop Menu -->
             <div class="desktop-menu">
                 <div class="menu-item has-dropdown" data-dropdown="nosotros">
-                    <button class="nav-link">
-                        {t("nav.about")}
+                    <a class="nav-link" href={prefixPath("/nosotros")}>
+                        SOBRE NOSOTROS
                         <svg
                             width="14"
                             height="14"
@@ -160,25 +198,37 @@ const headerClass = isTransparentPage
                             stroke-linejoin="round"
                             class="chevron"><path d="m6 9 6 6 6-6"></path></svg
                         >
-                    </button>
-                    <!-- Mega Menu NOSOTROS -->
+                    </a>
                     <div class="mega-menu" id="dropdown-nosotros">
                         <div class="mega-content">
                             <div class="mega-main">
-                                <h3 class="mega-title">Sobre Nosotros</h3>
+                                <h3
+                                    class="mega-title uppercase tracking-widest"
+                                >
+                                    {t("nav.about") || "Sobre Nosotros"}
+                                </h3>
                                 <div class="mega-grid two-cols">
                                     {
                                         aboutItems.map((item) => (
                                             <a
                                                 href={item.href}
-                                                class="mega-link"
+                                                class="mega-link premium-card"
+                                                aria-label={`${item.name} - ${item.desc}`}
                                             >
-                                                <span class="mega-link-title">
-                                                    {item.name}
-                                                </span>
-                                                <span class="mega-link-desc">
-                                                    {item.desc}
-                                                </span>
+                                                <div
+                                                    class="mega-link-icon"
+                                                    style={`--icon-color: ${item.color}`}
+                                                    set:html={item.icon}
+                                                    aria-hidden="true"
+                                                />
+                                                <div class="mega-link-content">
+                                                    <span class="mega-link-title">
+                                                        {item.name}
+                                                    </span>
+                                                    <span class="mega-link-desc">
+                                                        {item.desc}
+                                                    </span>
+                                                </div>
                                             </a>
                                         ))
                                     }
@@ -198,10 +248,11 @@ const headerClass = isTransparentPage
                                         stroke-width="2"
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
-                                        ><path
-                                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-                                        ></path></svg
                                     >
+                                        <path
+                                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                                        ></path>
+                                    </svg>
                                     {t("navbar.work_with_us")}
                                 </a>
                             </div>
@@ -231,21 +282,34 @@ const headerClass = isTransparentPage
                                 <h3
                                     class="mega-title uppercase tracking-widest"
                                 >
-                                    {t("navbar.products_services_title")}
+                                    {
+                                        t("navbar.products_services_title") ||
+                                            "Nuestras Líneas"
+                                    }
                                 </h3>
                                 <div class="mega-grid three-cols">
                                     {
                                         productsItems.map((item) => (
                                             <a
-                                                href={item.href}
-                                                class="mega-link"
+                                                href={item.href || "#"}
+                                                class="mega-link premium-card"
                                             >
-                                                <span class="mega-link-title">
-                                                    {item.name}
-                                                </span>
-                                                <span class="mega-link-desc">
-                                                    {item.desc}
-                                                </span>
+                                                <div
+                                                    class="mega-link-icon"
+                                                    style={`--icon-color: ${item.color}`}
+                                                    set:html={item.icon}
+                                                    aria-hidden="true"
+                                                />
+                                                <div class="mega-link-content">
+                                                    <span class="mega-link-title">
+                                                        {item.name ||
+                                                            "Línea de Negocio"}
+                                                    </span>
+                                                    <span class="mega-link-desc">
+                                                        {item.desc ||
+                                                            "Descripción del servicio corporativo."}
+                                                    </span>
+                                                </div>
                                             </a>
                                         ))
                                     }
@@ -266,7 +330,7 @@ const headerClass = isTransparentPage
                     ))
                 }
 
-                <button class="icon-btn search-btn">
+                <button class="icon-btn search-btn" aria-label="Buscar">
                     <svg
                         width="20"
                         height="20"
@@ -282,9 +346,12 @@ const headerClass = isTransparentPage
                 </button>
             </div>
 
+            <!-- Overlay for Mega Menu Blur -->
+            <div class="mega-overlay"></div>
+
             <!-- Mobile Actions -->
             <div class="mobile-actions">
-                <button class="icon-btn" id="mobileSearch">
+                <button class="icon-btn" id="mobileSearch" aria-label="Buscar">
                     <svg
                         width="20"
                         height="20"
@@ -298,7 +365,7 @@ const headerClass = isTransparentPage
                             d="m21 21-4.3-4.3"></path></svg
                     >
                 </button>
-                <button class="icon-btn" id="mobileToggle">
+                <button class="icon-btn" id="mobileToggle" aria-label="Menu">
                     <svg
                         width="24"
                         height="24"
@@ -333,596 +400,717 @@ const headerClass = isTransparentPage
                 </button>
             </div>
         </div>
-    </nav>
 
-    <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu" id="mobileMenu">
-        <div class="mobile-menu-top">
-            <a href={prefixPath("/contacto")} class="top-link"
-                >{t("nav.contact")}</a
-            >
-            <a href={lang === "es" ? "/en" : "/"} class="top-link"
-                >{lang === "es" ? "EN" : "ES"}</a
-            >
-        </div>
-        <div class="mobile-menu-links">
-            <!-- Mobile Accordions -->
-            <div class="mobile-accordion">
-                <button class="accordion-trigger"
-                    >{t("nav.about")}
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-top">
+                <a href={prefixPath("/contacto")} class="top-link"
+                    >{t("nav.contact")}</a
+                >
+                <a href={lang === "es" ? "/en" : "/"} class="top-link"
+                    >{lang === "es" ? "EN" : "ES"}</a
+                >
+            </div>
+            <div class="mobile-menu-links">
+                <!-- Mobile Accordions -->
+                <div class="mobile-accordion">
+                    <button class="accordion-trigger"
+                        >{t("nav.about")}
+                        <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="chevron"><path d="m6 9 6 6 6-6"></path></svg
+                        ></button
+                    >
+                    <div class="accordion-content">
+                        {
+                            aboutItems.map((item) => (
+                                <a href={item.href}>{item.name}</a>
+                            ))
+                        }
+                    </div>
+                </div>
+
+                <div class="mobile-accordion">
+                    <button class="accordion-trigger"
+                        >{t("navbar.products_services_title")}
+                        <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="chevron"><path d="m6 9 6 6 6-6"></path></svg
+                        ></button
+                    >
+                    <div class="accordion-content">
+                        {
+                            productsItems.map((item) => (
+                                <a href={item.href}>{item.name}</a>
+                            ))
+                        }
+                    </div>
+                </div>
+
+                <a href={prefixPath("/impacto-circular")} class="mobile-link"
+                    >{t("nav.activities")}</a
+                >
+            </div>
+            <div class="mobile-menu-footer">
+                <a href={prefixPath("/contacto")} class="cta-mobile-btn">
                     <svg
                         width="18"
                         height="18"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
-                        stroke-width="2.5"
+                        stroke-width="2"
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                        class="chevron"><path d="m6 9 6 6 6-6"></path></svg
-                    ></button
-                >
-                <div class="accordion-content">
-                    {
-                        aboutItems.map((item) => (
-                            <a href={item.href}>{item.name}</a>
-                        ))
-                    }
-                </div>
+                        ><path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                        ></path></svg
+                    >
+                    {t("navbar.work_with_us")}
+                </a>
             </div>
+        </div>
 
-            <div class="mobile-accordion">
-                <button class="accordion-trigger"
-                    >{t("navbar.products_services_title")}
-                    <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="chevron"><path d="m6 9 6 6 6-6"></path></svg
-                    ></button
-                >
-                <div class="accordion-content">
-                    {
-                        productsItems.map((item) => (
-                            <a href={item.href}>{item.name}</a>
-                        ))
+        <style>
+            .main-header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: 1000;
+                transition: all 0.5s var(--transition-premium);
+                background: transparent;
+            }
+
+            .main-header.scrolled {
+                background: var(--text-white);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            /* Balik Specific Glassmorphism */
+            .main-header.balik-nav.scrolled {
+                background: rgba(10, 15, 25, 0.6) !important;
+                backdrop-filter: blur(15px) !important;
+                -webkit-backdrop-filter: blur(15px) !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+            }
+
+            .main-header.balik-nav.scrolled .nav-link,
+            .main-header.balik-nav.scrolled .top-link,
+            .main-header.balik-nav.scrolled .icon-btn {
+                color: white !important;
+            }
+
+            .main-header.balik-nav.scrolled #logoWhite {
+                opacity: 1 !important;
+                visibility: visible !important;
+                position: relative !important;
+            }
+            .main-header.balik-nav.scrolled #logoDark {
+                opacity: 0 !important;
+                visibility: hidden !important;
+                position: absolute !important;
+            }
+
+            .main-header.solid.subpage {
+                background: var(--brand-blue);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                border-bottom: none;
+            }
+
+            .main-header.nav-hidden {
+                transform: translateY(-100%);
+            }
+
+            /* Top Bar */
+            .top-bar {
+                background: rgba(0, 0, 0, 0.1);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                transition: all 0.5s ease;
+            }
+
+            .main-header.scrolled .top-bar {
+                height: 0;
+                overflow: hidden;
+                opacity: 0;
+            }
+
+            .top-bar-inner {
+                max-width: 100%;
+                margin: 0;
+                padding: 0.5rem 4rem;
+                display: flex;
+                justify-content: flex-end;
+                gap: 2rem;
+            }
+
+            .top-link {
+                font-size: 0.75rem;
+                color: rgba(255, 255, 255, 0.85);
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-family: var(--font-primary);
+                font-weight: 600;
+                transition: color 0.3s ease;
+            }
+
+            .main-header.scrolled .top-link {
+                color: var(--text-secondary);
+            }
+
+            .top-link:hover {
+                color: var(--brand-green);
+            }
+
+            /* Nav Main */
+            .nav-container {
+                height: 6rem;
+                display: flex;
+                align-items: center;
+                transition: all 0.5s ease;
+            }
+
+            .main-header.scrolled .nav-container {
+                height: 5rem;
+            }
+
+            .nav-inner {
+                max-width: 100%;
+                width: 100%;
+                margin: 0;
+                padding: 0 4rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            /* Logo */
+            .nav-logo-link {
+                display: flex;
+                align-items: center;
+                height: 100%;
+            }
+
+            .logo {
+                height: 3.5rem;
+                width: auto;
+                object-fit: contain;
+                transition: opacity 0.5s ease;
+            }
+
+            .logo-dark {
+                opacity: 0;
+                position: absolute;
+            }
+            .logo-white {
+                opacity: 1;
+            }
+
+            .main-header.scrolled .logo-white,
+            .main-header.solid.subpage .logo-dark {
+                opacity: 0;
+                visibility: hidden;
+                position: absolute;
+            }
+            .main-header.scrolled .logo-dark,
+            .main-header.solid.subpage .logo-white {
+                opacity: 1;
+                visibility: visible;
+                position: relative;
+            }
+
+            /* Desktop Menu */
+            .desktop-menu {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                height: 100%;
+            }
+
+            .nav-link {
+                padding: 1rem 1.5rem;
+                font-family: var(--font-primary);
+                font-size: 0.95rem;
+                font-weight: 700;
+                color: var(--text-white);
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                text-decoration: none;
+                transition: color 0.3s ease;
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                transition: all 0.3s var(--transition-premium);
+                border-radius: 100px;
+            }
+
+            .main-header.scrolled .nav-link {
+                color: var(--text-primary);
+            }
+
+            .main-header.solid.subpage .nav-link,
+            .main-header.solid.subpage .top-link {
+                color: white;
+            }
+
+            /* Subpage hover logic */
+            .main-header.solid.subpage .nav-link:hover {
+                background: rgba(255, 255, 255, 0.15);
+                color: white;
+            }
+
+            .nav-link:hover,
+            .main-header.solid.subpage .nav-link:hover {
+                color: var(--brand-green);
+                background: rgba(
+                    103,
+                    189,
+                    69,
+                    0.08
+                ); /* Sutil fondo verde al pasar el mouse */
+                border-radius: 100px;
+            }
+
+            .nav-link.active {
+                color: var(--brand-green);
+                position: relative;
+            }
+
+            .nav-link.active::after {
+                content: "";
+                position: absolute;
+                bottom: 0.5rem;
+                left: 50%;
+                width: 4px;
+                height: 4px;
+                background: var(--brand-green);
+                border-radius: 50%;
+                transform: translateX(-50%);
+            }
+
+            .main-header.scrolled .nav-link.active::after {
+                background: var(--brand-green);
+            }
+
+            .main-header.solid.subpage .nav-link:hover {
+                color: white;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+            }
+
+            .chevron {
+                transition: transform 0.3s ease;
+                opacity: 0.6;
+            }
+
+            .menu-item:hover .chevron {
+                transform: rotate(180deg);
+                color: var(--brand-green);
+            }
+
+            /* Mega Menu Styles */
+            .mega-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid var(--border-color);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(10px);
+                transition: all 0.3s var(--transition-premium);
+                z-index: 1001; /* Encima del overlay */
+            }
+
+            .menu-item:hover .mega-menu {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            /* Mega Overlay Blur */
+            .mega-overlay {
+                position: fixed;
+                inset: 0;
+                top: 8.4rem; /* Altura del header completo (top-bar + nav) */
+                background: rgba(0, 0, 0, 0.2);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.4s ease;
+                z-index: 998;
+                pointer-events: none;
+            }
+
+            /* Ajuste cuando el header se encoge al hacer scroll */
+            .main-header.scrolled ~ .mega-overlay {
+                top: 5rem;
+            }
+
+            /* Cuando hay un hover en desktop-menu, activamos el overlay */
+            .desktop-menu:hover ~ .mega-overlay {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .mega-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: flex;
+                padding: 3rem 2rem;
+                gap: 3rem;
+            }
+
+            .mega-main {
+                flex: 1;
+            }
+            .mega-sidebar {
+                width: 250px;
+                border-left: 1px solid var(--border-color);
+                padding-left: 3rem;
+                display: flex;
+                align-items: center;
+            }
+
+            .mega-title {
+                font-family: var(--font-primary);
+                font-size: 1.1rem;
+                color: var(--brand-blue);
+                border-bottom: 2px solid var(--brand-green);
+                display: inline-block;
+                padding-bottom: 0.5rem;
+                margin-bottom: 2rem;
+                font-weight: 800;
+            }
+
+            .mega-grid {
+                display: grid;
+                gap: 1.5rem;
+            }
+
+            .mega-grid.two-cols {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .mega-grid.three-cols {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .mega-link {
+                text-decoration: none;
+                padding: 1.5rem;
+                border-radius: 1.2rem;
+                transition: all 0.4s var(--transition-premium);
+                display: flex;
+                flex-direction: row;
+                gap: 1.5rem;
+                align-items: center;
+                border: 1px solid transparent;
+                background: transparent;
+            }
+
+            .premium-card:hover {
+                background: white;
+                border-color: var(--border-color);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+                transform: translateY(-4px);
+            }
+
+            .mega-link-icon {
+                width: 64px;
+                height: 64px;
+                min-width: 64px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #f8fafc;
+                border-radius: 16px;
+                color: var(--icon-color, var(--brand-green));
+                transition: all 0.4s ease;
+            }
+
+            .premium-card:hover .mega-link-icon {
+                background: var(--icon-color, var(--brand-green));
+                color: white;
+                transform: scale(1.1) rotate(5deg);
+            }
+
+            .mega-link-content {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .mega-link-title {
+                font-family: var(--font-primary);
+                font-weight: 700;
+                font-size: 1.25rem;
+                color: var(--text-primary);
+                margin-bottom: 0.35rem;
+                transition: color 0.3s ease;
+            }
+
+            .mega-link:hover .mega-link-title {
+                color: var(--brand-blue);
+            }
+
+            .mega-link-desc {
+                font-family: var(--font-primary);
+                font-size: 0.9rem;
+                color: var(--text-secondary);
+                line-height: 1.5;
+            }
+
+            .sidebar-btn {
+                background: #f1f5f9;
+                color: var(--text-primary);
+                padding: 1.2rem;
+                border-radius: 1rem;
+                text-decoration: none;
+                font-family: var(--font-primary);
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                transition: all 0.3s ease;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .sidebar-btn:hover {
+                background: var(--brand-blue);
+                color: white;
+                transform: translateY(-3px);
+            }
+
+            /* Icon Buttons */
+            .icon-btn {
+                background: transparent;
+                border: none;
+                color: var(--text-white);
+                cursor: pointer;
+                padding: 0.6rem;
+                transition: color 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .main-header.scrolled .icon-btn {
+                color: var(--text-primary);
+            }
+
+            .icon-btn:hover {
+                color: var(--brand-green);
+            }
+
+            /* Mobile */
+            .mobile-actions {
+                display: none;
+            }
+
+            .mobile-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 85%;
+                height: 100vh;
+                background: white;
+                z-index: 2000;
+                display: flex;
+                flex-direction: column;
+                transition: right 0.5s var(--transition-premium);
+                padding: 2rem;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .mobile-menu.active {
+                right: 0;
+            }
+
+            .mobile-menu-top {
+                display: flex;
+                justify-content: space-between;
+                padding-bottom: 2rem;
+                border-bottom: 1px solid var(--border-color);
+                margin-bottom: 2rem;
+            }
+
+            .mobile-menu-links {
+                flex: 1;
+                overflow-y: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .mobile-link,
+            .accordion-trigger {
+                font-family: var(--font-primary);
+                font-size: 1.25rem;
+                font-weight: 700;
+                color: var(--text-primary);
+                text-decoration: none;
+                padding: 1rem 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: transparent;
+                border: none;
+                width: 100%;
+                text-align: left;
+                text-transform: uppercase;
+            }
+
+            .accordion-content {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                display: flex;
+                flex-direction: column;
+                padding-left: 1.5rem;
+                gap: 1.5rem;
+            }
+
+            .mobile-accordion.active .accordion-content {
+                max-height: 500px;
+                padding-top: 1rem;
+                padding-bottom: 2rem;
+            }
+
+            .mobile-accordion.active .accordion-trigger .chevron {
+                transform: rotate(180deg);
+            }
+
+            .accordion-content a {
+                font-family: var(--font-primary);
+                font-size: 1rem;
+                color: var(--text-secondary);
+                text-decoration: none;
+            }
+
+            .mobile-menu-footer {
+                margin-top: auto;
+                padding-top: 2rem;
+            }
+
+            .cta-mobile-btn {
+                background: var(--brand-green);
+                color: white;
+                padding: 1.2rem;
+                border-radius: 1rem;
+                text-decoration: none;
+                font-family: var(--font-primary);
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.8rem;
+            }
+
+            @media (max-width: 1024px) {
+                .top-bar {
+                    display: none;
+                }
+                .desktop-menu {
+                    display: none;
+                }
+                .mobile-actions {
+                    display: flex;
+                    gap: 0.5rem;
+                }
+                .logo {
+                    height: 2.8rem;
+                }
+                .nav-inner {
+                    padding: 0 1.5rem;
+                }
+            }
+        </style>
+
+        <script>
+            // Scroll Logic
+            const header = document.getElementById("mainHeader");
+            let lastScrollY = window.scrollY;
+
+            const updateScroll = () => {
+                const currentScrollY = window.scrollY;
+
+                // Sticky on scroll up, hide on scroll down
+                if (currentScrollY > 100) {
+                    header?.classList.add("scrolled");
+                    if (currentScrollY > lastScrollY && currentScrollY > 400) {
+                        header?.classList.add("nav-hidden");
+                    } else {
+                        header?.classList.remove("nav-hidden");
                     }
-                </div>
-            </div>
+                } else {
+                    header?.classList.remove("scrolled");
+                    header?.classList.remove("nav-hidden");
+                }
 
-            <a href={prefixPath("/impacto-circular")} class="mobile-link"
-                >{t("nav.activities")}</a
-            >
-        </div>
-        <div class="mobile-menu-footer">
-            <a href={prefixPath("/contacto")} class="cta-mobile-btn">
-                <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path
-                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-                    ></path></svg
-                >
-                {t("navbar.work_with_us")}
-            </a>
-        </div>
-    </div>
-</header>
+                lastScrollY = currentScrollY;
+            };
+            window.addEventListener("scroll", updateScroll, { passive: true });
+            updateScroll();
 
-<style>
-    .main-header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-        transition: all 0.5s var(--transition-premium);
-        background: transparent;
-    }
-
-    .main-header.scrolled {
-        background: var(--text-white);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .main-header.solid.subpage {
-        background: var(--brand-blue);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        border-bottom: none;
-    }
-
-    .main-header.nav-hidden {
-        transform: translateY(-100%);
-    }
-
-    /* Top Bar */
-    .top-bar {
-        background: rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.5s ease;
-    }
-
-    .main-header.scrolled .top-bar {
-        height: 0;
-        overflow: hidden;
-        opacity: 0;
-    }
-
-    .top-bar-inner {
-        max-width: 100%;
-        margin: 0;
-        padding: 0.5rem 4rem;
-        display: flex;
-        justify-content: flex-end;
-        gap: 2rem;
-    }
-
-    .top-link {
-        font-size: 0.75rem;
-        color: rgba(255, 255, 255, 0.85);
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-family: var(--font-primary);
-        font-weight: 600;
-        transition: color 0.3s ease;
-    }
-
-    .main-header.scrolled .top-link {
-        color: var(--text-secondary);
-    }
-
-    .top-link:hover {
-        color: var(--brand-green);
-    }
-
-    /* Nav Main */
-    .nav-container {
-        height: 6rem;
-        display: flex;
-        align-items: center;
-        transition: all 0.5s ease;
-    }
-
-    .main-header.scrolled .nav-container {
-        height: 5rem;
-    }
-
-    .nav-inner {
-        max-width: 100%;
-        width: 100%;
-        margin: 0;
-        padding: 0 4rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    /* Logo */
-    .nav-logo-link {
-        display: flex;
-        align-items: center;
-        height: 100%;
-    }
-
-    .logo {
-        height: 3.5rem;
-        width: auto;
-        object-fit: contain;
-        transition: opacity 0.5s ease;
-    }
-
-    .logo-dark {
-        opacity: 0;
-        position: absolute;
-    }
-    .logo-white {
-        opacity: 1;
-    }
-
-    .main-header.scrolled .logo-white,
-    .main-header.solid.subpage .logo-dark {
-        opacity: 0;
-        visibility: hidden;
-        position: absolute;
-    }
-    .main-header.scrolled .logo-dark,
-    .main-header.solid.subpage .logo-white {
-        opacity: 1;
-        visibility: visible;
-        position: relative;
-    }
-
-    /* Desktop Menu */
-    .desktop-menu {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        height: 100%;
-    }
-
-    .nav-link {
-        padding: 1rem 1.5rem;
-        font-family: var(--font-primary);
-        font-size: 0.95rem;
-        font-weight: 700;
-        color: var(--text-white);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        text-decoration: none;
-        transition: color 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-    }
-
-    .main-header.scrolled .nav-link {
-        color: var(--text-primary);
-    }
-
-    .main-header.solid.subpage .nav-link,
-    .main-header.solid.subpage .top-link {
-        color: white;
-    }
-
-    .nav-link:hover,
-    .main-header.solid.subpage .nav-link:hover {
-        color: var(--brand-green);
-    }
-
-    .main-header.solid.subpage .nav-link:hover {
-        color: white;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
-    }
-
-    .chevron {
-        transition: transform 0.3s ease;
-        opacity: 0.6;
-    }
-
-    .menu-item:hover .chevron {
-        transform: rotate(180deg);
-        color: var(--brand-green);
-    }
-
-    /* Mega Menu Styles */
-    .mega-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: white;
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-        border-top: 1px solid var(--border-color);
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(10px);
-        transition: all 0.3s var(--transition-premium);
-    }
-
-    .menu-item:hover .mega-menu {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-
-    .mega-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        padding: 3rem 2rem;
-        gap: 3rem;
-    }
-
-    .mega-main {
-        flex: 1;
-    }
-    .mega-sidebar {
-        width: 250px;
-        border-left: 1px solid var(--border-color);
-        padding-left: 3rem;
-        display: flex;
-        align-items: center;
-    }
-
-    .mega-title {
-        font-family: var(--font-primary);
-        font-size: 1.1rem;
-        color: var(--brand-blue);
-        border-bottom: 2px solid var(--brand-green);
-        display: inline-block;
-        padding-bottom: 0.5rem;
-        margin-bottom: 2rem;
-        font-weight: 800;
-    }
-
-    .mega-grid {
-        display: grid;
-        gap: 1.5rem;
-    }
-
-    .mega-grid.two-cols {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .mega-grid.three-cols {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .mega-link {
-        text-decoration: none;
-        padding: 1rem;
-        border-radius: 0.8rem;
-        transition: background 0.3s ease;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .mega-link:hover {
-        background: #f8fafc;
-    }
-
-    .mega-link-title {
-        font-family: var(--font-primary);
-        font-weight: 700;
-        font-size: 1rem;
-        color: var(--text-primary);
-        margin-bottom: 0.4rem;
-        transition: color 0.3s ease;
-    }
-
-    .mega-link:hover .mega-link-title {
-        color: var(--brand-green);
-    }
-
-    .mega-link-desc {
-        font-family: var(--font-secondary);
-        font-size: 0.85rem;
-        color: var(--text-secondary);
-        line-height: 1.4;
-    }
-
-    .sidebar-btn {
-        background: #f1f5f9;
-        color: var(--text-primary);
-        padding: 1.2rem;
-        border-radius: 1rem;
-        text-decoration: none;
-        font-family: var(--font-primary);
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-        transition: all 0.3s ease;
-        width: 100%;
-        justify-content: center;
-    }
-
-    .sidebar-btn:hover {
-        background: var(--brand-blue);
-        color: white;
-        transform: translateY(-3px);
-    }
-
-    /* Icon Buttons */
-    .icon-btn {
-        background: transparent;
-        border: none;
-        color: var(--text-white);
-        cursor: pointer;
-        padding: 0.6rem;
-        transition: color 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .main-header.scrolled .icon-btn {
-        color: var(--text-primary);
-    }
-
-    .icon-btn:hover {
-        color: var(--brand-green);
-    }
-
-    /* Mobile */
-    .mobile-actions {
-        display: none;
-    }
-
-    .mobile-menu {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 85%;
-        height: 100vh;
-        background: white;
-        z-index: 2000;
-        display: flex;
-        flex-direction: column;
-        transition: right 0.5s var(--transition-premium);
-        padding: 2rem;
-        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .mobile-menu.active {
-        right: 0;
-    }
-
-    .mobile-menu-top {
-        display: flex;
-        justify-content: space-between;
-        padding-bottom: 2rem;
-        border-bottom: 1px solid var(--border-color);
-        margin-bottom: 2rem;
-    }
-
-    .mobile-menu-links {
-        flex: 1;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .mobile-link,
-    .accordion-trigger {
-        font-family: var(--font-primary);
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        text-decoration: none;
-        padding: 1rem 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: transparent;
-        border: none;
-        width: 100%;
-        text-align: left;
-        text-transform: uppercase;
-    }
-
-    .accordion-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-        display: flex;
-        flex-direction: column;
-        padding-left: 1.5rem;
-        gap: 1.5rem;
-    }
-
-    .mobile-accordion.active .accordion-content {
-        max-height: 500px;
-        padding-top: 1rem;
-        padding-bottom: 2rem;
-    }
-
-    .mobile-accordion.active .accordion-trigger .chevron {
-        transform: rotate(180deg);
-    }
-
-    .accordion-content a {
-        font-family: var(--font-secondary);
-        font-size: 1rem;
-        color: var(--text-secondary);
-        text-decoration: none;
-    }
-
-    .mobile-menu-footer {
-        margin-top: auto;
-        padding-top: 2rem;
-    }
-
-    .cta-mobile-btn {
-        background: var(--brand-green);
-        color: white;
-        padding: 1.2rem;
-        border-radius: 1rem;
-        text-decoration: none;
-        font-family: var(--font-primary);
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.8rem;
-    }
-
-    @media (max-width: 1024px) {
-        .top-bar {
-            display: none;
-        }
-        .desktop-menu {
-            display: none;
-        }
-        .mobile-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-        .logo {
-            height: 2.8rem;
-        }
-        .nav-inner {
-            padding: 0 1.5rem;
-        }
-    }
-</style>
-
-<script>
-    // Scroll Logic
-    const header = document.getElementById("mainHeader");
-    let lastScrollY = window.scrollY;
-
-    const updateScroll = () => {
-        const currentScrollY = window.scrollY;
-
-        // Sticky on scroll up, hide on scroll down
-        if (currentScrollY > 100) {
-            header?.classList.add("scrolled");
-            if (currentScrollY > lastScrollY && currentScrollY > 400) {
-                header?.classList.add("nav-hidden");
+            // Mobile Menu Toggle
+            const mobileToggle = document.getElementById("mobileToggle");
+            const mobileMenu = document.getElementById("mobileMenu");
+            const menuIcon = document.getElementById("menuIcon");
+            const closeIcon = document.getElementById("closeIcon");
+            if (mobileToggle) {
+                mobileToggle.addEventListener("click", () => {
+                    if (mobileMenu) {
+                        mobileMenu.classList.toggle("active");
+                    }
+                    if (menuIcon) {
+                        menuIcon.classList.toggle("hidden");
+                    }
+                    if (closeIcon) {
+                        closeIcon.classList.toggle("hidden");
+                    }
+                    if (header) {
+                        header.classList.toggle("solid");
+                    }
+                });
             } else {
-                header?.classList.remove("nav-hidden");
+                console.log("No mobile toggle found");
             }
-        } else {
-            header?.classList.remove("scrolled");
-            header?.classList.remove("nav-hidden");
-        }
 
-        lastScrollY = currentScrollY;
-    };
-    window.addEventListener("scroll", updateScroll, { passive: true });
-    updateScroll();
-
-    // Mobile Menu Toggle
-    const mobileToggle = document.getElementById("mobileToggle");
-    const mobileMenu = document.getElementById("mobileMenu");
-    const menuIcon = document.getElementById("menuIcon");
-    const closeIcon = document.getElementById("closeIcon");
-    if (mobileToggle) {
-        mobileToggle.addEventListener("click", () => {
-            if (mobileMenu) {
-                mobileMenu.classList.toggle("active");
-            }
-            if (menuIcon) {
-                menuIcon.classList.toggle("hidden");
-            }
-            if (closeIcon) {
-                closeIcon.classList.toggle("hidden");
-            }
-            if (header) {
-                header.classList.toggle("solid");
-            }
-        });
-    } else {
-        console.log("No mobile toggle found");
-    }
-
-    // Accordions
-    document.querySelectorAll(".accordion-trigger").forEach((trigger) => {
-        trigger.addEventListener("click", () => {
-            const parent = trigger.parentElement;
-            if (parent) {
-                parent.classList.toggle("active");
-            }
-        });
-    });
-</script>
+            // Accordions
+            document
+                .querySelectorAll(".accordion-trigger")
+                .forEach((trigger) => {
+                    trigger.addEventListener("click", () => {
+                        const parent = trigger.parentElement;
+                        if (parent) {
+                            parent.classList.toggle("active");
+                        }
+                    });
+                });
+        </script>
+    </nav>
+</header>

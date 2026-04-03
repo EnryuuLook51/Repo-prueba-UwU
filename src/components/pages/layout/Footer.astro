@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
+import { Image } from "astro:assets";
 import "../../../styles/global.css";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -8,9 +9,10 @@ const prefixPath = (path: string) => {
   if (lang === "es") return path;
   return `/${lang}${path}`;
 };
+const isBalik = Astro.url.pathname.includes("/balik");
 ---
 
-<footer class="footer">
+<footer class={`footer ${isBalik ? "footer-balik" : ""}`}>
   <!-- Franja decorativa superior -->
   <div class="footer-topbar"></div>
 
@@ -18,9 +20,11 @@ const prefixPath = (path: string) => {
     <!-- COLUMNA 1: Logo + tagline -->
     <div class="footer-brand">
       <a href={prefixPath("/")} class="footer-logo-link">
-        <img
+        <Image
           src="/images/greenprod.png"
           alt="Green Prod & Sustainable"
+          width={155}
+          height={48}
           class="footer-logo"
         />
       </a>
@@ -29,7 +33,9 @@ const prefixPath = (path: string) => {
       <!-- Redes Sociales -->
       <div class="footer-socials">
         <a
-          href="https://www.facebook.com/share/TaR3vZpTHC/?mibextid=wwXIfr"
+          href={isBalik
+            ? "https://www.facebook.com/Balik"
+            : "https://www.facebook.com/share/TaR3vZpTHC/?mibextid=wwXIfr"}
           target="_blank"
           rel="noopener noreferrer"
           class="social-pill"
@@ -38,7 +44,9 @@ const prefixPath = (path: string) => {
           <i class="fab fa-facebook"></i>
         </a>
         <a
-          href="https://www.instagram.com/greenprodsustainable?igsh=MWE0ZXlynHdpYjBoZA=="
+          href={isBalik
+            ? "https://www.instagram.com/balikperu"
+            : "https://www.instagram.com/greenprodsustainable?igsh=MWE0ZXlynHdpYjBoZA=="}
           target="_blank"
           rel="noopener noreferrer"
           class="social-pill"
@@ -47,7 +55,9 @@ const prefixPath = (path: string) => {
           <i class="fab fa-instagram"></i>
         </a>
         <a
-          href="https://www.tiktok.com/@greenprodsustainable?_r=1&_t=ZS-94pPT4ilMwL"
+          href={isBalik
+            ? "https://www.tiktok.com/@BalikPeru"
+            : "https://www.tiktok.com/@greenprodsustainable?_r=1&_t=ZS-94pPT4ilMwL"}
           target="_blank"
           rel="noopener noreferrer"
           class="social-pill"
@@ -101,18 +111,40 @@ const prefixPath = (path: string) => {
       <ul class="footer-contact-list">
         <li>
           <a
-            href="mailto:greenprodsustainable@gmail.com"
+            href={isBalik
+              ? "mailto:balikperu@gmail.com"
+              : "mailto:greenprodsustainable@gmail.com"}
             class="footer-contact-item"
           >
             <span class="contact-icon">
               <i class="fas fa-envelope"></i>
             </span>
-            <span>greenprodsustainable@gmail.com</span>
+            <span
+              >{
+                isBalik
+                  ? "balikperu@gmail.com"
+                  : "greenprodsustainable@gmail.com"
+              }</span
+            >
           </a>
         </li>
+        {
+          isBalik && (
+            <li>
+              <a href="mailto:balik@greenprod.pe" class="footer-contact-item">
+                <span class="contact-icon">
+                  <i class="fas fa-envelope" />
+                </span>
+                <span>balik@greenprod.pe</span>
+              </a>
+            </li>
+          )
+        }
         <li>
           <a
-            href="https://wa.me/51950412534"
+            href={isBalik
+              ? "https://wa.me/51961235080"
+              : "https://wa.me/51950412534"}
             target="_blank"
             rel="noopener noreferrer"
             class="footer-contact-item"
@@ -120,7 +152,9 @@ const prefixPath = (path: string) => {
             <span class="contact-icon">
               <i class="fab fa-whatsapp"></i>
             </span>
-            <span>+51 950 412 534</span>
+            <span
+              >{isBalik ? "961 235 080 / 908 051 858" : "+51 950 412 534"}</span
+            >
           </a>
         </li>
         <li>
@@ -161,12 +195,7 @@ const prefixPath = (path: string) => {
   /* Franja superior con gradiente verde→azul */
   .footer-topbar {
     height: 4px;
-    background: linear-gradient(
-      90deg,
-      var(--brand-green) 0%,
-      var(--brand-blue-3) 50%,
-      var(--brand-green) 100%
-    );
+    background: linear-gradient(90deg, #67bd45 0%, #006db6 50%, #838587 100%);
     background-size: 200% auto;
     animation: shimmer 4s linear infinite;
   }
@@ -212,7 +241,7 @@ const prefixPath = (path: string) => {
     font-family: var(--font-secondary);
     font-size: 0.95rem;
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.6);
+    color: #838587; /* Gris corporativo */
     max-width: 300px;
     margin-bottom: 2.5rem;
   }
@@ -335,7 +364,7 @@ const prefixPath = (path: string) => {
   }
 
   .footer-contact-item:hover {
-    color: white;
+    color: #67bd45;
   }
 
   .contact-icon {
@@ -387,7 +416,9 @@ const prefixPath = (path: string) => {
 
   /* ── Barra inferior ── */
   .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: #838587; /* Gris corporativo en la base */
+    color: white;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .footer-bottom-inner {
@@ -405,7 +436,7 @@ const prefixPath = (path: string) => {
   .footer-copy {
     font-family: var(--font-secondary);
     font-size: 0.78rem;
-    color: rgba(255, 255, 255, 0.28);
+    color: rgba(255, 255, 255, 0.9);
   }
 
   /* ── Destellos de fondo ── */
@@ -456,5 +487,32 @@ const prefixPath = (path: string) => {
       text-align: center;
       gap: 0.4rem;
     }
+  }
+
+  /* ═══ BALIK BRANDING (NIGHT MODE) ═══ */
+  .footer-balik {
+    background: rgba(8, 12, 18, 0.45) !important;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .footer-balik .footer-topbar {
+    background: linear-gradient(
+      90deg,
+      #67bd45 0%,
+      rgba(0, 109, 182, 0.4) 50%,
+      rgba(255, 255, 255, 0.2) 100%
+    );
+    opacity: 0.8;
+  }
+
+  .footer-balik .footer-bottom {
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+  }
+
+  .footer-balik .footer-tagline {
+    color: rgba(255, 255, 255, 0.4);
   }
 </style>

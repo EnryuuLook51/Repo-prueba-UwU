@@ -1,6 +1,7 @@
 ---
 1;
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
+import { Image } from "astro:assets";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -17,10 +18,14 @@ const t = useTranslations(lang);
             "/images/carrusel/imagen1.jpeg",
             "/images/carrusel/imagen 2.png",
           ].map((img, index) => (
-            <img
+            <Image
               src={img}
               alt={`Sustainability ${index + 1}`}
+              width={index === 0 ? 1920 : 1280}
+              height={index === 0 ? 1080 : 720}
               class={`main-image hero-carousel-img ${index === 0 ? "active" : ""}`}
+              loading={index === 0 ? "eager" : "lazy"}
+              decoding={index === 0 ? "sync" : "async"}
             />
           ))
         }
@@ -44,7 +49,7 @@ const t = useTranslations(lang);
 
       <div class="hero-actions items-center" id="heroActions" data-fade-in="up">
         <div class="hero-cta">
-          <a href="#contacto" class="btn-premium">
+          <a href="/contacto" class="btn-premium">
             {t("nav.consultation")}
             <i class="fas fa-arrow-right ms-2 transition-transform"></i>
           </a>

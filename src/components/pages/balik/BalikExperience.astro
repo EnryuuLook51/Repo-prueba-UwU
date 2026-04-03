@@ -1,0 +1,1322 @@
+---
+/* 
+   BalikExperience.astro — Original Scrollytelling Engine Template
+   Implementación del código base solicitado para posterior adaptación.
+*/
+---
+
+<div class="balik-experience-root">
+    <!-- WebGL Background -->
+    <canvas id="webgl_canvas"></canvas>
+
+    <!-- UI Elements -->
+    <!-- UI Elements Hidden -->
+
+    <div id="scene_strip">
+        <div class="scene-dot active"></div>
+        <div class="scene-dot"></div>
+        <div class="scene-dot"></div>
+        <div class="scene-dot"></div>
+    </div>
+
+    <button id="theme_toggle" title="Toggle Theme">
+        <svg
+            class="icon-sun"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+        >
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg
+            class="icon-moon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+        >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <!-- Credits Hidden -->
+
+    <!-- Scroll Content -->
+    <div id="scroll_container">
+        <!-- Section 1 -->
+
+        <!-- Section 1: ¿Qué es BALIK? -->
+        <section id="s0">
+            <div class="text-card right">
+                <div class="tag">02 — NOSOTROS</div>
+                <div class="h-line"></div>
+                <h2>NUESTRO ENFOQUE</h2>
+                <p class="body-text">
+                    Diseñada para ser un aliado estratégico de restaurantes,
+                    cevicherías, hoteles, comedores institucionales y comercios
+                    especializados. Brindamos productos frescos y conservas
+                    listas para la transformación gastronómica.
+                </p>
+                <div class="mission-vision-grid" data-reveal>
+                    <div class="mv-item">
+                        <span class="mv-label">MISIÓN</span>
+                        <p>
+                            Garantizar una nutrición sostenible respetando la
+                            pesca responsable y el trabajo artesanal.
+                        </p>
+                    </div>
+                    <div class="mv-item">
+                        <span class="mv-label">VISIÓN</span>
+                        <p>
+                            Ser marca líder absoluta en productos del mar
+                            sostenibles en la región.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Compromiso -->
+        <section id="s2">
+            <div class="text-card center">
+                <div class="tag">03 — COMPROMISO</div>
+                <div class="h-line"></div>
+                <h2>NUTRICIÓN<br />SOSTENIBLE</h2>
+                <div class="commitment-grid">
+                    <div class="commitment-card" data-reveal>
+                        <span class="c-title">Calidad Garantizada</span>
+                        <p>
+                            Empacados al vacío bajo estrictos controles
+                            sanitarios para asegurar la máxima vida útil.
+                        </p>
+                    </div>
+                    <div class="commitment-card" data-reveal>
+                        <span class="c-title">Sostenibilidad</span>
+                        <p>
+                            Respetamos tallas mínimas y cerramos el ciclo usando
+                            residuos para abonos orgánicos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Catálogo -->
+        <section id="s3">
+            <div class="text-card left">
+                <div class="tag">04 — PRODUCTOS</div>
+                <div class="h-line"></div>
+                <h2>CATÁLOGO DE PRODUCTOS</h2>
+                <div class="catalog-mini-grid">
+                    <div class="catalog-item" data-reveal>
+                        <span>🐟 PESCADOS</span>
+                        <p>Cabrilla en Filete (Talla mín. 32cm)</p>
+                    </div>
+                    <div class="catalog-item" data-reveal>
+                        <span>🐙 MOLUSCOS</span>
+                        <p>Pulpo Entero Precogido</p>
+                    </div>
+                    <div class="catalog-item" data-reveal>
+                        <span>🥫 CONSERVAS</span>
+                        <p>Bonito en Aceite (Premium)</p>
+                    </div>
+                </div>
+                <div class="catalog-cta-center">
+                    <a href="/lineas-de-negocio/balik/productos" class="cta"
+                        >Ver más</a
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Contacto -->
+        <section id="s4">
+            <div class="text-card center contact-wide-card">
+                <div class="tag">05 — CONTACTO</div>
+                <div class="h-line"></div>
+
+                <div class="contact-header">
+                    <img
+                        src="/images/lineas/balik/LOGOBALIK-blanco.png"
+                        alt="BALIK BLANCO"
+                        class="balik-contact-logo"
+                    />
+                    <h2>¡ÚNETE AL CONSUMO RESPONSABLE!</h2>
+                    <p class="body-text">
+                        Lleva la frescura del mar peruano a tu negocio.
+                        Escríbenos directamente o solicita información.
+                    </p>
+                </div>
+
+                <div class="contact-dual-layout">
+                    <!-- Form Side -->
+                    <form
+                        class="balik-contact-form"
+                        action="mailto:balik@greenprod.pe"
+                        method="post"
+                        enctype="text/plain"
+                    >
+                        <div class="input-group">
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="Tu Nombre"
+                                required
+                            />
+                        </div>
+                        <div class="input-group">
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Tu Email"
+                                required
+                            />
+                        </div>
+                        <div class="input-group">
+                            <textarea
+                                name="message"
+                                placeholder="¿En qué podemos ayudarte?"
+                                rows="4"
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="cta form-submit"
+                            >Enviar Mensaje</button
+                        >
+                    </form>
+
+                    <!-- Info/Socials Side -->
+                    <div class="contact-sidebar">
+                        <div class="contact-methods">
+                            <div class="method">
+                                <span>📧 EMAIL</span>
+                                <p>balikperu@gmail.com</p>
+                                <p>balik@greenprod.pe</p>
+                            </div>
+                            <div class="method">
+                                <span>📱 TELÉFONOS / WHATSAPP</span>
+                                <p>961 235 080</p>
+                                <p>908 051 858</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-socials-grid">
+                            <a
+                                href="https://wa.me/51961235080"
+                                target="_blank"
+                                class="social-btn whatsapp"
+                            >
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <a
+                                href="https://www.facebook.com/Balik"
+                                target="_blank"
+                                class="social-btn facebook"
+                            >
+                                <i class="fab fa-facebook"></i> Facebook
+                            </a>
+                            <a
+                                href="https://www.instagram.com/balikperu"
+                                target="_blank"
+                                class="social-btn instagram"
+                            >
+                                <i class="fab fa-instagram"></i> Instagram
+                            </a>
+                            <a
+                                href="https://www.tiktok.com/@BalikPeru"
+                                target="_blank"
+                                class="social-btn tiktok"
+                            >
+                                <i class="fab fa-tiktok"></i> TikTok
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<style>
+    /* Estilos Originales del Template solicitado */
+    @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400&display=swap");
+
+    .balik-experience-root {
+        position: relative;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: var(--font-mono);
+        overflow-x: hidden;
+    }
+
+    :root {
+        color-scheme: dark;
+
+        --dark-bg: #0a0a0f;
+        --dark-fg: #e8e4d9;
+        --dark-muted: #6a6a7e;
+        --dark-accent: #c8ff47;
+        --dark-card-bg: rgba(10, 10, 15, 0.16);
+        --dark-card-border: rgba(200, 255, 71, 0.18);
+
+        --light-bg: #eef4ff;
+        --light-fg: #0b141a;
+        --light-muted: #6c8296;
+        --light-accent: #1b7ed6;
+        --light-card-bg: rgba(245, 249, 255, 0.82);
+        --light-card-border: rgba(27, 126, 214, 0.22);
+
+        --bg: var(--dark-bg);
+        --fg: var(--dark-fg);
+        --muted: var(--dark-muted);
+        --accent: var(--dark-accent);
+        --card-bg: var(--dark-card-bg);
+        --card-border: var(--dark-card-border);
+
+        --font-display: var(--font-primary, "Bahnschrift", sans-serif);
+        --font-mono: var(--font-secondary, "DM Sans", sans-serif);
+        --font-serif: "Cormorant Garamond", serif;
+        --hairline: 0.0625rem;
+        --ui-inset: 2rem;
+        --nav-x: calc(var(--ui-inset) + 0.125rem);
+        --reveal-offset: 0.625rem;
+        --reveal-duration: 0.5s;
+        --card-radius: 0.875rem;
+        --z-ui: 10;
+        --section-height: 120vh; /* Stretched sections for slower transitions */
+    }
+
+    :root[data-theme="light"] {
+        color-scheme: light;
+        --bg: var(--light-bg);
+        --fg: var(--light-fg);
+        --muted: var(--light-muted);
+        --accent: var(--light-accent);
+        --card-bg: var(--light-card-bg);
+        --card-border: var(--light-card-border);
+    }
+
+    #webgl_canvas {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    #hud {
+        position: fixed;
+        top: calc(var(--ui-inset) + 5rem);
+        right: var(--ui-inset);
+        z-index: var(--z-ui);
+        text-align: right;
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+        color: var(--muted);
+        text-transform: uppercase;
+    }
+
+    #hud .progress-bar {
+        width: 7.5rem;
+        height: var(--hairline);
+        background: var(--muted);
+        margin-block-start: 0.5rem;
+        margin-inline-start: auto;
+        position: relative;
+        overflow: hidden;
+    }
+
+    #hud .progress-fill {
+        position: absolute;
+        inset-block: 0;
+        inset-inline-start: 0;
+        width: 0%;
+        background: var(--accent);
+        transition: width 0.1s linear;
+    }
+
+    #hud .scene-label {
+        font-size: 0.6rem;
+        color: var(--accent);
+        margin-block-start: 0.4rem;
+    }
+
+    #scene_strip {
+        position: fixed;
+        left: var(--nav-x);
+        top: 50%;
+        translate: -50% -50%;
+        z-index: var(--z-ui);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .scene-dot {
+        width: 0.25rem;
+        height: 0.25rem;
+        border-radius: 50%;
+        background: var(--muted);
+        transition:
+            background 0.3s,
+            scale 0.3s;
+    }
+
+    .scene-dot.active {
+        background: var(--accent);
+        scale: 1.8;
+    }
+
+    #theme_toggle {
+        position: fixed;
+        bottom: var(--ui-inset);
+        left: var(--nav-x);
+        translate: -50% 0;
+        z-index: var(--z-ui);
+        width: 2rem;
+        height: 2rem;
+        border: none;
+        background: color-mix(in srgb, var(--muted) 35%, transparent);
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.3s;
+    }
+
+    #theme_toggle:hover {
+        background: color-mix(in srgb, var(--muted) 55%, transparent);
+    }
+
+    #theme_toggle svg {
+        width: 0.875rem;
+        height: 0.875rem;
+        position: absolute;
+        transition:
+            opacity 0.3s ease,
+            rotate 0.3s ease;
+        color: var(--accent);
+    }
+
+    :root[data-theme="light"] #theme_toggle svg {
+        color: var(--fg);
+    }
+
+    #theme_toggle .icon-sun {
+        opacity: 1;
+        rotate: 0deg;
+    }
+
+    #theme_toggle .icon-moon {
+        opacity: 0;
+        rotate: 90deg;
+    }
+
+    :root[data-theme="light"] #theme_toggle .icon-sun {
+        opacity: 0;
+        rotate: -90deg;
+    }
+
+    :root[data-theme="light"] #theme_toggle .icon-moon {
+        opacity: 1;
+        rotate: 0deg;
+    }
+
+    #scroll_container {
+        position: relative;
+        z-index: 1;
+    }
+
+    section {
+        min-height: var(--section-height);
+        display: flex;
+        align-items: center;
+        padding: 6rem 5.5rem;
+    }
+
+    .text-card {
+        max-width: 23.75rem;
+        padding: 2.25rem 2rem;
+        background: var(--card-bg);
+        border-left: var(--hairline) solid var(--card-border);
+        transition:
+            background 0.3s ease,
+            border-color 0.3s ease;
+    }
+
+    :root[data-theme="dark"] .text-card {
+        border: var(--hairline) solid var(--card-border);
+        border-radius: var(--card-radius);
+        backdrop-filter: blur(14px) saturate(130%);
+        -webkit-backdrop-filter: blur(14px) saturate(130%);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .text-card.right {
+        margin-inline-start: auto;
+        border-left: none;
+        border-right: var(--hairline) solid var(--card-border);
+        text-align: right;
+    }
+
+    .text-card.center {
+        margin-inline: auto;
+        border-left: none;
+        border-top: var(--hairline) solid var(--card-border);
+        text-align: center;
+        max-width: 28.75rem;
+    }
+
+    .tag {
+        font-size: 0.6rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-block-end: 1.1rem;
+        opacity: 0;
+        translate: 0 var(--reveal-offset);
+        transition:
+            opacity var(--reveal-duration) ease,
+            translate var(--reveal-duration) ease;
+    }
+
+    .tag.visible {
+        opacity: 1;
+        translate: 0 0;
+    }
+
+    :is(h1, h2) {
+        font-family: var(--font-display);
+        font-weight: 400;
+        letter-spacing: 0.03em;
+        line-height: 0.92;
+        opacity: 0;
+        translate: 0 1.125rem;
+        transition:
+            opacity var(--reveal-duration) ease 0.08s,
+            translate var(--reveal-duration) ease 0.08s;
+    }
+
+    :is(h1, h2).visible {
+        opacity: 1;
+        translate: 0 0;
+    }
+
+    h1 {
+        font-size: clamp(3rem, 8vw, 6.5rem);
+    }
+
+    h2 {
+        font-size: clamp(2.2rem, 6vw, 5rem);
+    }
+
+    .body-text {
+        font-size: 0.82rem;
+        line-height: 1.8;
+        color: color-mix(in srgb, var(--fg) 55%, transparent);
+        margin-block-start: 1.25rem;
+        opacity: 0;
+        translate: 0 var(--reveal-offset);
+        transition:
+            opacity var(--reveal-duration) ease 0.2s,
+            translate var(--reveal-duration) ease 0.2s;
+    }
+
+    .body-text.visible {
+        opacity: 1;
+        translate: 0 0;
+    }
+
+    /* Grids */
+    .mission-vision-grid,
+    .commitment-grid,
+    .catalog-mini-grid {
+        display: grid;
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+    .mission-vision-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .commitment-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .catalog-mini-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .mv-item,
+    .commitment-card,
+    .catalog-item {
+        background: rgba(10, 15, 25, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 2.2rem;
+        border-radius: 1.2rem;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .mv-item:hover,
+    .commitment-card:hover,
+    .catalog-item:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: var(--brand-green);
+        transform: translateY(-8px);
+    }
+    .mv-label,
+    .c-title {
+        display: block;
+        font-family: var(--font-display);
+        font-size: 0.85rem;
+        font-weight: 800;
+        color: var(--brand-green);
+        margin-bottom: 1rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+    }
+    .catalog-item span {
+        display: block;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        color: white;
+        font-family: var(--font-display);
+    }
+    .catalog-cta-center {
+        margin-top: 4rem;
+        display: flex;
+        justify-content: center;
+    }
+    .contact-wide-card {
+        max-width: 60rem !important;
+        padding: 3rem !important;
+    }
+    .contact-header {
+        margin-bottom: 3rem;
+    }
+    .balik-contact-logo {
+        height: 60px;
+        width: auto;
+        margin-bottom: 1.5rem;
+    }
+    .contact-dual-layout {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 3rem;
+        text-align: left;
+    }
+    .balik-contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+    .input-group input,
+    .input-group textarea {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1rem;
+        border-radius: 0.5rem;
+        color: white;
+        font-family: var(--font-mono);
+    }
+    .input-group input:focus,
+    .input-group textarea:focus {
+        border-color: var(--brand-green);
+        outline: none;
+        background: rgba(255, 255, 255, 0.1);
+    }
+    .form-submit {
+        width: 100%;
+        justify-content: center;
+        background: var(--brand-green) !important;
+        color: white !important;
+        border: none !important;
+    }
+    .contact-methods {
+        margin-bottom: 2rem;
+    }
+    .method {
+        margin-bottom: 1.5rem;
+    }
+    .method span {
+        display: block;
+        font-size: 0.7rem;
+        color: var(--brand-green);
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        margin-bottom: 0.3rem;
+    }
+    .method p {
+        font-size: 1rem;
+        color: white;
+        margin: 0;
+    }
+    .contact-socials-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.8rem;
+    }
+    .social-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.8rem;
+        border-radius: 0.5rem;
+        font-size: 0.8rem;
+        text-decoration: none;
+        color: white;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+    .social-btn:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: var(--brand-green);
+        transform: translateY(-3px);
+    }
+
+    @media (max-width: 768px) {
+        .mission-vision-grid,
+        .commitment-grid,
+        .catalog-mini-grid,
+        .contact-dual-layout {
+            grid-template-columns: 1fr;
+        }
+        .contact-wide-card {
+            padding: 2rem !important;
+        }
+    }
+
+    .h-line {
+        width: 3.125rem;
+        height: var(--hairline);
+        background: var(--accent);
+        margin-block-end: 1.2rem;
+        opacity: 0;
+        scale: 0 1;
+        transform-origin: left;
+        transition:
+            opacity 0.4s ease,
+            scale 0.4s ease;
+    }
+
+    .h-line.visible {
+        opacity: 1;
+        scale: 1 1;
+    }
+
+    .text-card.right .h-line {
+        transform-origin: right;
+        margin-inline-start: auto;
+    }
+
+    .text-card.center .h-line {
+        transform-origin: center;
+        margin-inline: auto;
+        margin-block-end: 1.2rem;
+    }
+
+    .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-block-start: 1.75rem;
+        padding: 0.6rem 1.25rem;
+        border: var(--hairline) solid var(--accent);
+        color: var(--accent);
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        text-decoration: none;
+        cursor: pointer;
+        opacity: 0;
+        translate: 0 var(--reveal-offset);
+        transition:
+            opacity var(--reveal-duration) ease 0.35s,
+            translate var(--reveal-duration) ease 0.35s,
+            background 0.2s,
+            color 0.2s;
+    }
+
+    .cta.visible {
+        opacity: 1;
+        translate: 0 0;
+    }
+
+    .cta:hover {
+        background: var(--accent);
+        color: var(--bg);
+    }
+
+    .cta svg {
+        width: 0.6875rem;
+        height: 0.6875rem;
+    }
+
+    #credit {
+        position: fixed;
+        right: var(--ui-inset);
+        top: 50%;
+        transform: translateY(-50%) rotate(-90deg);
+        transform-origin: right center;
+        z-index: var(--z-ui);
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+    }
+
+    #credit a {
+        color: var(--muted);
+        text-decoration: none;
+    }
+
+    @media (width <= 60em) {
+        section {
+            padding: 5rem 3rem;
+        }
+        .text-card {
+            max-width: 20rem;
+        }
+    }
+
+    /* --- NUEVAS CLASES BRAND HERO (S0) --- */
+    .balik-brand-hero {
+        position: relative;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 20rem;
+        height: var(--section-height);
+        overflow: hidden;
+    }
+
+    .balik-branding-group {
+        text-align: center;
+        margin-bottom: 2rem;
+        z-index: 5;
+    }
+
+    .balik-hero-logo {
+        height: min(160px, 22vw);
+        width: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(40px);
+        -webkit-backdrop-filter: blur(40px);
+        padding: 1rem 3rem;
+        border-radius: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.267);
+        display: inline-block;
+        margin-bottom: 2rem;
+        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+        z-index: 5;
+    }
+
+    .hero-card {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        max-width: 60rem !important;
+        margin-top: -2rem !important;
+    }
+
+    .hero-cta-wrapper {
+        margin-top: 1rem;
+    }
+    .hero-btn {
+        background: var(--brand-green) !important;
+        color: white !important;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        padding: 1.2rem 2.5rem !important;
+        border-radius: 100px !important;
+        text-transform: uppercase;
+        box-shadow: 0 10px 30px rgba(103, 189, 69, 0.3);
+    }
+    .hero-btn:hover {
+        background: white !important;
+        color: var(--brand-green) !important;
+        transform: translateY(-5px);
+    }
+
+    .hero-body-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        max-width: 48rem;
+        margin: 0 auto;
+    }
+
+    .hero-body-content .body-text {
+        font-size: clamp(1rem, 1.8vw, 1.25rem) !important;
+        line-height: 1.6 !important;
+        color: rgba(255, 255, 255, 0.85);
+        opacity: 0;
+    }
+
+    /* Floating Assets */
+    .floating-assets-container {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    .asset-item {
+        position: absolute;
+        width: min(300px, 40vw);
+        transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .asset-left {
+        left: 3%;
+        bottom: 47%;
+    }
+
+    .asset-right {
+        right: 3%;
+        bottom: 47%;
+    }
+
+    .asset-visual-wrapper {
+        position: relative;
+        width: 100%;
+    }
+
+    .asset-img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+    }
+
+    .smoke-aura {
+        position: absolute;
+        inset: -20%;
+        background: radial-gradient(
+            circle at center,
+            rgba(255, 255, 255, 0.15),
+            transparent 70%
+        );
+        mix-blend-mode: overlay;
+        pointer-events: none;
+    }
+
+    .asset-badge-snowflake,
+    .asset-badge-flag {
+        position: absolute;
+        width: 4rem;
+        height: 4rem;
+        z-index: 5;
+    }
+
+    .asset-badge-snowflake {
+        top: -1rem;
+        right: -1rem;
+        color: white;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 50%;
+        padding: 0.8rem;
+    }
+
+    .asset-badge-flag {
+        top: -1.5rem;
+        right: -1.5rem;
+    }
+
+    .flag-peru {
+        width: 3.5rem;
+        height: 2.5rem;
+        display: block;
+        background: linear-gradient(
+            to right,
+            #ed1c24 33.3%,
+            #ffffff 33.3%,
+            #ffffff 66.6%,
+            #ed1c24 66.6%
+        );
+        border: 2px solid white;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Scroll Hint */
+    .scroll-discover-hint {
+        position: absolute;
+        right: 2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        z-index: 10;
+    }
+
+    .hint-text {
+        font-family: var(--font-mono);
+        writing-mode: vertical-rl;
+        rotate: 180deg;
+        font-size: 0.7rem;
+        letter-spacing: 0.3em;
+        color: var(--muted);
+        text-transform: uppercase;
+    }
+
+    .hint-line {
+        width: 1px;
+        height: 80px;
+        background: linear-gradient(to bottom, var(--muted), transparent);
+    }
+
+    /* Reveal animations */
+    #s0 img,
+    #s0 .balik-hero-slogan,
+    #s0 h2,
+    #s0 .body-text {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    [data-reveal] {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    [data-reveal].visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    @media (width <= 37.5em) {
+        :root {
+            --ui-inset: 1.25rem;
+        }
+        section {
+            padding: 4rem 1.25rem;
+        }
+        .text-card {
+            max-width: 100%;
+        }
+        .text-card:is(.right, .center) {
+            margin-inline: 0;
+            text-align: left;
+            border-right: none;
+            border-top: none;
+            border-left: var(--hairline) solid var(--card-border);
+        }
+        .text-card:is(.right, .center) .h-line {
+            transform-origin: left;
+            margin-inline-start: 0;
+            margin-inline: 0;
+        }
+        #hud {
+            top: 1rem;
+            right: 1rem;
+        }
+        #scene_strip {
+            display: none;
+        }
+        #theme_toggle {
+            bottom: 1rem;
+            left: 1.25rem;
+            translate: 0 0;
+        }
+        .stat-row {
+            gap: 1.5rem;
+        }
+    }
+</style>
+
+<script>
+    /* 
+       Balik Scrollytelling Engine — Adapted Script
+       Implementación original optimizada para el entorno Astro.
+    */
+
+    (function initEngine() {
+        if (typeof window === "undefined") return;
+
+        const canvas = document.getElementById(
+            "webgl_canvas",
+        ) as HTMLCanvasElement;
+        const gl = canvas?.getContext("webgl", {
+            alpha: false,
+            antialias: false,
+            depth: false,
+            stencil: false,
+            preserveDrawingBuffer: false,
+            powerPreference: "high-performance",
+        });
+
+        if (!gl || !canvas) {
+            if (canvas) canvas.style.background = "#0a0a0f";
+            console.warn("WebGL not supported");
+            return;
+        }
+
+        const vs = `attribute vec2 a; void main() { gl_Position = vec4(a, 0.0, 1.0); }`;
+        const fs = `
+            precision highp float;
+            uniform vec2 uR;
+            uniform float uT, uS, uSc, uBl;
+            uniform vec3 uBg;
+
+            #define PI 3.14159265359
+            #define TA 6.28318530718
+            #define MS 22
+            #define RS 5
+
+            float sat(float x) { return clamp(x, 0.0, 1.0); }
+            float smoother(float x) { x = sat(x); return x * x * x * (x * (x * 6.0 - 15.0) + 10.0); }
+
+            vec3 sCol(vec3 c0, vec3 c1, vec3 c2, vec3 c3, vec3 c4) {
+                int si = int(uSc);
+                vec3 a = c0; vec3 b = c1;
+                if (si == 1) { a = c1; b = c2; }
+                else if (si == 2) { a = c2; b = c3; }
+                else if (si == 3) { a = c3; b = c4; }
+                return mix(a, b, uBl);
+            }
+
+            float sF(float c0, float c1, float c2, float c3, float c4) {
+                int si = int(uSc);
+                float a = c0; float b = c1;
+                if (si == 1) { a = c1; b = c2; }
+                else if (si == 2) { a = c2; b = c3; }
+                else if (si == 3) { a = c3; b = c4; }
+                return mix(a, b, uBl);
+            }
+
+            mat2 rot(float a) { float c = cos(a), s = sin(a); return mat2(c, -s, s, c); }
+            float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.545); }
+            float noise(vec2 p) {
+                vec2 i = floor(p); vec2 f = fract(p); f = f*f*(3.0-2.0*f);
+                float a = hash(i), b = hash(i+vec2(1.0,0.0)), c = hash(i+vec2(0.0,1.0)), d = hash(i+vec2(1.0,1.0));
+                return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+            }
+
+            float waveH(vec2 p, float t, float amp, float storm) {
+                float h = 0.0;
+                vec2 s1 = normalize(vec2(1.0, 0.28)), s2 = normalize(vec2(-0.48, 0.88)), s3 = normalize(vec2(0.82, -0.16));
+                s2 = rot(storm * 0.18) * s2; s3 = rot(-storm * 0.14) * s3;
+                float d1 = dot(p, s1), d2 = dot(p, s2), d3 = dot(p, s3);
+                h += amp * 0.66 * sin(d1 * 0.42 + t * 0.38);
+                h += amp * 0.22 * sin(d1 * 0.94 - t * 0.62);
+                h += amp * 0.14 * sin(d2 * 1.18 - t * 0.82);
+                h += amp * 0.09 * sin(d3 * 1.82 + t * 1.04);
+                h += amp * (0.11 + storm * 0.07) * sin(p.x * 1.45 - t * 0.76 + p.y * 0.66);
+                float micro = noise(p * 14.0 + vec2(t * 0.18, t * 0.06)) - 0.5;
+                h += micro * amp * (0.010 + storm * 0.008);
+                return h;
+            }
+
+            vec3 waveNorm(vec2 p, float t, float amp, float storm) {
+                float e = 0.018;
+                float hL = waveH(p - vec2(e, 0.0), t, amp, storm), hR = waveH(p + vec2(e, 0.0), t, amp, storm);
+                float hD = waveH(p - vec2(0.0, e), t, amp, storm), hU = waveH(p + vec2(0.0, e), t, amp, storm);
+                return normalize(vec3(-(hR - hL), 2.0 * e, -(hU - hD)));
+            }
+
+            float stars(vec2 uv) {
+                vec2 g = floor(uv), l = fract(uv)-0.5;
+                float h = hash(g);
+                return smoothstep(mix(0.012, 0.002, h), 0.0, length(l + (vec2(hash(g+3.1), hash(g+7.3))-0.5)*0.25)) * step(0.82, h);
+            }
+
+            void main() {
+                vec2 uv = (gl_FragCoord.xy - uR * 0.5) / uR.y;
+                float s = smoother(uS);
+                float camY = mix(1.14, 1.03, s) + sin(s * PI * 1.4) * 0.028;
+                float pitch = mix(0.115, 0.088, s);
+                vec3 ro = vec3(0.0, camY, mix(0.08, -0.18, s)), rd = normalize(vec3(uv.x, uv.y - pitch, -1.4));
+
+                float storm = smoothstep(0.8, 1.0, s), night = smoothstep(0.56, 0.84, s);
+                vec3 skyT = sCol(vec3(0.50,0.70,1.00), vec3(0.18,0.06,0.24), vec3(0.26,0.06,0.04), vec3(0.01,0.01,0.05), vec3(0.04,0.05,0.09));
+                vec3 skyH = sCol(vec3(0.95,0.98,1.00), vec3(0.92,0.48,0.18), vec3(0.88,0.32,0.04), vec3(0.03,0.05,0.14), vec3(0.15,0.17,0.23));
+                vec3 sunC = sCol(vec3(1.00,1.00,1.00), vec3(1.0,0.62,0.22), vec3(1.0,0.38,0.05), vec3(0.70,0.75,0.94), vec3(0.26,0.28,0.34));
+                vec3 seaD = sCol(vec3(0.00,0.12,0.45), vec3(0.08,0.05,0.12), vec3(0.10,0.06,0.04), vec3(0.00,0.01,0.03), vec3(0.03,0.04,0.07));
+                vec3 seaS = sCol(vec3(0.08,0.35,0.80), vec3(0.28,0.17,0.24), vec3(0.24,0.13,0.06), vec3(0.04,0.06,0.16), vec3(0.07,0.10,0.14));
+                vec3 fogC = sCol(vec3(0.90,0.95,1.00), vec3(0.80,0.50,0.30), vec3(0.70,0.28,0.05), vec3(0.02,0.03,0.08), vec3(0.12,0.14,0.18));
+
+                vec3 sunDir = normalize(vec3(cos(clamp(s/0.58,0.0,1.0)*PI)*-0.75, sin(clamp(s/0.58,0.0,1.0)*PI)*0.38-0.08, -1.0));
+                float waveA = sF(0.082, 0.070, 0.100, 0.054, 0.30) + storm * 0.02;
+                float fogD = sF(0.020, 0.010, 0.022, 0.034, 0.046);
+                
+                vec3 col;
+                if (rd.y < 0.0) {
+                    float t = ro.y / (-rd.y), step = t / float(MS);
+                    for (int i=0; i<MS; i++) { if (ro.y + rd.y*t < waveH(ro.xz+rd.xz*t, uT, waveA, storm)) break; t+=step; }
+                    vec3 n = waveNorm(ro.xz+rd.xz*t, uT, waveA, storm);
+                    float fres = pow(1.0-max(0.0, dot(n, -rd)), 4.0);
+                    col = mix(mix(seaD, seaS, exp(-t*0.4)*0.5), mix(skyH, skyT, pow(max(0.0,reflect(rd,n).y),0.4)), 0.15+fres*0.34);
+                    col = mix(col, fogC, 1.0-exp(-t*fogD*1.65));
+                } else {
+                    col = mix(skyH, skyT, pow(rd.y, 0.38));
+                    float sd = max(0.0, dot(rd, sunDir));
+                    col += sunC * (pow(sd, 380.0)*6.8 + pow(sd, 22.0)*0.2) * smoothstep(-0.1, 0.06, sunDir.y);
+                    if (night > 0.02) col += vec3(0.8,0.9,1.0) * stars(rd.xy/max(0.1,rd.z+1.6)*140.0) * night * (1.0-storm*0.8);
+                }
+                gl_FragColor = vec4(col + (hash(gl_FragCoord.xy + floor(uT*12.0))-0.5)*0.006, 1.0);
+            }
+        `;
+
+        const mkShader = (t: number, s: string) => {
+            const sh = gl.createShader(t);
+            if (!sh) return null;
+            gl.shaderSource(sh, s);
+            gl.compileShader(sh);
+            return gl.getShaderParameter(sh, gl.COMPILE_STATUS)
+                ? sh
+                : (console.error(gl.getShaderInfoLog(sh)), null);
+        };
+
+        const prog = gl.createProgram();
+        const vsh = mkShader(gl.VERTEX_SHADER, vs);
+        const fsh = mkShader(gl.FRAGMENT_SHADER, fs);
+        if (prog && vsh && fsh) {
+            gl.attachShader(prog, vsh);
+            gl.attachShader(prog, fsh);
+            gl.linkProgram(prog);
+            gl.useProgram(prog);
+        }
+
+        const buf = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+        gl.bufferData(
+            gl.ARRAY_BUFFER,
+            new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
+            gl.STATIC_DRAW,
+        );
+        const ap = gl.getAttribLocation(prog!, "a");
+        gl.enableVertexAttribArray(ap);
+        gl.vertexAttribPointer(ap, 2, gl.FLOAT, false, 0, 0);
+
+        const uR = gl.getUniformLocation(prog!, "uR"),
+            uTi = gl.getUniformLocation(prog!, "uT");
+        const uS = gl.getUniformLocation(prog!, "uS"),
+            uSc = gl.getUniformLocation(prog!, "uSc"),
+            uBl = gl.getUniformLocation(prog!, "uBl"),
+            uBg = gl.getUniformLocation(prog!, "uBg");
+
+        const updateBg = (theme: string) => {
+            const hex = theme === "light" ? "#eef4ff" : "#0a0a0f";
+            const n = parseInt(hex.replace("#", ""), 16);
+            if (uBg)
+                gl.uniform3f(
+                    uBg,
+                    ((n >> 16) & 255) / 255,
+                    ((n >> 8) & 255) / 255,
+                    (n & 255) / 255,
+                );
+        };
+
+        let theme =
+            document.documentElement.getAttribute("data-theme") || "dark";
+        updateBg(theme);
+
+        const themeToggle = document.getElementById("theme_toggle");
+        themeToggle?.addEventListener("click", () => {
+            theme = theme === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+            updateBg(theme);
+        });
+
+        const resize = () => {
+            const dpr = Math.min(window.devicePixelRatio, 1.5);
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+            gl.viewport(0, 0, canvas.width, canvas.height);
+            if (uR) gl.uniform2f(uR, canvas.width, canvas.height);
+        };
+        window.addEventListener("resize", resize);
+        resize();
+
+        let tgt = 0,
+            smooth = 0,
+            velocity = 0;
+        const scrollEase = 0.1,
+            NAMES = ["MIDDAY", "DUSK", "NIGHT", "STORM"],
+            N = NAMES.length;
+        const progFill = document.getElementById("prog_fill"),
+            hudPct = document.getElementById("hud_pct"),
+            sceneName = document.getElementById("scene_name"),
+            dots = document.querySelectorAll(".scene-dot");
+
+        const updateScroll = () => {
+            const bannerHeight = window.innerHeight; // The 100vh banner
+            const sy = Math.max(0, window.scrollY - bannerHeight);
+            const max =
+                document.documentElement.scrollHeight -
+                window.innerHeight -
+                bannerHeight;
+            tgt = max > 0 ? sy / max : 0;
+        };
+        window.addEventListener("scroll", updateScroll);
+
+        // Scroll nativo habilitado. Se elimina el listener de 'wheel' con preventDefault.
+
+        const frame = (now: number) => {
+            // smooth += (tgt - smooth) * 0.1; // Se mantiene abajo en la lógica original
+
+            smooth += (tgt - smooth) * 0.1;
+            const raw = smooth * (N - 1),
+                si = Math.min(Math.floor(raw), N - 2);
+
+            if (progFill) progFill.style.width = `${Math.round(smooth * 100)}%`;
+            if (hudPct)
+                hudPct.textContent = `${Math.round(smooth * 100)}%`.padStart(
+                    4,
+                    "0",
+                );
+            if (sceneName)
+                sceneName.textContent =
+                    NAMES[Math.min(N - 1, Math.floor(smooth * N))];
+            dots.forEach((d, i) =>
+                d.classList.toggle(
+                    "active",
+                    i === Math.min(N - 1, Math.floor(smooth * N)),
+                ),
+            );
+
+            gl.uniform1f(uTi, now * 0.001);
+            gl.uniform1f(uS, smooth);
+            gl.uniform1f(uSc, si);
+            gl.uniform1f(uBl, raw - si);
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+            requestAnimationFrame(frame);
+        };
+        requestAnimationFrame(frame);
+
+        const io = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((e) => {
+                    if (e.isIntersecting) e.target.classList.add("visible");
+                });
+            },
+            { threshold: 0 },
+        );
+        document
+            .querySelectorAll(
+                ".tag, h1, h2, .body-text, .stat-row, .cta, .h-line, [data-reveal]",
+            )
+            .forEach((el) => io.observe(el));
+    })();
+</script>

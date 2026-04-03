@@ -81,7 +81,16 @@
   --brand-green-2: #7fc355;
   --brand-green-3: #90c960;
   --brand-green-4: #a3d06f;
+  --brand-green-4: #a3d06f;
   --brand-green-5: #b4d77b;
+
+  /* ── Colores por Línea de Negocio ── */
+  --linea-proveeduria: #61addf;
+  /* Celeste */
+  --linea-balik: #006db6;
+  /* Azul */
+  --linea-ceprobio: #67bd45;
+  /* Verde */
 
   --bg-main: #f8fafc;
   --bg-card: rgba(255, 255, 255, 0.95);

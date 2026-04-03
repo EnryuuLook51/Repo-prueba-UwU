@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
+import { Image } from "astro:assets";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
@@ -11,9 +12,11 @@ const prefixPath = (path: string) => {
 
 <section class="future-cta relative overflow-hidden" data-reveal-section>
     <div class="cta-background">
-        <img
+        <Image
             src="/images/principal/conocemas.jpg"
             alt="Futuro Prospero"
+            width={1280}
+            height={720}
             class="parallax-img"
         />
         <div class="image-overlay"></div>

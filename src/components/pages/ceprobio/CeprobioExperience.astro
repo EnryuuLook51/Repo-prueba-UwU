@@ -1,0 +1,580 @@
+---
+/* 
+   CeprobioExperience.astro — Scrollytelling Interactive Bio-System
+   Presentación inmersiva de los valores y áreas de Ceprobio.
+*/
+import BioParticles from "./BioParticles.astro";
+---
+
+<div class="bio-experience-container" id="bio-experience">
+    <!-- El Canvas es Sticky: Se queda fijo mientras el contenido hace scroll -->
+    <div class="bio-canvas-wrapper">
+        <canvas id="bio-canvas"></canvas>
+        <BioParticles />
+        <div class="bio-gradient-overlay"></div>
+    </div>
+
+    <div class="bio-content-scroll">
+        <!-- SECCIÓN 0: INTRODUCCIÓN -->
+        <section class="bio-step" id="step-0">
+            <div class="bio-card" data-reveal>
+                <div class="bio-tag">01 — Nuestra Identidad</div>
+                <h2 class="font-heading">¿QUÉ ES<br />CEPROBIO?</h2>
+                <p>
+                    Es un centro especializado en la investigación y producción
+                    de bioinsumos de alta calidad. Nuestras soluciones
+                    biotecnológicas optimizan los cultivos y restauran el
+                    equilibrio natural del suelo.
+                </p>
+                <div class="bio-h-line"></div>
+            </div>
+            <div class="bio-img-wrapper right" data-reveal>
+                <img
+                    src="/images/lineas/ceprobio/centro.png"
+                    alt="Centro Ceprobio"
+                />
+            </div>
+        </section>
+
+        <!-- SECCIÓN 1: VISIÓN & ENFOQUE -->
+        <section class="bio-step" id="step-1">
+            <div class="bio-img-wrapper left" data-reveal>
+                <img
+                    src="/images/lineas/ceprobio/proposito.png"
+                    alt="Visión Biosostenible"
+                />
+            </div>
+            <div class="bio-card right" data-reveal>
+                <div class="bio-tag">02 — Propósito</div>
+                <h2 class="font-heading">VISIÓN &<br />ENFOQUE</h2>
+                <p>
+                    Transformar la agricultura mediante biotecnología aplicada,
+                    reduciendo impactos ambientales y promoviendo una nutrición
+                    orgánica real.
+                </p>
+                <div class="bio-stat-grid">
+                    <div class="bio-stat">
+                        <span class="bio-val">100%</span>
+                        <span class="bio-lab">Orgánico</span>
+                    </div>
+                    <div class="bio-stat">
+                        <span class="bio-val">Zero</span>
+                        <span class="bio-lab">Químicos</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: BIOTECNOLOGÍA -->
+        <section class="bio-step" id="step-2">
+            <div class="bio-img-wrapper side-left" data-reveal>
+                <img
+                    src="/images/lineas/ceprobio/lab_1.png"
+                    alt="I+D Ceprobio"
+                />
+            </div>
+            <div class="bio-card center" data-reveal>
+                <div class="bio-tag">03 — Ciencia Aplicada</div>
+                <h2 class="font-heading">BIOTECNOLOGÍA<br />APLICADA</h2>
+                <p>
+                    Desde I+D hasta la producción final, supervisamos cada
+                    proceso para asegurar la trazabilidad y la máxima calidad
+                    técnica de nuestros bioinsumos.
+                </p>
+                <div class="bio-areas-row">
+                    <span>Investigación</span>
+                    <span>•</span>
+                    <span>Producción</span>
+                    <span>•</span>
+                    <span>Valorización</span>
+                </div>
+            </div>
+            <div class="bio-img-wrapper side-right" data-reveal>
+                <img
+                    src="/images/lineas/ceprobio/lab_2.png"
+                    alt="Producción Biológica"
+                />
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: CAPACIDAD -->
+        <section class="bio-step" id="step-3">
+            <div class="bio-img-wrapper left" data-reveal>
+                <img
+                    src="/images/lineas/ceprobio/potencial.png"
+                    alt="Capacidad Operativa"
+                />
+            </div>
+            <div class="bio-card right" data-reveal>
+                <div class="bio-tag">04 — Capacidad</div>
+                <h2 class="font-heading">POTENCIAL<br />OPERATIVO</h2>
+                <div class="bio-stats-box">
+                    <div class="bio-stat-item">
+                        <span class="v">1 Ton.</span>
+                        <span class="l">Bioinsumos / Mes</span>
+                    </div>
+                    <div class="bio-stat-item">
+                        <span class="v">100 Ton.</span>
+                        <span class="l">Valorización / Mes</span>
+                    </div>
+                </div>
+                <a
+                    href="/lineas-de-negocio/ceprobio/productos"
+                    class="bio-cta-scrolly"
+                >
+                    CONOCE EL CATÁLOGO
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Indicador de Progreso -->
+    <div class="bio-experience-hud">
+        <div class="hud-labels">
+            <span id="bio-hud-name">REVELANDO IDENTIDAD</span>
+            <span id="bio-hud-pct">00%</span>
+        </div>
+        <div class="hud-progress"><div id="bio-hud-fill"></div></div>
+    </div>
+</div>
+
+<style>
+    .bio-experience-container {
+        position: relative;
+        background: #f1f8f1; /* Verde orgánico muy claro */
+        width: 100%;
+    }
+
+    .bio-canvas-wrapper {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    #bio-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        z-index: 1; /* Al fondo del wrapper */
+    }
+
+    .bio-gradient-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 4; /* Sobre todo el fondo */
+        background: radial-gradient(
+            circle at 50% 50%,
+            transparent 10%,
+            rgba(241, 248, 241, 0.4) 100%
+        );
+        pointer-events: none;
+    }
+
+    .bio-content-scroll {
+        position: relative;
+        z-index: 2;
+        margin-top: -100vh; /* Para que la primera sección coincida con el primer frame */
+    }
+
+    .bio-step {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 0 5rem;
+    }
+
+    .bio-card {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(103, 189, 69, 0.3);
+        padding: 3.5rem;
+        width: 100%;
+        max-width: 520px; /* Un poco mas ancha para evitar desbordes */
+        color: var(--text-primary);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.05);
+        z-index: 2;
+    }
+
+    .bio-img-wrapper {
+        flex: 1;
+        max-width: 400px;
+        aspect-ratio: 4/5;
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(103, 189, 69, 0.2);
+        padding: 1.5rem;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+    }
+
+    .bio-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(0.2) contrast(1.1);
+        transition: all 0.5s ease;
+    }
+
+    .bio-img-wrapper:hover img {
+        filter: grayscale(0) contrast(1.2);
+        transform: scale(1.05);
+    }
+
+    .bio-img-wrapper.right {
+        margin-left: auto;
+    }
+    .bio-img-wrapper.left {
+        margin-right: auto;
+    }
+    .bio-img-wrapper.side-left {
+        margin-right: 2rem;
+        max-width: 300px;
+    }
+    .bio-img-wrapper.side-right {
+        margin-left: 2rem;
+        max-width: 300px;
+    }
+
+    .bio-card.right {
+        margin-left: auto;
+        border-right: 2px solid var(--brand-green);
+        border-left: none;
+        text-align: right;
+    }
+    .bio-card.center {
+        margin: 0 auto;
+        text-align: center;
+        border-top: 2px solid var(--brand-green);
+        border-left: none;
+    }
+    .bio-card.left {
+        border-left: 2px solid var(--brand-green);
+    }
+
+    .bio-tag {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--brand-green);
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        margin-bottom: 1.5rem;
+    }
+    h2 {
+        font-size: clamp(
+            2rem,
+            5vw,
+            2.8rem
+        ); /* Tamaño mas controlado para evitar desbordes */
+        line-height: 1;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+        color: var(--text-primary);
+    }
+    p {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        color: var(--text-secondary);
+    }
+
+    .bio-h-line {
+        width: 50px;
+        height: 2px;
+        background: var(--brand-green);
+        margin-top: 2rem;
+    }
+
+    .bio-stat-grid {
+        display: flex;
+        gap: 2rem;
+        margin-top: 2.5rem;
+        justify-content: flex-end;
+    }
+    .bio-stat {
+        display: flex;
+        flex-direction: column;
+    }
+    .bio-val {
+        font-size: 2.5rem;
+        font-family: var(--font-primary);
+        font-weight: 800;
+        color: var(--brand-green);
+        line-height: 1;
+    }
+    .bio-lab {
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        opacity: 0.6;
+    }
+
+    .bio-areas-row {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--brand-green);
+    }
+
+    .bio-stats-box {
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .bio-stat-item .v {
+        display: block;
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--brand-green);
+    }
+    .bio-stat-item .l {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        opacity: 0.6;
+    }
+
+    .bio-cta-scrolly {
+        display: inline-block;
+        margin-top: 2.5rem;
+        padding: 1rem 2rem;
+        border: 1px solid var(--brand-green);
+        color: var(--brand-green);
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        transition: all 0.3s ease;
+    }
+    .bio-cta-scrolly:hover {
+        background: var(--brand-green);
+        color: black;
+    }
+
+    /* HUD */
+    .bio-experience-hud {
+        position: fixed;
+        bottom: 2rem;
+        left: 2rem;
+        right: 2rem;
+        z-index: 5;
+    }
+    .hud-labels {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+    }
+    .hud-progress {
+        width: 100%;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.1);
+    }
+    #bio-hud-fill {
+        width: 0%;
+        height: 100%;
+        background: var(--brand-green);
+        transition: width 0.2s linear;
+    }
+
+    @media (max-width: 768px) {
+        .bio-step {
+            padding: 0 1.5rem;
+        }
+        .bio-card {
+            padding: 2rem;
+        }
+        h2 {
+            font-size: 2.5rem;
+        }
+        .bio-experience-hud {
+            left: 1rem;
+            right: 1rem;
+            bottom: 1rem;
+        }
+    }
+</style>
+
+<script>
+    const canvas = document.getElementById("bio-canvas") as HTMLCanvasElement;
+    const gl = canvas.getContext("webgl", { alpha: false });
+
+    if (gl) {
+        const vs = `attribute vec2 a; void main(){ gl_Position=vec4(a,0,1); }`;
+        const fs = `
+            precision highp float;
+            uniform vec2 uR;
+            uniform float uT, uS, uSc, uBl;
+            
+            #define TAU 6.2831853
+
+            mat2 r2(float a) {
+                float c = cos(a), s = sin(a);
+                return mat2(c, -s, s, c);
+            }
+
+            float sphere(vec3 p, float r) { return length(p) - r; }
+            float torus(vec3 p, vec2 t) {
+                vec2 q = vec2(length(p.xz) - t.x, p.y);
+                return length(q) - t.y;
+            }
+            float octa(vec3 p, float s) {
+                p = abs(p);
+                return (p.x + p.y + p.z - s) * .5773;
+            }
+            float box(vec3 p, vec3 b) {
+                vec3 q = abs(p) - b;
+                return length(max(q, 0.)) + min(max(q.x, max(q.y, q.z)), 0.);
+            }
+
+            float sdf(vec3 p) {
+                float t = uT * .2, sc = uSc, bl = uBl;
+                float d0 = sphere(p, .7 + .05 * sin(t * 1.5));
+                vec3 p1 = p; p1.xz = r2(t) * p1.xz; p1.xy = r2(t*0.5) * p1.xy;
+                float d1 = torus(p1, vec2(.6, .2));
+                vec3 p2 = p; p2.xy = r2(t) * p2.xy; p2.yz = r2(t * 0.7) * p2.yz;
+                float d2 = box(p2, vec3(.5));
+                vec3 p3 = p; p3.yz = r2(t * 0.8) * p3.yz;
+                float d3 = octa(p3, .8);
+                
+                if (sc < 1.) return mix(d0, d1, bl);
+                if (sc < 2.) return mix(d1, d2, bl);
+                return mix(d2, d3, bl);
+            }
+
+            vec3 norm(vec3 p) {
+                float e = .001; return normalize(vec3(
+                    sdf(p + vec3(e,0,0)) - sdf(p - vec3(e,0,0)),
+                    sdf(p + vec3(0,e,0)) - sdf(p - vec3(0,e,0)),
+                    sdf(p + vec3(0,0,e)) - sdf(p - vec3(0,0,e))
+                ));
+            }
+
+            void main() {
+                vec2 uv = (gl_FragCoord.xy - uR * .5) / min(uR.x, uR.y);
+                vec3 ro = vec3(0, 0, 2.8);
+                vec3 rd = normalize(vec3(uv, -1.5));
+                
+                float t = 0., hit = 0.;
+                for (int i = 0; i < 80; i++) {
+                    float d = sdf(ro + rd * t);
+                    if (d < .001) { hit = 1.; break; }
+                    if (t > 6.) break;
+                    t += d;
+                }
+
+                vec3 bg = vec3(0.945, 0.973, 0.945); // Correspondiente a #f1f8f1
+                vec3 col = bg;
+                if (hit > .5) {
+                    vec3 p = ro + rd * t;
+                    vec3 n = norm(p);
+                    vec3 bc = mix(vec3(0.3, 0.6, 0.2), vec3(0.5, 0.8, 0.3), 0.5 + 0.5*sin(uT*0.5 + p.y*2.0));
+                    vec3 l = normalize(vec3(.7, 1., .5));
+                    float dif = clamp(dot(n, l), 0., 1.);
+                    float fr = pow(1. - clamp(dot(-rd, n), 0., 1.), 2.5);
+                    col = bc * (dif * .9 + .1) + fr * vec3(1.0, 1.0, 1.0) * 0.3;
+                    col = mix(bg, col, exp(-t * 0.05));
+                }
+                gl_FragColor = vec4(col, 1.0);
+            }
+        `;
+
+        const mkShader = (type: number, src: string) => {
+            const s = gl.createShader(type);
+            if (!s) return null;
+            gl.shaderSource(s, src);
+            gl.compileShader(s);
+            return s;
+        };
+
+        const prog = gl.createProgram();
+        if (prog) {
+            gl.attachShader(prog, mkShader(gl.VERTEX_SHADER, vs)!);
+            gl.attachShader(prog, mkShader(gl.FRAGMENT_SHADER, fs)!);
+            gl.linkProgram(prog);
+            gl.useProgram(prog);
+        }
+
+        const buf = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+        gl.bufferData(
+            gl.ARRAY_BUFFER,
+            new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
+            gl.STATIC_DRAW,
+        );
+        const ap = gl.getAttribLocation(prog!, "a");
+        gl.enableVertexAttribArray(ap);
+        gl.vertexAttribPointer(ap, 2, gl.FLOAT, false, 0, 0);
+
+        const uR = gl.getUniformLocation(prog!, "uR");
+        const uTi = gl.getUniformLocation(prog!, "uT");
+        const uS = gl.getUniformLocation(prog!, "uS");
+        const uSc = gl.getUniformLocation(prog!, "uSc");
+        const uBl = gl.getUniformLocation(prog!, "uBl");
+
+        const resize = () => {
+            canvas.width = canvas.clientWidth * devicePixelRatio;
+            canvas.height = canvas.clientHeight * devicePixelRatio;
+            gl.viewport(0, 0, canvas.width, canvas.height);
+            gl.uniform2f(uR, canvas.width, canvas.height);
+        };
+        window.addEventListener("resize", resize);
+        resize();
+
+        let smoothScroll = 0;
+        const hudFill = document.getElementById("bio-hud-fill");
+        const hudPct = document.getElementById("bio-hud-pct");
+        const hudName = document.getElementById("bio-hud-name");
+
+        const NAMES = ["IDENTIDAD", "PROPÓSITO", "CIENCIA", "POTENCIAL"];
+        const container = document.getElementById("bio-experience");
+
+        const frame = (t: number) => {
+            if (!container) return;
+            const rect = container.getBoundingClientRect();
+            const progress = Math.max(
+                0,
+                Math.min(1, -rect.top / (rect.height - window.innerHeight)),
+            );
+
+            smoothScroll += (progress - smoothScroll) * 0.1;
+
+            if (hudFill)
+                hudFill.style.width = `${Math.round(smoothScroll * 100)}%`;
+            if (hudPct)
+                hudPct.textContent =
+                    `${Math.round(smoothScroll * 100)}%`.padStart(3, "0");
+            if (hudName) {
+                const step = Math.min(
+                    NAMES.length - 1,
+                    Math.floor(smoothScroll * NAMES.length),
+                );
+                hudName.textContent = NAMES[step];
+            }
+
+            gl.uniform1f(uTi, t / 1000);
+            gl.uniform1f(uS, smoothScroll);
+
+            const raw = smoothScroll * (NAMES.length - 1);
+            gl.uniform1f(uSc, Math.floor(raw));
+            gl.uniform1f(uBl, raw - Math.floor(raw));
+
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+            requestAnimationFrame(frame);
+        };
+        requestAnimationFrame(frame);
+    }
+</script>

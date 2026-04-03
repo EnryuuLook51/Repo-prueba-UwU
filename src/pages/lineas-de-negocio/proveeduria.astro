@@ -43,6 +43,20 @@ const title = "Proveeduría | Green Prod & Sustainable";
                     <p class="font-body mt-4">
                         {t("proveeduria.identity.p2")}
                     </p>
+                    <div class="mt-10">
+                        <a href="/contacto" class="btn-cta-green">
+                            {t("proveeduria.cta.button")}
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="3"
+                                class="w-5 h-5 ml-2 transition-transform group-hover:translate-x-2"
+                            >
+                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
                 <div class="identity-visual" data-reveal>
                     <div class="stats-box">
@@ -56,7 +70,7 @@ const title = "Proveeduría | Green Prod & Sustainable";
                         </div>
                     </div>
                     <img
-                        src="/images/lineas/proveeduria/warehouse.png"
+                        src="/images/lineas/proveeduria/proveeduri.jpeg"
                         alt="Logística de Proveeduría"
                         class="rounded-3xl shadow-2xl transition-transform duration-700 hover:scale-105"
                     />
@@ -67,26 +81,82 @@ const title = "Proveeduría | Green Prod & Sustainable";
 
     <!-- Propuesta de Valor -->
     <section class="provee-value">
-        <div class="custom-container">
-            <h2 class="section-title text-center" data-reveal>
-                {t("proveeduria.valor.title")}
-            </h2>
-            <div class="value-grid mt-16">
+        <!-- Background Elements -->
+        <div class="value-bg-patterns">
+            <div class="pattern-wavy"></div>
+            <div class="pattern-leaf left"></div>
+            <div class="pattern-leaf right"></div>
+        </div>
+
+        <div class="custom-container relative z-10">
+            <div class="section-header text-center mb-20" data-reveal>
+                <h2 class="value-title font-heading">
+                    {t("proveeduria.valor.title")}
+                    <span class="title-underline"></span>
+                </h2>
+            </div>
+
+            <div class="value-grid">
                 {
-                    [1, 2, 3, 4, 5].map((i) => (
+                    [1, 2, 3].map((i) => (
                         <div class="value-card" data-reveal>
-                            <div class="icon-wrap">
-                                <i
-                                    class={`fas fa-${["boxes-stacked", "clock-rotate-left", "shield-check", "handshake-angle", "anchor-circle-check"][i - 1]}`}
+                            <div class="card-image">
+                                <img
+                                    src={`/images/propuesta-de-valor/${["abastecimiento", "rapidez", "calidad"][i - 1]}.png`}
+                                    alt={t(
+                                        `proveeduria.valor.item${i}.title` as any,
+                                    )}
                                 />
                             </div>
-                            <h3>
-                                {t(`proveeduria.valor.item${i}.title` as any)}
-                            </h3>
-                            <p>{t(`proveeduria.valor.item${i}.desc` as any)}</p>
+                            <div class="card-content">
+                                <h3>
+                                    {t(
+                                        `proveeduria.valor.item${i}.title` as any,
+                                    )}
+                                </h3>
+                                <p>
+                                    {t(
+                                        `proveeduria.valor.item${i}.desc` as any,
+                                    )}
+                                </p>
+                            </div>
                         </div>
                     ))
                 }
+                <div class="value-row-bottom">
+                    {
+                        [4, 5].map((i) => (
+                            <div class="value-card" data-reveal>
+                                <div class="card-image">
+                                    <img
+                                        src={`/images/propuesta-de-valor/${["relacion", "pesca"][i - 4]}.png`}
+                                        alt={t(
+                                            `proveeduria.valor.item${i}.title` as any,
+                                        )}
+                                    />
+                                </div>
+                                <div class="card-content">
+                                    <h3>
+                                        {t(
+                                            `proveeduria.valor.item${i}.title` as any,
+                                        )}
+                                    </h3>
+                                    <p>
+                                        {t(
+                                            `proveeduria.valor.item${i}.desc` as any,
+                                        )}
+                                    </p>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <div class="cta-wrap text-center mt-20" data-reveal>
+                <a href="/contacto" class="btn-conecta">
+                    CONECTA CON NOSOTROS
+                </a>
             </div>
         </div>
     </section>
@@ -221,14 +291,14 @@ const title = "Proveeduría | Green Prod & Sustainable";
             inset: 0;
             background: linear-gradient(
                 to bottom,
-                rgba(2, 69, 122, 0.8),
-                rgba(0, 0, 0, 0.4)
+                rgba(2, 69, 122, 0.6),
+                rgba(97, 173, 223, 0.4)
             );
         }
         .badge {
             display: inline-block;
             padding: 0.6rem 1.4rem;
-            background: var(--brand-green);
+            background: var(--linea-proveeduria);
             color: white;
             border-radius: 100px;
             font-weight: 800;
@@ -236,6 +306,7 @@ const title = "Proveeduría | Green Prod & Sustainable";
             text-transform: uppercase;
             letter-spacing: 0.15em;
             margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(97, 173, 223, 0.3);
         }
         .provee-hero h1 {
             font-size: clamp(4rem, 10vw, 6.5rem);
@@ -252,11 +323,43 @@ const title = "Proveeduría | Green Prod & Sustainable";
             font-family: var(--font-secondary);
         }
 
-        /* Identity */
         .provee-identity {
             padding: 10rem 0;
             background: white;
         }
+
+        .btn-cta-green {
+            display: inline-flex;
+            align-items: center;
+            background: var(--brand-green);
+            color: white;
+            padding: 1.2rem 3rem;
+            border-radius: 100px;
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            font-size: 0.95rem;
+            box-shadow: 0 10px 30px rgba(103, 189, 69, 0.3);
+            transition: all 0.4s var(--transition-premium);
+        }
+
+        .btn-cta-green:hover {
+            transform: translateY(-5px);
+            background: var(--brand-blue);
+            box-shadow: 0 20px 40px rgba(0, 109, 182, 0.4);
+        }
+
+        .btn-cta-green svg {
+            margin-left: 0.75rem;
+            width: 1.25rem;
+            height: 1.25rem;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-cta-green:hover svg {
+            transform: translateX(5px);
+        }
+
         .identity-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -265,7 +368,7 @@ const title = "Proveeduría | Green Prod & Sustainable";
         }
         .identity-text h2 {
             font-size: 3.5rem;
-            color: var(--brand-blue);
+            color: var(--linea-proveeduria);
             font-family: var(--font-primary);
             line-height: 1.1;
         }
@@ -298,117 +401,197 @@ const title = "Proveeduría | Green Prod & Sustainable";
             font-size: 0.7rem;
             text-transform: uppercase;
             font-weight: 700;
-            color: var(--brand-blue);
+            color: var(--linea-proveeduria);
             letter-spacing: 0.1em;
             margin-top: 0.5rem;
         }
 
         /* Propuesta de Valor */
         .provee-value {
-            padding: 8rem 0;
-            background: #f8fafc;
+            padding: 10rem 0;
+            background: radial-gradient(
+                circle at 50% 50%,
+                rgba(103, 189, 69, 0.05) 0%,
+                rgba(255, 255, 255, 1) 100%
+            );
+            position: relative;
+            overflow: hidden;
         }
-        .section-title {
+
+        .value-bg-patterns {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .pattern-wavy {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,500 C150,400 350,600 500,500 C650,400 850,600 1000,500' fill='none' stroke='white' stroke-width='2' opacity='0.3'/%3E%3Cpath d='M0,450 C150,350 350,550 500,450 C650,350 850,550 1000,450' fill='none' stroke='white' stroke-width='1.5' opacity='0.2'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 800px;
+            opacity: 0.5;
+        }
+
+        .pattern-leaf {
+            position: absolute;
+            width: 400px;
+            height: 600px;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M100,20 C120,50 140,80 140,110 C140,150 100,180 100,180 C100,180 60,150 60,110 C60,80 80,50 100,20' fill='%2367bd45' opacity='0.1'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0.1;
+        }
+
+        .pattern-leaf.left {
+            left: -100px;
+            bottom: 10%;
+            transform: rotate(25deg);
+        }
+        .pattern-leaf.right {
+            right: -100px;
+            top: 10%;
+            transform: rotate(-25deg);
+        }
+
+        .value-title {
             font-size: 3.5rem;
-            color: var(--brand-blue);
-            font-family: var(--font-primary);
+            color: var(--linea-proveeduria);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
         }
+
+        .title-underline {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,5 Q25,0 50,5 T100,5' fill='none' stroke='%23006db6' stroke-width='2'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
         .value-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 2.5rem;
-            max-width: 1100px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* 3 items on top */
-        .value-grid > *:nth-child(1),
-        .value-grid > *:nth-child(2),
-        .value-grid > *:nth-child(3) {
-            grid-column: span 2;
+        .value-row-bottom {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 1rem;
         }
 
-        /* 2 items on bottom, centered */
-        .value-grid > *:nth-child(4) {
-            grid-column: 2 / 4;
-        }
-        .value-grid > *:nth-child(5) {
-            grid-column: 4 / 6;
-        }
-
-        @media (max-width: 1024px) {
-            .value-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            .value-grid > * {
-                grid-column: span 2 !important;
-            }
-            /* Move 5th item to be centered on a 2-col row if alone? 
-               Actually 2+2 on mid-screen is fine. */
-            .value-grid > *:nth-child(5) {
-                grid-column: 2 / 4 !important;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .value-grid {
-                grid-template-columns: 1fr;
-            }
-            .value-grid > * {
-                grid-column: 1 / -1 !important;
-            }
-        }
         .value-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 3rem 2.2rem;
-            border-radius: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            transition: all 0.5s var(--transition-premium);
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 40px;
+            padding: 4rem 2.5rem;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            transition: all 0.5s var(--transition-premium);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            max-width: 380px;
         }
+
         .value-card:hover {
-            transform: translateY(-12px) scale(1.02);
+            transform: translateY(-15px) scale(1.03);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.08);
             border-color: var(--brand-green);
-            background: white;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
         }
-        .icon-wrap {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(
-                135deg,
-                rgba(103, 189, 69, 0.15),
-                rgba(0, 109, 182, 0.05)
-            );
-            color: var(--brand-green);
-            border-radius: 20px;
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            margin: 0 auto 2rem;
-            transition: all 0.5s ease;
-            box-shadow: 0 8px 20px rgba(103, 189, 69, 0.1);
+            transition: transform 0.6s ease;
         }
-        .value-card:hover .icon-wrap {
-            transform: scale(1.1) rotate(5deg);
-            background: var(--brand-green);
-            color: white;
-            box-shadow: 0 15px 30px rgba(103, 189, 69, 0.3);
+
+        .value-card:hover .card-image {
+            transform: scale(1.1);
         }
-        .value-card h3 {
-            font-size: 1.25rem;
-            color: var(--brand-blue);
-            margin-bottom: 1rem;
+
+        .card-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 15px rgba(103, 189, 69, 0.1));
         }
-        .value-card p {
+
+        .card-content h3 {
+            font-size: 1.6rem;
+            color: var(--linea-proveeduria);
+            font-family: var(--font-primary);
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+        }
+
+        .card-content p {
             font-size: 1.05rem;
             color: #64748b;
-            line-height: 1.7;
+            line-height: 1.6;
             font-family: var(--font-secondary);
+        }
+
+        .btn-conecta {
+            display: inline-block;
+            background: white;
+            color: var(--linea-proveeduria);
+            padding: 1.2rem 3rem;
+            border-radius: 100px;
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f1f5f9;
+            transition: all 0.4s var(--transition-premium);
+        }
+
+        .btn-conecta:hover {
+            background: var(--linea-proveeduria);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 109, 182, 0.3);
+        }
+
+        @media (max-width: 1100px) {
+            .value-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .value-row-bottom {
+                grid-column: auto;
+                flex-direction: column;
+                align-items: center;
+            }
+            .value-card {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+            .value-title {
+                font-size: 2.5rem;
+            }
         }
 
         /* Diferencial */
@@ -437,12 +620,12 @@ const title = "Proveeduría | Green Prod & Sustainable";
         .row-num {
             font-size: 3rem;
             font-weight: 900;
-            color: var(--brand-green);
-            opacity: 0.2;
+            color: var(--linea-proveeduria);
+            opacity: 0.3;
         }
         .row-content h3 {
             font-size: 1.5rem;
-            color: var(--brand-blue);
+            color: var(--linea-proveeduria);
             margin-bottom: 0.5rem;
         }
         .row-content p {
@@ -455,7 +638,7 @@ const title = "Proveeduría | Green Prod & Sustainable";
         /* Productos */
         .provee-products {
             padding: 8rem 0;
-            background: var(--brand-blue);
+            background: var(--linea-proveeduria);
             color: white;
         }
         .categories-grid {
@@ -537,7 +720,7 @@ const title = "Proveeduría | Green Prod & Sustainable";
             transition: all 0.3s ease;
         }
         .btn-main:hover {
-            background: var(--brand-green);
+            background: var(--linea-proveeduria);
             transform: translateY(-5px);
         }
         .btn-outline {
