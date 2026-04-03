@@ -367,8 +367,8 @@ const headerClass = isTransparentPage
                 </button>
                 <button class="icon-btn" id="mobileToggle" aria-label="Menu">
                     <svg
-                        width="24"
-                        height="24"
+                        width="28"
+                        height="28"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -384,8 +384,8 @@ const headerClass = isTransparentPage
                         ></line></svg
                     >
                     <svg
-                        width="24"
-                        height="24"
+                        width="28"
+                        height="28"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -491,7 +491,7 @@ const headerClass = isTransparentPage
                 top: 0;
                 left: 0;
                 width: 100%;
-                z-index: 1000;
+                z-index: 2000;
                 transition: all 0.5s var(--transition-premium);
                 background: transparent;
             }
@@ -528,14 +528,22 @@ const headerClass = isTransparentPage
                 position: absolute !important;
             }
 
-            .main-header.solid.subpage {
+            .main-header.solid,
+            .main-header.scrolled {
                 background: var(--brand-blue);
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-                border-bottom: none;
+            }
+
+            .main-header.scrolled:not(.solid):not(.subpage) {
+                background: var(--text-white);
             }
 
             .main-header.nav-hidden {
                 transform: translateY(-100%);
+            }
+
+            .hidden {
+                display: none !important;
             }
 
             /* Top Bar */
@@ -935,14 +943,14 @@ const headerClass = isTransparentPage
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 85%;
+                width: 100%;
                 height: 100vh;
                 background: white;
-                z-index: 2000;
+                z-index: -1; /* Detrás de los botones del header */
                 display: flex;
                 flex-direction: column;
                 transition: right 0.5s var(--transition-premium);
-                padding: 2rem;
+                padding: 6rem 2rem 2rem; /* Espacio para el header */
                 box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
             }
 
@@ -1039,13 +1047,37 @@ const headerClass = isTransparentPage
                 }
                 .mobile-actions {
                     display: flex;
-                    gap: 0.5rem;
+                    gap: 0.8rem;
+                    position: relative;
+                    z-index: 2005;
                 }
                 .logo {
                     height: 2.8rem;
                 }
                 .nav-inner {
                     padding: 0 1.5rem;
+                }
+                .nav-container {
+                    height: 5rem;
+                }
+
+                /* Estado cuando el menú está abierto (.solid) */
+                .main-header.solid {
+                    background: white !important;
+                    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+                }
+                .main-header.solid .icon-btn {
+                    color: var(--brand-blue) !important;
+                }
+                .main-header.solid .logo-dark {
+                    opacity: 1 !important;
+                    visibility: visible !important;
+                    position: relative !important;
+                }
+                .main-header.solid .logo-white {
+                    opacity: 0 !important;
+                    visibility: hidden !important;
+                    position: absolute !important;
                 }
             }
         </style>
