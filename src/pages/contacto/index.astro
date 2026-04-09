@@ -36,13 +36,20 @@ const prefixPath = (path: string) => {
       <div class="contact-grid">
         <!-- Formulario -->
         <div class="form-card">
-          <form class="space-y-8">
+          <form
+            id="contact-form"
+            action="https://formspree.io/f/xkoplnrw"
+            method="POST"
+            class="space-y-8"
+          >
             <div class="grid md:grid-cols-2 gap-8">
               <div class="form-group">
                 <label for="firstName">{t("contact.form.name")}</label>
                 <input
                   type="text"
                   id="firstName"
+                  name="firstName"
+                  required
                   placeholder={t("contact.form.name")}
                   class="input-style"
                 />
@@ -52,6 +59,8 @@ const prefixPath = (path: string) => {
                 <input
                   type="text"
                   id="lastName"
+                  name="lastName"
+                  required
                   placeholder={t("contact.form.lastname")}
                   class="input-style"
                 />
@@ -64,6 +73,8 @@ const prefixPath = (path: string) => {
                 <input
                   type="email"
                   id="email"
+                  name="email"
+                  required
                   placeholder="email@address.com"
                   class="input-style"
                 />
@@ -78,6 +89,7 @@ const prefixPath = (path: string) => {
                 <input
                   type="text"
                   id="company"
+                  name="company"
                   placeholder={t("contact.form.company")}
                   class="input-style"
                 />
@@ -88,6 +100,8 @@ const prefixPath = (path: string) => {
               <label for="message">{t("contact.form.message")}</label>
               <textarea
                 id="message"
+                name="message"
+                required
                 placeholder="Cuéntanos sobre tu proyecto o consulta..."
                 class="input-style h-40 resize-none"></textarea>
             </div>
@@ -96,6 +110,8 @@ const prefixPath = (path: string) => {
               <input
                 type="checkbox"
                 id="privacy"
+                name="privacy"
+                required
                 class="w-6 h-6 rounded accent-[#67bd45]"
               />
               <label
@@ -106,9 +122,15 @@ const prefixPath = (path: string) => {
               </label>
             </div>
 
-            <button type="submit" class="submit-btn">
+            <button type="submit" id="submit-btn" class="submit-btn">
               {t("contact.form.send")}
             </button>
+
+            <div
+              id="form-status"
+              class="hidden mt-4 p-4 rounded-xl text-center font-bold"
+            >
+            </div>
           </form>
         </div>
 
@@ -428,4 +450,69 @@ const prefixPath = (path: string) => {
       padding: 2.5rem;
     }
   }
+
+  /* Status Styles */
+  .status-success {
+    background: #ecfdf5;
+    color: #059669;
+    border: 1px solid #10b981;
+  }
+  .status-error {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #f87171;
+  }
 </style>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const status = document.getElementById("form-status");
+  const btn = document.getElementById("submit-btn") as HTMLButtonElement;
+
+  if (form && status && btn) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Enviando...';
+
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: formData,
+          headers: {
+            Accept: "application/json",
+          },
+        });
+
+        if (response.ok) {
+          status.innerHTML =
+            "¡Gracias! Tu mensaje ha sido enviado con éxito 🎉";
+          status.classList.remove("hidden", "status-error");
+          status.classList.add("status-success");
+          form.reset();
+        } else {
+          const data = await response.json();
+          if (Object.hasOwn(data, "errors")) {
+            status.innerHTML = data["errors"]
+              .map((error: any) => error["message"])
+              .join(", ");
+          } else {
+            status.innerHTML =
+              "Vaya, hubo un problema al enviar el formulario.";
+          }
+          status.classList.remove("hidden", "status-success");
+          status.classList.add("status-error");
+        }
+      } catch (error) {
+        status.innerHTML = "Error de conexión. Inténtalo de nuevo más tarde.";
+        status.classList.remove("hidden", "status-success");
+        status.classList.add("status-error");
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "Enviar Mensaje";
+      }
+    });
+  }
+</script>
