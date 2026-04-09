@@ -1,0 +1,505 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/pages/layout/Footer.astro";
+import "../../styles/global.css";
+
+const title = "Nuestro Equipo | Green Prod & Sustainable";
+---
+
+<Layout title={title}>
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content-wrap">
+            <div class="custom-container">
+                <div class="hero-inner">
+                    <span class="hero-label">SOBRE NOSOTROS</span>
+                    <h1 class="hero-title font-heading">
+                        Liderazgo <span class="hero-accent">Corporativo</span>
+                    </h1>
+                    <p class="hero-desc">
+                        Un equipo técnico especializado, profesionales
+                        responsables del control sanitario e investigación al
+                        servicio de la innovación sostenible.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team-section">
+        <div class="custom-container">
+            <div class="team-grid" data-reveal>
+                <div class="team-card">
+                    <div class="team-card-accent"></div>
+                    <div class="team-card-body">
+                        <div class="team-avatar">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>David Salazar</h3>
+                        <span class="team-role"
+                            >CEO — Chief Executive Officer</span
+                        >
+                        <p class="team-desc">
+                            Lidera la visión estratégica de Green Prod &
+                            Sustainable, impulsando la innovación en economía
+                            circular y agricultura sostenible.
+                        </p>
+                        <div class="team-tags">
+                            <span>Estrategia</span><span>Innovación</span><span
+                                >Sostenibilidad</span
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-card-accent blue"></div>
+                    <div class="team-card-body">
+                        <div class="team-avatar blue">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>Wilmer Guzman</h3>
+                        <span class="team-role"
+                            >COO — Chief Operating Officer</span
+                        >
+                        <p class="team-desc">
+                            Supervisa las operaciones de las tres líneas de
+                            negocio, asegurando la excelencia operativa y el
+                            cumplimiento de estándares sanitarios.
+                        </p>
+                        <div class="team-tags">
+                            <span>Operaciones</span><span>Calidad</span><span
+                                >Logística</span
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical team -->
+            <div class="tech-team" data-reveal>
+                <div class="tech-team-inner">
+                    <div class="tech-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <div class="tech-content">
+                        <h3>Equipo Técnico Especializado</h3>
+                        <p>
+                            Contamos con profesionales responsables del control
+                            sanitario e investigación, incluyendo biólogos,
+                            ingenieros agroindustriales y técnicos de
+                            laboratorio certificados.
+                        </p>
+                    </div>
+                    <div class="tech-badges">
+                        <div class="tech-badge">
+                            <i class="fas fa-microscope"></i><span
+                                >Laboratorio<br />Propio</span>
+                        </div>
+                        <div class="tech-badge">
+                            <i class="fas fa-flask"></i><span
+                                >I+D<br />Continua</span>
+                        </div>
+                        <div class="tech-badge">
+                            <i class="fas fa-clipboard-check"></i><span
+                                >Control<br />Sanitario</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Departments -->
+            <div class="dept-grid" data-reveal>
+                <div class="dept-card">
+                    <div class="dept-icon"><i class="fas fa-vial"></i></div>
+                    <h4>Laboratorio</h4>
+                    <p>
+                        Validación analítica de productos, monitoreo de
+                        inocuidad y control de calidad.
+                    </p>
+                </div>
+                <div class="dept-card">
+                    <div class="dept-icon blue">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h4>Producción</h4>
+                    <p>
+                        Operación de plantas de tratamiento primario y
+                        valorización de residuos.
+                    </p>
+                </div>
+                <div class="dept-card">
+                    <div class="dept-icon orange">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h4>Logística</h4>
+                    <p>
+                        Cadena de frío, transporte refrigerado y trazabilidad de
+                        suministros.
+                    </p>
+                </div>
+                <div class="dept-card">
+                    <div class="dept-icon green">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h4>Investigación</h4>
+                    <p>
+                        Desarrollo de bioinsumos con cepas nativas y fórmulas
+                        optimizadas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <Footer />
+</Layout>
+
+<style>
+    .page-hero {
+        position: relative;
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        background:
+            linear-gradient(
+                135deg,
+                rgba(0, 109, 182, 0.92) 0%,
+                rgba(0, 60, 100, 0.96) 100%
+            ),
+            url("/images/banners/ceprobio.jpg") center/cover no-repeat;
+        background-blend-mode: multiply;
+    }
+    .hero-content-wrap {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        padding: 10rem 0 6rem;
+    }
+    .hero-inner {
+        max-width: 800px;
+    }
+    .hero-label {
+        display: inline-block;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+        animation: fadeInUp 0.8s ease forwards;
+        opacity: 0;
+    }
+    .hero-title {
+        font-size: clamp(2.8rem, 6vw, 4.5rem);
+        color: white;
+        line-height: 1.1;
+        margin-bottom: 2rem;
+        animation: fadeInUp 0.8s 0.15s ease forwards;
+        opacity: 0;
+    }
+    .hero-accent {
+        color: var(--brand-green);
+    }
+    .hero-desc {
+        font-size: clamp(1rem, 1.5vw, 1.15rem);
+        color: rgba(255, 255, 255, 0.75);
+        line-height: 1.8;
+        max-width: 650px;
+        animation: fadeInUp 0.8s 0.3s ease forwards;
+        opacity: 0;
+    }
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* TEAM */
+    .team-section {
+        padding: 6rem 0 8rem;
+        background: white;
+    }
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+        max-width: 900px;
+        margin: 0 auto 4rem;
+    }
+    .team-card {
+        background: white;
+        border-radius: 24px;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+    .team-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+    }
+    .team-card-accent {
+        height: 6px;
+        background: linear-gradient(90deg, var(--brand-green), #90c960);
+    }
+    .team-card-accent.blue {
+        background: linear-gradient(90deg, var(--brand-blue), #4c9bd5);
+    }
+    .team-card-body {
+        padding: 2.5rem 2rem;
+        text-align: center;
+    }
+    .team-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        font-size: 2rem;
+        color: var(--brand-green);
+    }
+    .team-avatar.blue {
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        color: var(--brand-blue);
+    }
+    .team-card-body h3 {
+        font-size: 1.5rem;
+        color: var(--text-primary);
+        margin-bottom: 0.4rem;
+        font-weight: 700;
+    }
+    .team-role {
+        display: block;
+        color: var(--brand-green);
+        font-size: 0.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        margin-bottom: 1.25rem;
+    }
+    .team-desc {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+    }
+    .team-tags {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    .team-tags span {
+        background: #f1f5f9;
+        padding: 0.3rem 0.85rem;
+        border-radius: 100px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--text-secondary);
+    }
+
+    /* TECH TEAM */
+    .tech-team {
+        max-width: 1000px;
+        margin: 0 auto 4rem;
+    }
+    .tech-team-inner {
+        background: #f8fafc;
+        border-radius: 24px;
+        padding: 3rem;
+        display: flex;
+        align-items: center;
+        gap: 2.5rem;
+        border: 1px solid #e2e8f0;
+        transition: all 0.4s ease;
+    }
+    .tech-team-inner:hover {
+        border-color: var(--brand-blue);
+        box-shadow: 0 20px 50px rgba(0, 109, 182, 0.06);
+    }
+    .tech-icon {
+        width: 64px;
+        height: 64px;
+        min-width: 64px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--brand-blue);
+        font-size: 1.5rem;
+    }
+    .tech-content {
+        flex: 1;
+    }
+    .tech-content h3 {
+        font-size: 1.2rem;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+    }
+    .tech-content p {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+    }
+    .tech-badges {
+        display: flex;
+        gap: 1.25rem;
+    }
+    .tech-badge {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    .tech-badge i {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: #f0f7ed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--brand-green);
+        font-size: 1rem;
+    }
+    .tech-badge span {
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        line-height: 1.3;
+    }
+
+    /* DEPARTMENTS */
+    .dept-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    .dept-card {
+        background: #f8fafc;
+        border-radius: 20px;
+        padding: 2.5rem 2rem;
+        text-align: center;
+        border: 1px solid #f1f5f9;
+        transition: all 0.35s ease;
+    }
+    .dept-card:hover {
+        border-color: var(--brand-green);
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+    }
+    .dept-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--brand-green);
+        font-size: 1.2rem;
+        margin: 0 auto 1.25rem;
+    }
+    .dept-icon.blue {
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        color: var(--brand-blue);
+    }
+    .dept-icon.orange {
+        background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+        color: #f57c00;
+    }
+    .dept-icon.green {
+        background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        color: var(--brand-green);
+    }
+    .dept-card h4 {
+        font-size: 1.05rem;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+        font-weight: 700;
+    }
+    .dept-card p {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+
+    [data-reveal] {
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+            opacity 0.8s ease,
+            transform 0.8s ease;
+    }
+    [data-reveal].revealed {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @media (max-width: 1024px) {
+        .team-grid {
+            grid-template-columns: 1fr;
+        }
+        .tech-team-inner {
+            flex-direction: column;
+            text-align: center;
+        }
+        .dept-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (max-width: 768px) {
+        .hero-content-wrap {
+            padding: 8rem 0 4rem;
+        }
+        .tech-badges {
+            flex-direction: column;
+        }
+        .dept-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    @media (max-width: 480px) {
+        .page-hero {
+            min-height: auto;
+        }
+        .hero-content-wrap {
+            padding: 7rem 0 3rem;
+        }
+    }
+</style>
+
+<script>
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((e) => {
+                if (e.isIntersecting) e.target.classList.add("revealed");
+            });
+        },
+        { threshold: 0.1 },
+    );
+    document
+        .querySelectorAll("[data-reveal]")
+        .forEach((el) => observer.observe(el));
+</script>

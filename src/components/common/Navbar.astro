@@ -53,50 +53,112 @@ const productsItems = [
         icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 7c.5 0 1 .2 1.4.6.4.4.6.9.6 1.4 0 .5-.2 1-.6 1.4-.4.4-.9.6-1.4.6h-2c-.5 0-1-.2-1.4-.6-.4-.4-.6-.9-.6-1.4 0-.5.2-1 .6-1.4.4-.4.9-.6 1.4-.6h2Z"/><path d="M12 13h.01"/><path d="M18 13h.01"/><path d="M6 13h.01"/><path d="M12 18h.01"/><path d="M18 18h.01"/><path d="M6 18h.01"/><path d="M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2"/></svg>`,
         color: "#00a9e0",
     },
-    {
-        name: t("navbar.proyectos"),
-        desc: t("navbar.proyectos_desc"),
-        href: prefixPath("/nuestros-proyectos"),
-        icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/><path d="M7 3v13"/><path d="M17 3v13"/><path d="M12 3v13"/></svg>`,
-        color: "#f39200",
-    },
-    {
-        name: t("navbar.planta"),
-        desc: t("navbar.planta_desc"),
-        href: prefixPath("/lineas-de-negocio/planta-de-tratamiento"),
-        icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7Z"/></svg>`,
-        color: "#009640",
-    },
 ];
 
 const aboutItems = [
     {
         name: "Propósito y Esencia",
         desc: "Comprometidos con el ecosistema marino y el campo.",
-        href: prefixPath("/nosotros#quienes-somos"),
+        href: prefixPath("/nosotros/proposito"),
         icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
         color: "#67bd45",
     },
     {
         name: "Modelo Circular",
         desc: "Transformando residuos en nutrición orgánica.",
-        href: prefixPath("/nosotros#modelo-circular"),
+        href: prefixPath("/nosotros/modelo-circular"),
         icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20"/><path d="M2 12h20"/><path d="M12 2a14.5 14.5 0 0 1 0 20"/></svg>`,
         color: "#006db6",
     },
     {
         name: "Ejes Estratégicos",
         desc: "Nuestros pilares operativos y tecnológicos.",
-        href: prefixPath("/nosotros#ejes-economicos"),
+        href: prefixPath("/nosotros/ejes-estrategicos"),
         icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-7"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg>`,
         color: "#00a9e0",
     },
     {
         name: "Nuestro Equipo",
         desc: "El talento humano detrás de la innovación.",
-        href: prefixPath("/nosotros#nuestro-equipo"),
+        href: prefixPath("/nosotros/equipo"),
         icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
         color: "#f39200",
+    },
+];
+
+const businessLinesItems = [
+    {
+        name: t("navbar.ceprobio"),
+        desc:
+            lang === "es"
+                ? "Biotecnología avanzada y soluciones biológicas para nutrición y bioestimulación."
+                : "Advanced biotechnology and biological solutions for nutrition and biostimulation.",
+        href: prefixPath("/lineas-de-negocio/ceprobio"),
+        icon: productsItems[0]?.icon,
+        color: "#67bd45",
+    },
+    {
+        name: t("navbar.balik"),
+        desc:
+            lang === "es"
+                ? "Línea de pescados, mariscos y conservas al vacío con cadena de frío garantizada."
+                : "Fish, seafood and vacuum-packed products with guaranteed cold chain.",
+        href: prefixPath("/lineas-de-negocio/balik"),
+        icon: productsItems[2]?.icon,
+        color: "#00a9e0",
+    },
+    {
+        name: t("navbar.proveeduria"),
+        desc:
+            lang === "es"
+                ? "Logística e insumos para el sector agro-industrial sostenible. Abastecimiento integral con seguridad alimentaria."
+                : "Logistics and supplies for sustainable agro-industry with food-safety oriented fulfillment.",
+        href: prefixPath("/lineas-de-negocio/proveeduria"),
+        icon: productsItems[1]?.icon,
+        color: "#006db6",
+    },
+    {
+        name: lang === "es" ? "Proyectos" : "Projects",
+        desc:
+            lang === "es"
+                ? "Desarrollo de infraestructura verde y licitaciones sostenibles."
+                : "Green infrastructure development and sustainable tenders.",
+        href: prefixPath("/lineas-de-negocio/proyectos"),
+        icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/><path d="M7 3v13"/><path d="M17 3v13"/><path d="M12 3v13"/></svg>`,
+        color: "#f39200",
+    },
+];
+
+const productsAndServicesItems = [
+    {
+        name: `${t("navbar.ceprobio")} · ${lang === "es" ? "Productos" : "Products"}`,
+        desc:
+            lang === "es"
+                ? "Catálogo de productos orgánicos y soluciones de nutrición."
+                : "Catalog of organic products and nutrition solutions.",
+        href: prefixPath("/lineas-de-negocio/ceprobio/productos"),
+        icon: productsItems[0]?.icon,
+        color: "#67bd45",
+    },
+    {
+        name: `${t("navbar.balik")} · ${lang === "es" ? "Productos" : "Products"}`,
+        desc:
+            lang === "es"
+                ? "Soluciones, equipos y servicios para operaciones sostenibles."
+                : "Solutions, equipment and services for sustainable operations.",
+        href: prefixPath("/lineas-de-negocio/balik/productos"),
+        icon: productsItems[2]?.icon,
+        color: "#00a9e0",
+    },
+    {
+        name: lang === "es" ? "Servicios · Proveeduría" : "Services · Supply",
+        desc:
+            lang === "es"
+                ? "Proveeduría especializada para la industria y el agro."
+                : "Specialized supply for industry and agriculture.",
+        href: prefixPath("/lineas-de-negocio/proveeduria"),
+        icon: productsItems[1]?.icon,
+        color: "#006db6",
     },
 ];
 
@@ -120,21 +182,6 @@ const headerClass = isTransparentPage
     <!-- Top Bar -->
     <div class="top-bar">
         <div class="top-bar-inner">
-            <a href={prefixPath("/contacto")} class="top-link">
-                <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path d="m22 2-10 11"></path><path d="m22 2-7 20-4-9-9-4Z"
-                    ></path></svg
-                >
-                {t("nav.contact")}
-            </a>
             <a
                 href={getSwitchLangPath(lang === "es" ? "en" : "es")}
                 class="top-link lang-switcher"
@@ -185,8 +232,8 @@ const headerClass = isTransparentPage
             <!-- Desktop Menu -->
             <div class="desktop-menu">
                 <div class="menu-item has-dropdown" data-dropdown="nosotros">
-                    <a class="nav-link" href={prefixPath("/nosotros")}>
-                        SOBRE NOSOTROS
+                    <button class="nav-link">
+                        {lang === "es" ? "Nosotros" : "About"}
                         <svg
                             width="14"
                             height="14"
@@ -198,7 +245,7 @@ const headerClass = isTransparentPage
                             stroke-linejoin="round"
                             class="chevron"><path d="m6 9 6 6 6-6"></path></svg
                         >
-                    </a>
+                    </button>
                     <div class="mega-menu" id="dropdown-nosotros">
                         <div class="mega-content">
                             <div class="mega-main">
@@ -260,9 +307,9 @@ const headerClass = isTransparentPage
                     </div>
                 </div>
 
-                <div class="menu-item has-dropdown" data-dropdown="productos">
+                <div class="menu-item has-dropdown" data-dropdown="lineas">
                     <button class="nav-link">
-                        {t("navbar.products_services_title")}
+                        {lang === "es" ? "Líneas de Negocio" : "Business Lines"}
                         <svg
                             width="14"
                             height="14"
@@ -275,21 +322,17 @@ const headerClass = isTransparentPage
                             class="chevron"><path d="m6 9 6 6 6-6"></path></svg
                         >
                     </button>
-                    <!-- Mega Menu PRODUCTOS -->
-                    <div class="mega-menu" id="dropdown-productos">
+                    <div class="mega-menu" id="dropdown-lineas">
                         <div class="mega-content">
                             <div class="mega-main">
                                 <h3
                                     class="mega-title uppercase tracking-widest"
                                 >
-                                    {
-                                        t("navbar.products_services_title") ||
-                                            "Nuestras Líneas"
-                                    }
+                                    {lang === "es" ? "Nuestras Líneas" : "Our Lines"}
                                 </h3>
                                 <div class="mega-grid three-cols">
                                     {
-                                        productsItems.map((item) => (
+                                        businessLinesItems.map((item) => (
                                             <a
                                                 href={item.href || "#"}
                                                 class="mega-link premium-card"
@@ -319,31 +362,76 @@ const headerClass = isTransparentPage
                     </div>
                 </div>
 
-                {
-                    navLinks.map((link) => (
-                        <a
-                            href={link.href}
-                            class={`nav-link ${currentPath === link.href ? "active" : ""}`}
+                <div class="menu-item has-dropdown" data-dropdown="productos-servicios">
+                    <button class="nav-link">
+                        {lang === "es"
+                            ? "Productos y Servicios"
+                            : "Products & Services"}
+                        <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="chevron"><path d="m6 9 6 6 6-6"></path></svg
                         >
-                            {link.name}
-                        </a>
-                    ))
-                }
+                    </button>
+                    <div class="mega-menu" id="dropdown-productos-servicios">
+                        <div class="mega-content">
+                            <div class="mega-main">
+                                <h3 class="mega-title uppercase tracking-widest">
+                                    {lang === "es"
+                                        ? "Productos y Servicios"
+                                        : "Products & Services"}
+                                </h3>
+                                <div class="mega-grid three-cols">
+                                    {
+                                        productsAndServicesItems.map((item) => (
+                                            <a
+                                                href={item.href || "#"}
+                                                class="mega-link premium-card"
+                                            >
+                                                <div
+                                                    class="mega-link-icon"
+                                                    style={`--icon-color: ${item.color}`}
+                                                    set:html={item.icon}
+                                                    aria-hidden="true"
+                                                />
+                                                <div class="mega-link-content">
+                                                    <span class="mega-link-title">
+                                                        {item.name}
+                                                    </span>
+                                                    <span class="mega-link-desc">
+                                                        {item.desc}
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <button class="icon-btn search-btn" aria-label="Buscar">
-                    <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><circle cx="11" cy="11" r="8"></circle><path
-                            d="m21 21-4.3-4.3"></path></svg
-                    >
-                </button>
+                <a
+                    href={prefixPath("/operaciones")}
+                    class={`nav-link ${currentPath === prefixPath("/operaciones") ? "active" : ""}`}
+                >
+                    {lang === "es" ? "Operaciones" : "Operations"}
+                </a>
+
+                <a
+                    href={prefixPath("/contacto")}
+                    class="nav-link nav-cta"
+                    aria-label={lang === "es" ? "Ir a Contacto" : "Go to Contact"}
+                >
+                    {lang === "es" ? "Contacto" : "Contact"}
+                    <span class="cta-dot" aria-hidden="true"></span>
+                </a>
             </div>
 
             <!-- Overlay for Mega Menu Blur -->
@@ -351,20 +439,6 @@ const headerClass = isTransparentPage
 
             <!-- Mobile Actions -->
             <div class="mobile-actions">
-                <button class="icon-btn" id="mobileSearch" aria-label="Buscar">
-                    <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><circle cx="11" cy="11" r="8"></circle><path
-                            d="m21 21-4.3-4.3"></path></svg
-                    >
-                </button>
                 <button class="icon-btn" id="mobileToggle" aria-label="Menu">
                     <svg
                         width="28"
@@ -404,9 +478,6 @@ const headerClass = isTransparentPage
         <!-- Mobile Menu Overlay -->
         <div class="mobile-menu" id="mobileMenu">
             <div class="mobile-menu-top">
-                <a href={prefixPath("/contacto")} class="top-link"
-                    >{t("nav.contact")}</a
-                >
                 <a href={lang === "es" ? "/en" : "/"} class="top-link"
                     >{lang === "es" ? "EN" : "ES"}</a
                 >
@@ -415,7 +486,7 @@ const headerClass = isTransparentPage
                 <!-- Mobile Accordions -->
                 <div class="mobile-accordion">
                     <button class="accordion-trigger"
-                        >{t("nav.about")}
+                        >{lang === "es" ? "Nosotros" : "About"}
                         <svg
                             width="18"
                             height="18"
@@ -439,7 +510,7 @@ const headerClass = isTransparentPage
 
                 <div class="mobile-accordion">
                     <button class="accordion-trigger"
-                        >{t("navbar.products_services_title")}
+                        >{lang === "es" ? "Líneas de Negocio" : "Business Lines"}
                         <svg
                             width="18"
                             height="18"
@@ -454,15 +525,41 @@ const headerClass = isTransparentPage
                     >
                     <div class="accordion-content">
                         {
-                            productsItems.map((item) => (
+                            businessLinesItems.map((item) => (
                                 <a href={item.href}>{item.name}</a>
                             ))
                         }
                     </div>
                 </div>
 
-                <a href={prefixPath("/impacto-circular")} class="mobile-link"
-                    >{t("nav.activities")}</a
+                <div class="mobile-accordion">
+                    <button class="accordion-trigger"
+                        >{lang === "es"
+                            ? "Productos y Servicios"
+                            : "Products & Services"}
+                        <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="chevron"><path d="m6 9 6 6 6-6"></path></svg
+                        ></button
+                    >
+                    <div class="accordion-content">
+                        {
+                            productsAndServicesItems.map((item) => (
+                                <a href={item.href}>{item.name}</a>
+                            ))
+                        }
+                    </div>
+                </div>
+
+                <a href={prefixPath("/operaciones")} class="mobile-link"
+                    >{lang === "es" ? "Operaciones" : "Operations"}</a
                 >
             </div>
             <div class="mobile-menu-footer">
@@ -480,7 +577,7 @@ const headerClass = isTransparentPage
                             d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
                         ></path></svg
                     >
-                    {t("navbar.work_with_us")}
+                    {lang === "es" ? "Contacto" : "Contact"}
                 </a>
             </div>
         </div>
@@ -671,6 +768,84 @@ const headerClass = isTransparentPage
                 cursor: pointer;
                 transition: all 0.3s var(--transition-premium);
                 border-radius: 100px;
+            }
+
+            /* CTA Contacto (desktop) */
+            .nav-link.nav-cta {
+                position: relative;
+                padding: 0.9rem 1.35rem;
+                margin-left: 0.25rem;
+                color: white !important;
+                background: linear-gradient(
+                    135deg,
+                    rgba(103, 189, 69, 1) 0%,
+                    rgba(0, 109, 182, 1) 100%
+                );
+                box-shadow:
+                    0 12px 28px rgba(0, 0, 0, 0.18),
+                    0 0 0 1px rgba(255, 255, 255, 0.14) inset;
+                overflow: hidden;
+                isolation: isolate;
+            }
+
+            .nav-link.nav-cta::before {
+                content: "";
+                position: absolute;
+                inset: -2px;
+                background: radial-gradient(
+                    120px 80px at 30% 30%,
+                    rgba(255, 255, 255, 0.35),
+                    transparent 60%
+                );
+                opacity: 0.65;
+                transform: translate3d(0, 0, 0);
+                transition: opacity 0.35s ease, transform 0.35s ease;
+                z-index: -1;
+            }
+
+            .nav-link.nav-cta:hover {
+                transform: translateY(-1px);
+                filter: saturate(1.05);
+                color: white !important;
+                background: linear-gradient(
+                    135deg,
+                    rgba(103, 189, 69, 1) 0%,
+                    rgba(0, 169, 224, 1) 100%
+                );
+            }
+
+            .nav-link.nav-cta:hover::before {
+                opacity: 0.9;
+                transform: translate3d(10px, -6px, 0);
+            }
+
+            .nav-link.nav-cta:focus-visible {
+                outline: none;
+                box-shadow:
+                    0 12px 28px rgba(0, 0, 0, 0.18),
+                    0 0 0 3px rgba(103, 189, 69, 0.45),
+                    0 0 0 6px rgba(0, 109, 182, 0.25);
+            }
+
+            .cta-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 999px;
+                background: rgba(255, 255, 255, 0.9);
+                box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.14);
+                animation: ctaPulse 1.8s ease-in-out infinite;
+            }
+
+            @keyframes ctaPulse {
+                0%,
+                100% {
+                    transform: scale(1);
+                    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.14);
+                }
+                50% {
+                    transform: scale(1.08);
+                    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.12);
+                }
             }
 
             .main-header.scrolled .nav-link {
@@ -960,7 +1135,7 @@ const headerClass = isTransparentPage
 
             .mobile-menu-top {
                 display: flex;
-                justify-content: space-between;
+                justify-content: flex-end;
                 padding-bottom: 2rem;
                 border-bottom: 1px solid var(--border-color);
                 margin-bottom: 2rem;

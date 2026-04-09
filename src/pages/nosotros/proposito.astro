@@ -1,0 +1,523 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/pages/layout/Footer.astro";
+import "../../styles/global.css";
+
+const title = "Propósito y Esencia | Green Prod & Sustainable";
+---
+
+<Layout title={title}>
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content-wrap">
+            <div class="custom-container">
+                <div class="hero-inner">
+                    <span class="hero-label">SOBRE NOSOTROS</span>
+                    <h1 class="hero-title font-heading">
+                        Conectando el mar<br />con el campo para un<br />
+                        <span class="hero-accent">futuro orgánico</span>
+                    </h1>
+                    <p class="hero-desc">
+                        Comprometidos con el cuidado del ecosistema marino y el
+                        desarrollo de una agricultura sostenible, brindando
+                        nutrición saludable y garantizando el abastecimiento de
+                        alimentos.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="stat-num">10+</span>
+                            <span class="stat-label"
+                                >Años de<br />Innovación</span
+                            >
+                        </div>
+                        <div class="hero-stat-divider"></div>
+                        <div class="hero-stat">
+                            <span class="stat-num">3</span>
+                            <span class="stat-label">Ejes<br />Económicos</span>
+                        </div>
+                        <div class="hero-stat-divider"></div>
+                        <div class="hero-stat">
+                            <span class="stat-num">0</span>
+                            <span class="stat-label">Desechos<br />al Mar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proposito y Esencia Content -->
+    <section class="purpose-section" id="proposito">
+        <div class="custom-container">
+            <div class="purpose-grid">
+                <div class="purpose-left" data-reveal>
+                    <span class="overline-tag">Propósito y Esencia</span>
+                    <h2 class="purpose-title font-heading">
+                        Nuestra <span class="text-brand-green">Esencia</span> Sostenible
+                    </h2>
+                    <p class="purpose-lead">
+                        Somos una empresa comprometida con el cuidado del
+                        ecosistema marino y el desarrollo de una agricultura
+                        sostenible.
+                    </p>
+                    <p class="purpose-body">
+                        Brindamos soluciones a los residuos marinos generados en
+                        la pesca artesanal, transformándolos en abonos
+                        orgánicos, asegurando productos sanos y una nutrición
+                        orgánica.
+                    </p>
+                    <p class="purpose-body">
+                        Promovemos el comercio justo de productos del mar que
+                        desarrollan una pesca responsable, respetando las tallas
+                        mínimas; asegurando los estándares sanitarios en toda la
+                        cadena de valor.
+                    </p>
+                    <div class="purpose-values">
+                        <div class="purpose-value">
+                            <div class="pv-icon">
+                                <i class="fas fa-fish"></i>
+                            </div>
+                            <div>
+                                <h4>Pesca Responsable</h4>
+                                <p>
+                                    Cero desechos al mar, respetando tallas
+                                    mínimas y ciclos biológicos.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="purpose-value">
+                            <div class="pv-icon">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <div>
+                                <h4>Nutrición Orgánica</h4>
+                                <p>
+                                    Garantizamos alimentos sanos y abonos 100%
+                                    orgánicos.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="purpose-value">
+                            <div class="pv-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Estándares Sanitarios</h4>
+                                <p>
+                                    Protocolos HACCP, BPM y POES en toda la
+                                    cadena.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="purpose-right" data-reveal>
+                    <div class="purpose-image-stack">
+                        <img
+                            src="/images/banners/ceprobio.jpg"
+                            alt="Laboratorio Green Prod"
+                            class="purpose-img-main"
+                            loading="lazy"
+                        />
+                        <div class="purpose-badge-card">
+                            <i class="fas fa-award"></i>
+                            <span>Licencias SANIPES & SENASA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission/Vision/Values -->
+    <section class="mvv-section">
+        <div class="custom-container">
+            <div class="mvv-grid" data-reveal>
+                <div class="mvv-card">
+                    <div class="mvv-icon"><i class="fas fa-bullseye"></i></div>
+                    <h3>Nuestra Misión</h3>
+                    <p>
+                        Garantizar la seguridad alimentaria a través de insumos
+                        orgánicos y procesos circulares, asegurando el
+                        abastecimiento de alimentos sanos y la nutrición
+                        orgánica.
+                    </p>
+                </div>
+                <div class="mvv-card">
+                    <div class="mvv-icon blue"><i class="fas fa-eye"></i></div>
+                    <h3>Nuestra Visión</h3>
+                    <p>
+                        Ser el referente regional en valorización de residuos
+                        hidrobiológicos y biotecnología aplicada a la
+                        agricultura sostenible.
+                    </p>
+                </div>
+                <div class="mvv-card">
+                    <div class="mvv-icon orange">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Nuestros Valores</h3>
+                    <p>
+                        Innovación circular, compromiso con el ecosistema
+                        marino, excelencia operativa y transparencia en toda
+                        nuestra cadena de valor.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <Footer />
+</Layout>
+
+<style>
+    /* HERO */
+    .page-hero {
+        position: relative;
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        background:
+            linear-gradient(
+                135deg,
+                rgba(0, 109, 182, 0.92) 0%,
+                rgba(0, 60, 100, 0.95) 50%,
+                rgba(0, 40, 70, 0.97) 100%
+            ),
+            url("/images/banners/ceprobio.jpg") center/cover no-repeat;
+        background-blend-mode: multiply;
+    }
+    .hero-content-wrap {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        padding: 10rem 0 6rem;
+    }
+    .hero-inner {
+        max-width: 900px;
+    }
+    .hero-label {
+        display: inline-block;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+        animation: fadeInUp 0.8s ease forwards;
+        opacity: 0;
+    }
+    .hero-title {
+        font-size: clamp(2.8rem, 6vw, 5rem);
+        color: white;
+        line-height: 1.1;
+        margin-bottom: 2rem;
+        animation: fadeInUp 0.8s 0.15s ease forwards;
+        opacity: 0;
+    }
+    .hero-accent {
+        color: var(--brand-green);
+    }
+    .hero-desc {
+        font-size: clamp(1rem, 1.5vw, 1.15rem);
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.8;
+        max-width: 650px;
+        margin-bottom: 3rem;
+        animation: fadeInUp 0.8s 0.3s ease forwards;
+        opacity: 0;
+    }
+    .hero-stats {
+        display: flex;
+        align-items: center;
+        gap: 2.5rem;
+        animation: fadeInUp 0.8s 0.45s ease forwards;
+        opacity: 0;
+    }
+    .hero-stat {
+        display: flex;
+        flex-direction: column;
+    }
+    .stat-num {
+        font-size: 3rem;
+        font-weight: 900;
+        color: var(--brand-green);
+        line-height: 1;
+    }
+    .stat-label {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.5);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-top: 0.5rem;
+        line-height: 1.4;
+    }
+    .hero-stat-divider {
+        width: 1px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* SHARED */
+    .overline-tag {
+        display: inline-block;
+        color: var(--brand-green);
+        font-weight: 800;
+        font-size: 0.8rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+    }
+    .text-brand-green {
+        color: var(--brand-green);
+    }
+
+    /* PURPOSE */
+    .purpose-section {
+        padding: 8rem 0;
+        background: white;
+    }
+    .purpose-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 5rem;
+        align-items: start;
+    }
+    .purpose-title {
+        font-size: clamp(2rem, 3.5vw, 2.8rem);
+        color: var(--text-primary);
+        line-height: 1.15;
+        margin-bottom: 2rem;
+    }
+    .purpose-lead {
+        font-size: 1.15rem;
+        color: var(--text-primary);
+        line-height: 1.8;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+    }
+    .purpose-body {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        line-height: 1.8;
+        margin-bottom: 1.25rem;
+    }
+    .purpose-values {
+        margin-top: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .purpose-value {
+        display: flex;
+        gap: 1.25rem;
+        align-items: flex-start;
+        padding: 1.25rem 1.5rem;
+        border-radius: 16px;
+        border: 1px solid transparent;
+        transition: all 0.35s ease;
+    }
+    .purpose-value:hover {
+        background: #f8fafc;
+        border-color: #e2e8f0;
+        transform: translateX(6px);
+    }
+    .pv-icon {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--brand-green);
+        font-size: 1.15rem;
+    }
+    .purpose-value h4 {
+        font-size: 1.05rem;
+        color: var(--text-primary);
+        margin-bottom: 0.35rem;
+        font-weight: 700;
+    }
+    .purpose-value p {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+    .purpose-right {
+        position: sticky;
+        top: 8rem;
+    }
+    .purpose-image-stack {
+        position: relative;
+    }
+    .purpose-img-main {
+        width: 100%;
+        border-radius: 24px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+    }
+    .purpose-badge-card {
+        position: absolute;
+        bottom: -1.5rem;
+        left: -1.5rem;
+        background: white;
+        padding: 1.25rem 2rem;
+        border-radius: 16px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: var(--text-primary);
+    }
+    .purpose-badge-card i {
+        color: var(--brand-green);
+        font-size: 1.3rem;
+    }
+
+    /* MISSION VISION VALUES */
+    .mvv-section {
+        padding: 6rem 0 8rem;
+        background: #f8fafc;
+    }
+    .mvv-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+    .mvv-card {
+        background: white;
+        border-radius: 24px;
+        padding: 3rem 2.5rem;
+        border: 1px solid #e2e8f0;
+        transition: all 0.4s ease;
+        text-align: center;
+    }
+    .mvv-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
+        border-color: var(--brand-green);
+    }
+    .mvv-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--brand-green);
+        font-size: 1.5rem;
+        margin: 0 auto 1.5rem;
+    }
+    .mvv-icon.blue {
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        color: var(--brand-blue);
+    }
+    .mvv-icon.orange {
+        background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+        color: #f57c00;
+    }
+    .mvv-card h3 {
+        font-size: 1.3rem;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        font-weight: 700;
+    }
+    .mvv-card p {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+    }
+
+    /* REVEAL */
+    [data-reveal] {
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+            opacity 0.8s ease,
+            transform 0.8s ease;
+    }
+    [data-reveal].revealed {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+        .purpose-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        .purpose-right {
+            position: relative;
+            top: 0;
+        }
+        .mvv-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    @media (max-width: 768px) {
+        .hero-content-wrap {
+            padding: 8rem 0 4rem;
+        }
+        .hero-stats {
+            gap: 1.5rem;
+        }
+        .stat-num {
+            font-size: 2.2rem;
+        }
+    }
+    @media (max-width: 480px) {
+        .page-hero {
+            min-height: auto;
+        }
+        .hero-content-wrap {
+            padding: 7rem 0 3rem;
+        }
+        .hero-title {
+            font-size: 2rem;
+        }
+        .hero-stats {
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .hero-stat-divider {
+            display: none;
+        }
+    }
+</style>
+
+<script>
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((e) => {
+                if (e.isIntersecting) e.target.classList.add("revealed");
+            });
+        },
+        { threshold: 0.1 },
+    );
+    document
+        .querySelectorAll("[data-reveal]")
+        .forEach((el) => observer.observe(el));
+</script>

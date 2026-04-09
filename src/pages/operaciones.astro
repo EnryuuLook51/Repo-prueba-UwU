@@ -1,0 +1,189 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/common/Navbar.astro";
+import Footer from "../components/pages/layout/Footer.astro";
+---
+
+<Layout title="Operaciones | Green Prod & Sustainable">
+  <Navbar />
+
+  <main class="ops-page">
+    <section class="ops-hero">
+      <div class="ops-wrap">
+        <p class="ops-kicker">Operaciones</p>
+        <h1 class="ops-title">Ejecución, control y mejora continua.</h1>
+        <p class="ops-subtitle">
+          Esta sección centraliza cómo operamos: procesos, gestión de calidad,
+          seguridad, y la trazabilidad que sostiene nuestros resultados.
+        </p>
+        <div class="ops-actions">
+          <a class="ops-cta" href="/contacto">Hablar con Operaciones</a>
+          <a class="ops-secondary" href="/nosotros/ejes-estrategicos"
+            >Ver ejes estratégicos</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="ops-grid">
+      <div class="ops-wrap">
+        <div class="ops-cards">
+          <article class="ops-card">
+            <h2>Gestión de procesos</h2>
+            <p>
+              Definimos estándares operativos, indicadores y ciclos de mejora
+              para asegurar consistencia y eficiencia.
+            </p>
+          </article>
+          <article class="ops-card">
+            <h2>Calidad y trazabilidad</h2>
+            <p>
+              Documentación, control de lotes y seguimiento de variables clave
+              para garantizar resultados verificables.
+            </p>
+          </article>
+          <article class="ops-card">
+            <h2>Seguridad y cumplimiento</h2>
+            <p>
+              Buenas prácticas, seguridad operacional y cumplimiento en campo y
+              planta para cuidar a las personas y el entorno.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .ops-page {
+    padding-top: 8.4rem;
+    background: linear-gradient(180deg, #f7fbff 0%, #ffffff 55%);
+  }
+
+  .ops-hero {
+    padding: 5rem 1.5rem 3rem;
+  }
+
+  .ops-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .ops-kicker {
+    font-family: var(--font-primary);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: var(--brand-blue);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .ops-title {
+    font-family: var(--font-primary);
+    font-weight: 900;
+    color: var(--text-primary);
+    font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+    line-height: 1.06;
+    margin: 0 0 1rem 0;
+  }
+
+  .ops-subtitle {
+    font-family: var(--font-primary);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 60ch;
+    margin: 0 0 2rem 0;
+  }
+
+  .ops-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    align-items: center;
+  }
+
+  .ops-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.95rem 1.25rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-family: var(--font-primary);
+    font-weight: 800;
+    color: white;
+    background: linear-gradient(
+      135deg,
+      rgba(103, 189, 69, 1) 0%,
+      rgba(0, 109, 182, 1) 100%
+    );
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.14);
+    transition: transform 0.25s ease, filter 0.25s ease;
+  }
+
+  .ops-cta:hover {
+    transform: translateY(-2px);
+    filter: saturate(1.05);
+  }
+
+  .ops-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.95rem 1.25rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-family: var(--font-primary);
+    font-weight: 800;
+    color: var(--brand-blue);
+    background: rgba(0, 109, 182, 0.08);
+    border: 1px solid rgba(0, 109, 182, 0.16);
+  }
+
+  .ops-grid {
+    padding: 0 1.5rem 5rem;
+  }
+
+  .ops-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .ops-card {
+    border-radius: 1.25rem;
+    background: white;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.06);
+    padding: 1.5rem;
+  }
+
+  .ops-card h2 {
+    margin: 0 0 0.6rem 0;
+    font-family: var(--font-primary);
+    font-weight: 900;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+  }
+
+  .ops-card p {
+    margin: 0;
+    font-family: var(--font-primary);
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 900px) {
+    .ops-page {
+      padding-top: 5rem;
+    }
+    .ops-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

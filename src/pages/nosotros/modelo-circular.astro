@@ -1,0 +1,486 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/pages/layout/Footer.astro";
+import "../../styles/global.css";
+
+const title = "Modelo Circular | Green Prod & Sustainable";
+---
+
+<Layout title={title}>
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content-wrap">
+            <div class="custom-container">
+                <div class="hero-inner">
+                    <span class="hero-label">SOBRE NOSOTROS</span>
+                    <h1 class="hero-title font-heading">
+                        Nuestro <span class="hero-accent">Modelo</span> Circular
+                    </h1>
+                    <p class="hero-desc">
+                        Un ciclo virtuoso que transforma los residuos del mar en
+                        vida para el campo. Cero desechos, máximo valor.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Circular Model -->
+    <section class="circular-section">
+        <div class="custom-container">
+            <div class="circular-intro" data-reveal>
+                <p class="intro-lead">
+                    En Green Prod & Sustainable, hemos diseñado un modelo de
+                    economía circular donde <strong>nada se desperdicia</strong
+                    >. Cada etapa de nuestro proceso genera valor, desde la
+                    pesca artesanal responsable hasta la nutrición de los suelos
+                    agrícolas.
+                </p>
+            </div>
+
+            <div class="circular-flow" data-reveal>
+                <!-- Step 1 -->
+                <div class="flow-step" data-step="1">
+                    <div class="flow-step-icon">
+                        <i class="fas fa-anchor"></i>
+                    </div>
+                    <div class="flow-step-content">
+                        <span class="flow-step-num">01</span>
+                        <h3>Pesca Artesanal Responsable</h3>
+                        <p>
+                            Ofrecemos productos marinos respetando las tallas
+                            mínimas, brindamos soluciones a los desechos que se
+                            generan en la pesca artesanal, cuidando el mar. <strong
+                                >Cero desechos al océano.</strong>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flow-connector">
+                    <svg viewBox="0 0 60 20" class="flow-arrow"
+                        ><path
+                            d="M0 10 L50 10 M40 3 L52 10 L40 17"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            fill="none"></path></svg
+                    >
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flow-step" data-step="2">
+                    <div class="flow-step-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <div class="flow-step-content">
+                        <span class="flow-step-num">02</span>
+                        <h3>Proceso Primario (Planta Balik)</h3>
+                        <p>
+                            Procesamiento de productos hidrobiológicos bajo
+                            estándares internacionales ESG. Productos frescos,
+                            refrigerados, congelados y empacados al vacío con
+                            protocolos HACCP y BPM.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flow-connector">
+                    <svg viewBox="0 0 60 20" class="flow-arrow"
+                        ><path
+                            d="M0 10 L50 10 M40 3 L52 10 L40 17"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            fill="none"></path></svg
+                    >
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flow-step highlight" data-step="3">
+                    <div class="flow-step-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <div class="flow-step-content">
+                        <span class="flow-step-num">03</span>
+                        <h3>Valorización de Residuos</h3>
+                        <p>
+                            Los residuos no se botan: se transforman en <strong
+                                >abono líquido (hidrolizado de pescado)</strong
+                            >, <strong>aceites para uso agrícola</strong> y <strong
+                                >materia orgánica sólida</strong
+                            >. La Planta de Tratamiento es el corazón de nuestra
+                            economía circular.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flow-connector">
+                    <svg viewBox="0 0 60 20" class="flow-arrow"
+                        ><path
+                            d="M0 10 L50 10 M40 3 L52 10 L40 17"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            fill="none"></path></svg
+                    >
+                </div>
+
+                <!-- Step 4 -->
+                <div class="flow-step" data-step="4">
+                    <div class="flow-step-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="flow-step-content">
+                        <span class="flow-step-num">04</span>
+                        <h3>Agricultura Sostenible</h3>
+                        <p>
+                            Nutrimos los suelos agrícolas, mejoramos la
+                            productividad y reducimos el impacto ambiental,
+                            asegurando la nutrición orgánica. Producimos
+                            biofungicidas, bioinsecticidas y bionematicidas como
+                            propuesta integral.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Circular return -->
+            <div class="circular-return" data-reveal>
+                <span class="return-label">
+                    <i class="fas fa-sync-alt"></i> Ciclo continuo · Cero residuos
+                </span>
+            </div>
+
+            <!-- Impact numbers -->
+            <div class="impact-grid" data-reveal>
+                <div class="impact-card">
+                    <span class="impact-num">10</span>
+                    <span class="impact-unit">Ton/mes</span>
+                    <span class="impact-label">Residuos procesados</span>
+                </div>
+                <div class="impact-card">
+                    <span class="impact-num">0</span>
+                    <span class="impact-unit">Desechos</span>
+                    <span class="impact-label">Al océano</span>
+                </div>
+                <div class="impact-card">
+                    <span class="impact-num">100%</span>
+                    <span class="impact-unit">Orgánico</span>
+                    <span class="impact-label">Productos certificados</span>
+                </div>
+                <div class="impact-card">
+                    <span class="impact-num">3</span>
+                    <span class="impact-unit">Plantas</span>
+                    <span class="impact-label">Operativas</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <Footer />
+</Layout>
+
+<style>
+    .page-hero {
+        position: relative;
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        background:
+            linear-gradient(
+                135deg,
+                rgba(103, 189, 69, 0.9) 0%,
+                rgba(0, 109, 182, 0.95) 100%
+            ),
+            url("/images/lineas/ceprobio/centro.png") center/cover no-repeat;
+        background-blend-mode: multiply;
+    }
+    .hero-content-wrap {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        padding: 10rem 0 6rem;
+    }
+    .hero-inner {
+        max-width: 800px;
+    }
+    .hero-label {
+        display: inline-block;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+        animation: fadeInUp 0.8s ease forwards;
+        opacity: 0;
+    }
+    .hero-title {
+        font-size: clamp(2.8rem, 6vw, 4.5rem);
+        color: white;
+        line-height: 1.1;
+        margin-bottom: 2rem;
+        animation: fadeInUp 0.8s 0.15s ease forwards;
+        opacity: 0;
+    }
+    .hero-accent {
+        color: #a3d06f;
+    }
+    .hero-desc {
+        font-size: clamp(1rem, 1.5vw, 1.15rem);
+        color: rgba(255, 255, 255, 0.75);
+        line-height: 1.8;
+        max-width: 600px;
+        animation: fadeInUp 0.8s 0.3s ease forwards;
+        opacity: 0;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* CIRCULAR */
+    .circular-section {
+        padding: 6rem 0 8rem;
+        background: white;
+    }
+    .circular-intro {
+        max-width: 800px;
+        margin: 0 auto 5rem;
+        text-align: center;
+    }
+    .intro-lead {
+        font-size: 1.2rem;
+        color: var(--text-secondary);
+        line-height: 1.9;
+    }
+    .intro-lead strong {
+        color: var(--text-primary);
+    }
+
+    .circular-flow {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+        gap: 0;
+        align-items: stretch;
+        margin-bottom: 2rem;
+    }
+    .flow-step {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        border: 1px solid #e8f0e4;
+        transition: all 0.4s ease;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+    .flow-step:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 50px rgba(103, 189, 69, 0.12);
+        border-color: var(--brand-green);
+    }
+    .flow-step.highlight {
+        background: linear-gradient(135deg, #f0f9eb, #e8f5e2);
+        border-color: var(--brand-green);
+        box-shadow: 0 10px 30px rgba(103, 189, 69, 0.1);
+    }
+    .flow-step-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, var(--brand-green), #52a536);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+        margin-bottom: 1.25rem;
+    }
+    .flow-step-num {
+        font-size: 0.75rem;
+        font-weight: 800;
+        color: var(--brand-green);
+        letter-spacing: 0.15em;
+        opacity: 0.5;
+    }
+    .flow-step h3 {
+        font-size: 1.1rem;
+        color: var(--text-primary);
+        margin: 0.5rem 0 0.75rem;
+        line-height: 1.3;
+        font-weight: 700;
+    }
+    .flow-step p {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        line-height: 1.65;
+        flex-grow: 1;
+    }
+    .flow-step p strong {
+        color: var(--text-primary);
+        font-weight: 600;
+    }
+    .flow-connector {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0.5rem;
+        color: var(--brand-green);
+        opacity: 0.4;
+    }
+    .flow-arrow {
+        width: 40px;
+        height: 16px;
+    }
+
+    .circular-return {
+        text-align: center;
+        padding: 2rem 0 4rem;
+    }
+    .return-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: #f0f7ed;
+        padding: 0.7rem 2rem;
+        border-radius: 100px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--brand-green);
+        letter-spacing: 0.05em;
+    }
+
+    /* IMPACT */
+    .impact-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+    .impact-card {
+        background: #f8fafc;
+        border-radius: 20px;
+        padding: 2.5rem 2rem;
+        text-align: center;
+        border: 1px solid #f1f5f9;
+        transition: all 0.35s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .impact-card:hover {
+        border-color: var(--brand-green);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+    }
+    .impact-num {
+        font-size: 3rem;
+        font-weight: 900;
+        color: var(--brand-green);
+        line-height: 1;
+    }
+    .impact-unit {
+        font-size: 0.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--text-primary);
+        letter-spacing: 0.1em;
+        margin-top: 0.25rem;
+    }
+    .impact-label {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin-top: 0.5rem;
+    }
+
+    [data-reveal] {
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+            opacity 0.8s ease,
+            transform 0.8s ease;
+    }
+    [data-reveal].revealed {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @media (max-width: 1100px) {
+        .circular-flow {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        .flow-connector {
+            transform: rotate(90deg);
+            padding: 0.25rem 0;
+        }
+        .impact-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (max-width: 768px) {
+        .hero-content-wrap {
+            padding: 8rem 0 4rem;
+        }
+    }
+    @media (max-width: 480px) {
+        .page-hero {
+            min-height: auto;
+        }
+        .hero-content-wrap {
+            padding: 7rem 0 3rem;
+        }
+        .impact-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<script>
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((e) => {
+                if (e.isIntersecting) e.target.classList.add("revealed");
+            });
+        },
+        { threshold: 0.1 },
+    );
+    document
+        .querySelectorAll("[data-reveal]")
+        .forEach((el) => observer.observe(el));
+
+    // Stagger flow steps
+    const flowSteps = document.querySelectorAll(".flow-step");
+    const flowOb = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const step = entry.target as HTMLElement;
+                    const i = Array.from(flowSteps).indexOf(step);
+                    setTimeout(() => {
+                        step.style.opacity = "1";
+                        step.style.transform = "translateY(0)";
+                    }, i * 150);
+                }
+            });
+        },
+        { threshold: 0.2 },
+    );
+    flowSteps.forEach((s) => {
+        (s as HTMLElement).style.opacity = "0";
+        (s as HTMLElement).style.transform = "translateY(30px)";
+        (s as HTMLElement).style.transition =
+            "opacity 0.6s ease, transform 0.6s ease";
+        flowOb.observe(s);
+    });
+</script>

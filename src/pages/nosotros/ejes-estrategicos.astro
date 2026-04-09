@@ -1,0 +1,598 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/pages/layout/Footer.astro";
+import "../../styles/global.css";
+
+const title = "Ejes Estratégicos | Green Prod & Sustainable";
+---
+
+<Layout title={title}>
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content-wrap">
+            <div class="custom-container">
+                <div class="hero-inner">
+                    <span class="hero-label">SOBRE NOSOTROS</span>
+                    <h1 class="hero-title font-heading">
+                        Nuestros <span class="hero-accent">Ejes</span> Estratégicos
+                    </h1>
+                    <p class="hero-desc">
+                        Tres unidades operativas que sostienen nuestra cadena de
+                        valor, operando bajo protocolos sanitarios HACCP, BPM,
+                        POES con laboratorios propios y licencias de SANIPES y
+                        SENASA.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Axes Section -->
+    <section class="axes-section">
+        <div class="custom-container">
+            <!-- Tabs -->
+            <div class="axes-tabs" data-reveal>
+                <button class="axes-tab active" data-tab="planta">
+                    <i class="fas fa-flask"></i>
+                    <span>Planta de Tratamiento</span>
+                </button>
+                <button class="axes-tab" data-tab="ceprobio">
+                    <i class="fas fa-microscope"></i>
+                    <span>Ceprobio</span>
+                </button>
+                <button class="axes-tab" data-tab="balik">
+                    <i class="fas fa-ship"></i>
+                    <span>Balik</span>
+                </button>
+            </div>
+
+            <!-- Panels -->
+            <div class="axes-panels">
+                <!-- Planta -->
+                <div class="axes-panel active" id="panel-planta">
+                    <div class="panel-header" data-reveal>
+                        <span class="panel-op">Operación 01</span>
+                        <h3 class="panel-title font-heading">
+                            Planta de Tratamiento de Residuos Marinos
+                        </h3>
+                        <p class="panel-desc">
+                            Transformamos los residuos de la pesca artesanal en
+                            productos de alto valor para la agricultura. Nuestra
+                            planta opera con 10 toneladas de residuo por mes,
+                            generando hidrolizado de pescado, materia orgánica y
+                            biofertilizantes.
+                        </p>
+                    </div>
+                    <div class="panel-grid" data-reveal>
+                        <div class="panel-col">
+                            <div class="panel-col-header">
+                                <i class="fas fa-box-open"></i><h4>
+                                    Productos
+                                </h4>
+                            </div>
+                            <ul>
+                                <li>
+                                    Hidrolizado de pescado (1L, 4L, 20L, 200L,
+                                    1000L)
+                                </li>
+                                <li>Materia orgánica sólida</li>
+                                <li>Aceite de pescado para uso agrícola</li>
+                                <li>Biofertilizante sólido y líquido</li>
+                            </ul>
+                        </div>
+                        <div class="panel-col">
+                            <div class="panel-col-header">
+                                <i class="fas fa-certificate"></i><h4>
+                                    Licencias y Certificaciones
+                                </h4>
+                            </div>
+                            <ul>
+                                <li>Convenio con SENASA</li>
+                                <li>Licencia de operaciones</li>
+                                <li>Análisis de macro y micronutrientes</li>
+                                <li>Aminogramas por lote</li>
+                            </ul>
+                        </div>
+                        <div class="panel-col">
+                            <div class="panel-col-header">
+                                <i class="fas fa-chart-bar"></i><h4>
+                                    Capacidad Instalada
+                                </h4>
+                            </div>
+                            <ul>
+                                <li>01 planta de procesamiento de residuos</li>
+                                <li>10 Toneladas de residuo por mes</li>
+                                <li>
+                                    02 Toneladas de materia orgánica por mes
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ceprobio -->
+                <div class="axes-panel" id="panel-ceprobio">
+                    <div class="panel-header">
+                        <span class="panel-op">Operación 02</span>
+                        <h3 class="panel-title font-heading">
+                            Centro de Producción de Bioinsumos (Ceprobio)
+                        </h3>
+                        <p class="panel-desc">
+                            Nuestro laboratorio debidamente implementado produce
+                            bioinsumos de última generación para la agricultura
+                            orgánica. Trabajamos con cepas nativas controladas
+                            para ofrecer soluciones biológicas efectivas y
+                            seguras.
+                        </p>
+                    </div>
+                    <div class="panel-grid">
+                        <div class="panel-col">
+                            <div class="panel-col-header">
+                                <i class="fas fa-box-open"></i><h4>
+                                    Productos
+                                </h4>
+                            </div>
+                            <ul>
+                                <li>Insecticidas biológicos</li>
+                                <li>Fungicidas biológicos</li>
+                                <li>Nematicidas biológicos</li>
+                                <li>Polvo mojable de 500 gr</li>
+                                <li>Sustrato sólido</li>
+                            </ul>
+                        </div>
+                        <div class="panel-col">
+                            <div class="panel-col-header">
+                                <i class="fas fa-certificate"></i><h4>
+                                    Licencias y Certificaciones
+                                </h4>
+                            </div>
+                            <ul>
+                                <li>Convenio con SENASA</li>
+                                <li>Licencia de operaciones</li>
+                                <li>Cepas nativas controladas</li>
+                            </ul>
+                        </div>
+                        <div class="panel-col">
+                            <div class="panel-col-header">
+                                <i class="fas fa-chart-bar"></i><h4>
+                                    Capacidad Instalada
+                                </h4>
+                            </div>
+                            <ul>
+                                <li>01 laboratorio debidamente implementado</li>
+                                <li>
+                                    Producción de bioinsumos: Beauveria,
+                                    Metarhizium, Lilacinus, Isaria, Bacillus
+                                    Subtilis, Thuringiensis, Trichoderma
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Balik -->
+                <div class="axes-panel" id="panel-balik">
+                    <div class="panel-header">
+                        <span class="panel-op">Operación 03</span>
+                        <h3 class="panel-title font-heading">
+                            Planta de Tratamiento Primario (Balik)
+                        </h3>
+                        <p class="panel-desc">
+                            Nuestra planta de procesamiento primario garantiza
+                            la seguridad alimentaria a través de estrictos
+                            protocolos técnico-sanitarios. Procesamos hasta 3
+                            toneladas diarias de pescado bajo licencias de
+                            SANIPES.
+                        </p>
+                    </div>
+                    <div class="panel-grid">
+                        <div class="panel-col">
+                            <div class="panel-col-header">
+                                <i class="fas fa-box-open"></i><h4>
+                                    Productos
+                                </h4>
+                            </div>
+                            <ul>
+                                <li>Fresco refrigerado</li>
+                                <li>Filetes congelados</li>
+                                <li>Empacados al vacío</li>
+                            </ul>
+                        </div>
+                        <div class="panel-col">
+                            <div class="panel-col-header">
+                                <i class="fas fa-certificate"></i><h4>
+                                    Licencias y Certificaciones
+                                </h4>
+                            </div>
+                            <ul>
+                                <li>Protocolo técnico sanitario (SANIPES)</li>
+                                <li>Licencia de operaciones</li>
+                                <li>
+                                    Licencia de funcionamiento y Defensa civil
+                                </li>
+                                <li>Protocolos HACCP, BPM, POES</li>
+                            </ul>
+                        </div>
+                        <div class="panel-col">
+                            <div class="panel-col-header">
+                                <i class="fas fa-chart-bar"></i><h4>
+                                    Capacidad Instalada
+                                </h4>
+                            </div>
+                            <ul>
+                                <li>01 planta de procesamiento primario</li>
+                                <li>03 Ton/día de pescado</li>
+                                <li>01 Tonelada de almacenamiento</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Protocols bar -->
+            <div class="protocols-bar" data-reveal>
+                <div class="proto-inner">
+                    <h3>Estándares de Calidad</h3>
+                    <div class="proto-badges">
+                        <div class="proto-badge">
+                            <span class="proto-name">HACCP</span><span
+                                class="proto-desc">Análisis de peligros</span>
+                        </div>
+                        <div class="proto-badge">
+                            <span class="proto-name">BPM</span><span
+                                class="proto-desc">Buenas prácticas</span>
+                        </div>
+                        <div class="proto-badge">
+                            <span class="proto-name">POES</span><span
+                                class="proto-desc"
+                                >Procedimientos operativos</span>
+                        </div>
+                        <div class="proto-badge">
+                            <span class="proto-name">SANIPES</span><span
+                                class="proto-desc">Licencia sanitaria</span>
+                        </div>
+                        <div class="proto-badge">
+                            <span class="proto-name">SENASA</span><span
+                                class="proto-desc">Convenio vigente</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <Footer />
+</Layout>
+
+<style>
+    .page-hero {
+        position: relative;
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        background:
+            linear-gradient(
+                135deg,
+                rgba(0, 109, 182, 0.92) 0%,
+                rgba(0, 40, 70, 0.97) 100%
+            ),
+            url("/images/lineas/balik/hero/banner.png") center/cover no-repeat;
+        background-blend-mode: multiply;
+    }
+    .hero-content-wrap {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        padding: 10rem 0 6rem;
+    }
+    .hero-inner {
+        max-width: 800px;
+    }
+    .hero-label {
+        display: inline-block;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+        animation: fadeInUp 0.8s ease forwards;
+        opacity: 0;
+    }
+    .hero-title {
+        font-size: clamp(2.8rem, 6vw, 4.5rem);
+        color: white;
+        line-height: 1.1;
+        margin-bottom: 2rem;
+        animation: fadeInUp 0.8s 0.15s ease forwards;
+        opacity: 0;
+    }
+    .hero-accent {
+        color: var(--brand-green);
+    }
+    .hero-desc {
+        font-size: clamp(1rem, 1.5vw, 1.15rem);
+        color: rgba(255, 255, 255, 0.75);
+        line-height: 1.8;
+        max-width: 650px;
+        animation: fadeInUp 0.8s 0.3s ease forwards;
+        opacity: 0;
+    }
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* AXES */
+    .axes-section {
+        padding: 6rem 0 8rem;
+        background: white;
+    }
+    .axes-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 3rem;
+        flex-wrap: wrap;
+    }
+    .axes-tab {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 1rem 2rem;
+        border: 2px solid #e2e8f0;
+        background: white;
+        border-radius: 100px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.35s ease;
+        font-family: inherit;
+    }
+    .axes-tab:hover {
+        border-color: var(--brand-green);
+        color: var(--brand-green);
+    }
+    .axes-tab.active {
+        background: var(--brand-green);
+        border-color: var(--brand-green);
+        color: white;
+        box-shadow: 0 8px 25px rgba(103, 189, 69, 0.3);
+    }
+    .axes-tab i {
+        font-size: 1.1rem;
+    }
+
+    .axes-panel {
+        display: none;
+        animation: panelFadeIn 0.5s ease;
+    }
+    .axes-panel.active {
+        display: block;
+    }
+    @keyframes panelFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(15px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .panel-header {
+        max-width: 800px;
+        margin: 0 auto 3rem;
+        text-align: center;
+    }
+    .panel-op {
+        display: inline-block;
+        background: linear-gradient(135deg, #e8f5e9, #e3f2fd);
+        padding: 0.4rem 1.25rem;
+        border-radius: 100px;
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--brand-green);
+        margin-bottom: 1rem;
+    }
+    .panel-title {
+        font-size: clamp(1.5rem, 2.5vw, 2rem);
+        color: var(--brand-blue);
+        margin-bottom: 1rem;
+    }
+    .panel-desc {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        line-height: 1.8;
+    }
+
+    .panel-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+    .panel-col {
+        background: #f8fafc;
+        border-radius: 20px;
+        padding: 2.5rem 2rem;
+        border: 1px solid #f1f5f9;
+        transition: all 0.35s ease;
+    }
+    .panel-col:hover {
+        border-color: var(--brand-green);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+    }
+    .panel-col-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+    .panel-col-header i {
+        color: var(--brand-green);
+        font-size: 1.15rem;
+    }
+    .panel-col-header h4 {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-primary);
+        font-weight: 800;
+    }
+    .panel-col ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    .panel-col li {
+        font-size: 0.95rem;
+        color: #475569;
+        position: relative;
+        padding-left: 1.5rem;
+        line-height: 1.5;
+    }
+    .panel-col li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.55rem;
+        width: 7px;
+        height: 7px;
+        background: var(--brand-green);
+        border-radius: 50%;
+    }
+
+    /* PROTOCOLS */
+    .protocols-bar {
+        margin-top: 4rem;
+    }
+    .proto-inner {
+        background: linear-gradient(135deg, #f0f7ed, #e8f5e2);
+        border-radius: 24px;
+        padding: 3rem;
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .proto-inner h3 {
+        font-size: 1.1rem;
+        color: var(--text-primary);
+        font-weight: 700;
+        white-space: nowrap;
+    }
+    .proto-badges {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .proto-badge {
+        background: white;
+        padding: 1rem 1.5rem;
+        border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        min-width: 120px;
+    }
+    .proto-name {
+        font-size: 1rem;
+        font-weight: 900;
+        color: var(--brand-green);
+    }
+    .proto-desc {
+        font-size: 0.7rem;
+        color: var(--text-secondary);
+        margin-top: 0.25rem;
+    }
+
+    [data-reveal] {
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+            opacity 0.8s ease,
+            transform 0.8s ease;
+    }
+    [data-reveal].revealed {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @media (max-width: 1024px) {
+        .panel-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    @media (max-width: 768px) {
+        .hero-content-wrap {
+            padding: 8rem 0 4rem;
+        }
+        .axes-tab span {
+            display: none;
+        }
+        .axes-tab {
+            padding: 1rem 1.5rem;
+        }
+        .proto-inner {
+            flex-direction: column;
+        }
+    }
+    @media (max-width: 480px) {
+        .page-hero {
+            min-height: auto;
+        }
+        .hero-content-wrap {
+            padding: 7rem 0 3rem;
+        }
+    }
+</style>
+
+<script>
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((e) => {
+                if (e.isIntersecting) e.target.classList.add("revealed");
+            });
+        },
+        { threshold: 0.1 },
+    );
+    document
+        .querySelectorAll("[data-reveal]")
+        .forEach((el) => observer.observe(el));
+
+    // Tab switching
+    const tabs = document.querySelectorAll(".axes-tab");
+    const panels = document.querySelectorAll(".axes-panel");
+    tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+            const target = tab.getAttribute("data-tab");
+            tabs.forEach((t) => t.classList.remove("active"));
+            panels.forEach((p) => p.classList.remove("active"));
+            tab.classList.add("active");
+            const targetPanel = document.getElementById(`panel-${target}`);
+            if (targetPanel) targetPanel.classList.add("active");
+        });
+    });
+</script>

@@ -1,0 +1,190 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/common/Navbar.astro";
+import Footer from "../../components/pages/layout/Footer.astro";
+---
+
+<Layout title="Proyectos | Green Prod & Sustainable">
+  <Navbar />
+
+  <main class="proj-page">
+    <section class="proj-hero">
+      <div class="proj-wrap">
+        <p class="proj-kicker">Líneas de Negocio · Proyectos</p>
+        <h1 class="proj-title">Infraestructura verde y licitaciones sostenibles.</h1>
+        <p class="proj-subtitle">
+          Diseñamos y ejecutamos proyectos con enfoque circular: ingeniería,
+          cumplimiento, trazabilidad y operación responsable desde el inicio.
+        </p>
+        <div class="proj-actions">
+          <a class="proj-cta" href="/contacto">Cotizar un proyecto</a>
+          <a class="proj-secondary" href="/nosotros/modelo-circular"
+            >Ver modelo circular</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="proj-grid">
+      <div class="proj-wrap">
+        <div class="proj-cards">
+          <article class="proj-card">
+            <h2>Diseño y pre-inversión</h2>
+            <p>
+              Alcance, diagnóstico, estimaciones, cronograma y entregables para
+              decisiones rápidas y sustentadas.
+            </p>
+          </article>
+          <article class="proj-card">
+            <h2>Implementación</h2>
+            <p>
+              Coordinación técnica y operativa, control de avance y calidad,
+              gestión de riesgos y puesta en marcha.
+            </p>
+          </article>
+          <article class="proj-card">
+            <h2>Soporte a licitaciones</h2>
+            <p>
+              Documentación, requisitos, cumplimiento y acompañamiento para
+              procesos públicos y privados.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .proj-page {
+    padding-top: 8.4rem;
+    background: radial-gradient(
+        900px 420px at 15% 5%,
+        rgba(243, 146, 0, 0.14),
+        transparent 60%
+      ),
+      linear-gradient(180deg, #fbfbff 0%, #ffffff 60%);
+  }
+
+  .proj-hero {
+    padding: 5rem 1.5rem 3rem;
+  }
+
+  .proj-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .proj-kicker {
+    font-family: var(--font-primary);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 900;
+    color: #f39200;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .proj-title {
+    font-family: var(--font-primary);
+    font-weight: 900;
+    color: var(--text-primary);
+    font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+    line-height: 1.06;
+    margin: 0 0 1rem 0;
+  }
+
+  .proj-subtitle {
+    font-family: var(--font-primary);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 62ch;
+    margin: 0 0 2rem 0;
+  }
+
+  .proj-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    align-items: center;
+  }
+
+  .proj-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.95rem 1.25rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-family: var(--font-primary);
+    font-weight: 900;
+    color: white;
+    background: linear-gradient(135deg, #f39200 0%, #006db6 100%);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.14);
+    transition: transform 0.25s ease, filter 0.25s ease;
+  }
+
+  .proj-cta:hover {
+    transform: translateY(-2px);
+    filter: saturate(1.03);
+  }
+
+  .proj-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.95rem 1.25rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-family: var(--font-primary);
+    font-weight: 900;
+    color: #f39200;
+    background: rgba(243, 146, 0, 0.08);
+    border: 1px solid rgba(243, 146, 0, 0.18);
+  }
+
+  .proj-grid {
+    padding: 0 1.5rem 5rem;
+  }
+
+  .proj-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .proj-card {
+    border-radius: 1.25rem;
+    background: white;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.06);
+    padding: 1.5rem;
+  }
+
+  .proj-card h2 {
+    margin: 0 0 0.6rem 0;
+    font-family: var(--font-primary);
+    font-weight: 900;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+  }
+
+  .proj-card p {
+    margin: 0;
+    font-family: var(--font-primary);
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 900px) {
+    .proj-page {
+      padding-top: 5rem;
+    }
+    .proj-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
